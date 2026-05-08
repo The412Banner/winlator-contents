@@ -6,7 +6,7 @@ Component catalog index for BannerHub / Winlator-family Android clients.
 
 A single JSON file: [`contents.json`](./contents.json).
 
-It's a flat list of component entries (Box64, FEXCore, DXVK, VKD3D, WOWBox64, GpuDriver, …) using the same 4-field scheme:
+It's a flat list of component entries (Box64, FEXCore, DXVK, VKD3D, WOWBox64, …) using a 4-field scheme:
 
 ```json
 {
