@@ -1,12 +1,12 @@
 # winlator-contents
 
-Component catalog index for BannerHub / Winlator-family Android clients.
+Component catalog for Winlator-family Android clients.
 
-## What this repo is
+## What's here
 
-A single JSON file: [`contents.json`](./contents.json).
+A single JSON file: [`contents.json`](./contents.json) — a flat list of available components (Wine, Proton, DXVK, VKD3D, Box64, WOWBox64, FEXCore) and where to download them.
 
-It's a flat list of component entries (Box64, FEXCore, DXVK, VKD3D, WOWBox64, …) using a 4-field scheme:
+Each entry uses a four-field schema:
 
 ```json
 {
@@ -17,20 +17,16 @@ It's a flat list of component entries (Box64, FEXCore, DXVK, VKD3D, WOWBox64, �
 }
 ```
 
-## What it is not
-
-The component **binaries** (`.wcp` / `.tzst` files) do **not** live here. They live on the GitHub releases of [`The412Banner/Nightlies`](https://github.com/The412Banner/Nightlies) (the build-tracking repo). Every `remoteUrl` in `contents.json` points back at a release asset there.
-
-Splitting them keeps the metadata index lightweight and easy to mirror, while the binary distribution stays in Nightlies where the auto-watcher pipeline already manages it.
-
 ## Live URL
 
 ```
 https://raw.githubusercontent.com/The412Banner/winlator-contents/main/contents.json
 ```
 
-## How it's updated
+## Where the binaries live
 
-Right now, **manually mirrored** from `The412Banner/Nightlies/nightlies_components.json` whenever that file moves forward. Automation is intentionally deferred — we'll either push from the Nightlies watcher or pull on a schedule from this repo, but the choice hasn't been made yet.
+This repo only hosts the index. The component archives (`.wcp`, `.wcp.xz`) are published as GitHub release assets on [The412Banner/Nightlies](https://github.com/The412Banner/Nightlies); every `remoteUrl` in the catalog resolves to one of those assets.
 
-If you depend on this URL, treat the file as eventually-consistent with the upstream Nightlies release set.
+## Updates
+
+The catalog is refreshed as new components ship. Treat it as eventually consistent with the upstream release set.
