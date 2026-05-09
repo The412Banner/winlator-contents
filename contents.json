@@ -565,6 +565,12 @@
   },
   {
     "type": "FEXCore",
+    "verName": "FEXCore-2605",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2605.wcp"
+  },
+  {
+    "type": "FEXCore",
     "verName": "fexcore_241214",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/fexcore_241214.wcp"
