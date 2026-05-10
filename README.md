@@ -1,6 +1,6 @@
 # winlator-contents
 
-Component catalog for Winlator-family Android clients.
+Component catalog for Winlator-family Android clients.  this is a combination of components from my nightlies repo full of stuff ive gsthered from arihany, nick, steven, coffincolors and more over time
 
 ## What's here
 
