@@ -1,4 +1,6 @@
 # winlator-contents
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=discord&logoColor=white)](https://discord.gg/n8S4G2WZQ4)
+
 
 Component catalog for Winlator-family Android clients.  this is a combination of components from my nightlies repo full of stuff ive gsthered from arihany, nick, steven, coffincolors and more over time
 
@@ -30,3 +32,8 @@ This repo only hosts the index. The component archives (`.wcp`, `.wcp.xz`) are p
 ## Updates
 
 The catalog is refreshed as new components ship. Treat it as eventually consistent with the upstream release set.
+
+
+## Community
+
+Join our Discord: https://discord.gg/n8S4G2WZQ4
