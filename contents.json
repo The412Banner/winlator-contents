@@ -685,12 +685,6 @@
   },
   {
     "type": "Proton",
-    "verName": "proton-10.99-arm64ec-NTSync-v5",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/proton-10.99-arm64ec-NTSync-v5.wcp"
-  },
-  {
-    "type": "Proton",
     "verName": "proton-9.0-arm64ec",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/proton-9.0-arm64ec.wcp"
@@ -820,12 +814,6 @@
     "verName": "wine-11.3-arm64ec",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/wine-11.3-arm64ec.wcp.xz"
-  },
-  {
-    "type": "Proton",
-    "verName": "proton-11.0-arm64ec-20260422.1559",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton-11/proton-11.0-arm64ec-20260422.1559.wcp"
   },
   {
     "type": "Proton",
