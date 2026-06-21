@@ -820,5 +820,17 @@
     "verName": "proton-10-arm64ec",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/proton-10-arm64ec.wcp.xz"
+  },
+  {
+    "type": "Proton",
+    "verName": "Proton-11.0-5-arm64ec",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/Proton-11.0-5-arm64ec.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "Proton-11.0-5-x86_64",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/Proton-11.0-5-x86_64.wcp"
   }
 ]
