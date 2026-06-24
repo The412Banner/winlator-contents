@@ -92,12 +92,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "amstream.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "amstream.dll",
           "dest": "win64"
         },
         {
@@ -2109,12 +2109,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "gdiplus.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "gdiplus.dll",
           "dest": "win64"
         },
         {
@@ -2227,12 +2227,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "iertutil.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "iertutil.dll",
           "dest": "win64"
         },
         {
@@ -2380,12 +2380,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "mf.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "mf.dll",
           "dest": "win64"
         },
         {
@@ -2410,7 +2410,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "mfc40.dll",
+          "dest": "win32"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "mfc40u.dll",
           "dest": "win32"
         },
         {
@@ -2440,7 +2445,7 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "mfc42u.dll",
           "dest": "win32"
         },
         {
@@ -2592,12 +2597,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "msftedit.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "msftedit.dll",
           "dest": "win64"
         },
         {
@@ -2866,12 +2871,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qasf.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qasf.dll",
           "dest": "win64"
         },
         {
@@ -2896,12 +2901,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qcap.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qcap.dll",
           "dest": "win64"
         },
         {
@@ -2926,12 +2931,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qdvd.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qdvd.dll",
           "dest": "win64"
         },
         {
@@ -2956,12 +2961,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qedit.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "qedit.dll",
           "dest": "win64"
         },
         {
@@ -2986,12 +2991,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "quartz.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "quartz.dll",
           "dest": "win64"
         },
         {
@@ -3082,12 +3087,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "urlmon.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "urlmon.dll",
           "dest": "win64"
         },
         {
@@ -3968,12 +3973,12 @@
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "wininet.dll",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "*",
+          "file_name": "wininet.dll",
           "dest": "win64"
         },
         {
