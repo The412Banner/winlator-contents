@@ -176,27 +176,17 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "W2KSP4_EN.EXE",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/W2KSP4_EN.EXE",
-     "rename": "w2ksp4_en.exe",
-     "file_checksum": "a4ef6c91d418418b287cefe31f958175",
-     "file_size": "135477136",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/W2KSP4_EN.EXE"
+     "action": "archive_extract",
+     "file_name": "atmlib__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/atmlib__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "w2ksp4_en.exe",
-     "file_name": "atmlib.dl_",
-     "dest": "temp/atmlib/"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "atmlib/i386/atmlib.dl_",
-     "file_name": "atmlib.dll",
+     "action": "copy_dll",
+     "file_name": "*",
      "dest": "win32"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "cjkfonts",
@@ -493,47 +483,27 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "directx_Jun2010_redist.exe",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/directx_Jun2010_redist.exe",
-     "file_checksum": "822e4c516600e81dc7fb16d9a77ec6d4",
-     "file_size": "100275120",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/directx_Jun2010_redist.exe"
+     "action": "archive_extract",
+     "file_name": "d3dcompiler_42__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/d3dcompiler_42__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "directx_Jun2010_redist.exe",
-     "file_name": "Aug2009_D3DCompiler_42_x86.cab",
-     "dest": "temp/d3dcompiler_42_x86/"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win32"
     },
     {
-     "action": "get_from_cab",
-     "source": "directx_Jun2010_redist.exe",
-     "file_name": "Aug2009_D3DCompiler_42_x64.cab",
-     "dest": "temp/d3dcompiler_42_x64/",
-     "for": ""
-    },
-    {
-     "action": "get_from_cab",
-     "source": "d3dcompiler_42_x86/Aug2009_D3DCompiler_42_x86.cab",
-     "file_name": "D3DCompiler_42.dll",
-     "dest": "win32",
-     "rename": "d3dcompiler_42.dll"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "d3dcompiler_42_x64/Aug2009_D3DCompiler_42_x64.cab",
-     "file_name": "D3DCompiler_42.dll",
-     "dest": "win64/",
-     "rename": "d3dcompiler_42.dll",
-     "for": ""
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win64"
     },
     {
      "action": "override_dll",
      "dll": "d3dcompiler_42",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "d3dcompiler_43",
@@ -579,42 +549,27 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "2630bae9681db6a9f6722366f47d055c.cab",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/d3dcompiler_46__2630bae9681db6a9f6722366f47d055c.cab",
-     "file_checksum": "9cc65b7e3aeebed781354b3a5399ece0",
-     "file_size": "1387877",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/d3dcompiler_46__2630bae9681db6a9f6722366f47d055c.cab"
+     "action": "archive_extract",
+     "file_name": "d3dcompiler_46__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/d3dcompiler_46__libs.tar.xz"
     },
     {
-     "action": "download_archive",
-     "file_name": "61d57a7a82309cd161a854a6f4619e52.cab",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/d3dcompiler_46__61d57a7a82309cd161a854a6f4619e52.cab",
-     "file_checksum": "9b92033822629a13ea60d5b4459faa5c",
-     "file_size": "1654595",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/d3dcompiler_46__61d57a7a82309cd161a854a6f4619e52.cab"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win32"
     },
     {
-     "action": "get_from_cab",
-     "source": "2630bae9681db6a9f6722366f47d055c.cab",
-     "file_name": "fil47ed91e900f4b9d9659b66a211b57c39",
-     "dest": "win32",
-     "rename": "d3dcompiler_46.dll"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "61d57a7a82309cd161a854a6f4619e52.cab",
-     "file_name": "fil8c20206095817436f8df4a711faee5b7",
-     "dest": "win64/",
-     "rename": "d3dcompiler_46.dll",
-     "for": ""
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win64"
     },
     {
      "action": "override_dll",
      "dll": "d3dcompiler_46",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "d3dcompiler_47",
@@ -817,35 +772,18 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "directx_feb2010_redist.exe",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/devenum.exe",
-     "file_checksum": "4cf007a355cb5f34a3c5c400113b33c3",
-     "file_size": "109063804",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/devenum.exe"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "directx_feb2010_redist.exe",
-     "file_name": "dxnt.cab",
-     "dest": "temp/dxnt/"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "dxnt/dxnt.cab",
-     "file_name": "devenum.dll",
-     "dest": "temp/devenum/"
+     "action": "archive_extract",
+     "file_name": "devenum__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/devenum__libs.tar.xz"
     },
     {
      "action": "copy_dll",
-     "url": "temp/devenum/",
-     "file_name": "devenum.dll",
+     "file_name": "*",
      "dest": "win32"
     },
     {
      "action": "copy_dll",
-     "url": "temp/devenum/",
-     "file_name": "devenum.dll",
+     "file_name": "*",
      "dest": "win64"
     },
     {
@@ -853,7 +791,8 @@
      "dll": "devenum",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "dirac",
@@ -2790,17 +2729,13 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "InstMsiW.exe",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/msls31.exe",
-     "file_checksum": "53820efbc952107ee1a38be6cd5aa3f0",
-     "file_size": "1822848",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/msls31.exe"
+     "action": "archive_extract",
+     "file_name": "msls31__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/msls31__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "InstMsiW.exe",
-     "file_name": "msls31.dll",
+     "action": "copy_dll",
+     "file_name": "*",
      "dest": "win32"
     },
     {
@@ -2808,7 +2743,8 @@
      "dll": "msls31",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "mspatcha",
@@ -2818,30 +2754,22 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "W2KSP4_EN.EXE",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/mspatcha.EXE",
-     "file_checksum": "a4ef6c91d418418b287cefe31f958175",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/mspatcha.EXE"
+     "action": "archive_extract",
+     "file_name": "mspatcha__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/mspatcha__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "W2KSP4_EN.EXE",
-     "file_name": "i386/mspatcha.dl_",
-     "dest": "temp/"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "mspatcha.dl_",
-     "file_name": "mspatcha.dll",
-     "dest": "win32/"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win32"
     },
     {
      "action": "override_dll",
      "dll": "mspatcha",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "msxml3",
@@ -2909,53 +2837,27 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "msxml6-KB973686-enu-amd64.exe",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/msxml6.exe",
-     "file_checksum": "13a292beb9ebe46ac97b8a4352fe2cd5",
-     "file_size": "1862488",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/msxml6.exe"
+     "action": "archive_extract",
+     "file_name": "msxml6__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/msxml6__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "msxml6-KB973686-enu-amd64.exe",
-     "file_name": "msxml6.msi",
-     "dest": "temp/msxml6/"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win32"
     },
     {
-     "action": "get_from_cab",
-     "source": "msxml6/msxml6.msi",
-     "file_name": "msxml6.dll.86F857F6_A743_463D_B2FE_98CB5F727E09",
-     "dest": "win32",
-     "rename": "msxml6.dll"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "msxml6/msxml6.msi",
-     "file_name": "msxml6r.dll.86F857F6_A743_463D_B2FE_98CB5F727E09",
-     "dest": "win32",
-     "rename": "msxml6r.dll"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "msxml6/msxml6.msi",
-     "file_name": "msxml6.dll.1ECC0691_D2EB_4A33_9CBF_5487E5CB17DB",
-     "dest": "win64/",
-     "rename": "msxml6.dll"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "msxml6/msxml6.msi",
-     "file_name": "msxml6r.dll.1ECC0691_D2EB_4A33_9CBF_5487E5CB17DB",
-     "dest": "win64/",
-     "rename": "msxml6r.dll"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win64"
     },
     {
      "action": "override_dll",
      "dll": "msxml6,msxml6r",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "oalinst",
@@ -3367,24 +3269,13 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "W2KSP4_EN.EXE",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/riched20.EXE",
-     "rename": "w2ksp4_en.exe",
-     "file_checksum": "a4ef6c91d418418b287cefe31f958175",
-     "file_size": "135477136",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/riched20.EXE"
+     "action": "archive_extract",
+     "file_name": "riched20__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/riched20__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "w2ksp4_en.exe",
-     "file_name": "riched20.dl_",
-     "dest": "temp/riched20/"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "riched20/i386/riched20.dl_",
-     "file_name": "riched20.dll",
+     "action": "copy_dll",
+     "file_name": "*",
      "dest": "win32"
     },
     {
@@ -3392,7 +3283,8 @@
      "dll": "riched20",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "sqlite3",
@@ -4127,83 +4019,13 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "VC6RedistSetup_deu.exe",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist6.exe",
-     "file_checksum": "53a0925609b366daa17051e1e4be3b86",
-     "file_size": "1837888",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist6.exe"
+     "action": "archive_extract",
+     "file_name": "vcredist6__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist6__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "VC6RedistSetup_deu.exe",
-     "file_name": "vcredist.exe",
-     "dest": "temp/vcredist6/"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "asycfilt.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "comcat.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "mfc42.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "mfc42u.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "msvcirt.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "msvcp60.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "msvcrt.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "oleaut32.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "olepro32.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "atla.dll",
-     "source": "vcredist6/vcredist.exe",
-     "dest": "win32"
-    },
-    {
-     "action": "get_from_cab",
-     "file_name": "stdole2.tlb",
-     "source": "vcredist6/vcredist.exe",
+     "action": "copy_dll",
+     "file_name": "*",
      "dest": "win32"
     },
     {
@@ -4251,7 +4073,8 @@
      "dll": "olepro32",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "vcredist6sp6",
@@ -4381,24 +4204,13 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "W2KSP4_EN.EXE",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/W2KSP4_EN.EXE",
-     "rename": "w2ksp4_en.exe",
-     "file_checksum": "a4ef6c91d418418b287cefe31f958175",
-     "file_size": "135477136",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/W2KSP4_EN.EXE"
+     "action": "archive_extract",
+     "file_name": "winhttp__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/winhttp__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "w2ksp4_en.exe",
-     "file_name": "winhttp.dl_",
-     "dest": "temp/winhttp/"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "winhttp/i386/new/winhttp.dl_",
-     "file_name": "winhttp.dll",
+     "action": "copy_dll",
+     "file_name": "*",
      "dest": "win32"
     },
     {
@@ -4406,7 +4218,8 @@
      "dll": "winhttp",
      "type": "native,builtin"
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "wininet",
@@ -4966,29 +4779,19 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "directx_Jun2010_redist.exe",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/xaudio2.7.exe",
-     "file_checksum": "822e4c516600e81dc7fb16d9a77ec6d4",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/xaudio2.7.exe"
+     "action": "archive_extract",
+     "file_name": "xaudio2.7__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/xaudio2.7__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "directx_Jun2010_redist.exe",
-     "file_name": "*XAudio*.cab",
-     "dest": "temp/XAudio/"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win32"
     },
     {
-     "action": "get_from_cab",
-     "source": "XAudio/*x86*.cab",
-     "file_name": "*.dll",
-     "dest": "win32/"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "XAudio/*x64*.cab",
-     "file_name": "*.dll",
-     "dest": "win64/"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win64"
     },
     {
      "action": "override_dll",
@@ -5007,7 +4810,8 @@
       }
      ]
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "xinput",
@@ -5017,29 +4821,19 @@
    "status": "ready",
    "steps": [
     {
-     "action": "download_archive",
-     "file_name": "directx_Jun2010_redist.exe",
-     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/directx_Jun2010_redist.exe",
-     "file_checksum": "822e4c516600e81dc7fb16d9a77ec6d4",
-     "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/directx_Jun2010_redist.exe"
+     "action": "archive_extract",
+     "file_name": "xinput__libs.tar.xz",
+     "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/xinput__libs.tar.xz"
     },
     {
-     "action": "get_from_cab",
-     "source": "directx_Jun2010_redist.exe",
-     "file_name": "*XINPUT*.cab",
-     "dest": "temp/XINPUT/"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win32"
     },
     {
-     "action": "get_from_cab",
-     "source": "XINPUT/*x86*.cab",
-     "file_name": "*.dll",
-     "dest": "win32/"
-    },
-    {
-     "action": "get_from_cab",
-     "source": "XINPUT/*x64*.cab",
-     "file_name": "*.dll",
-     "dest": "win64/"
+     "action": "copy_dll",
+     "file_name": "*",
+     "dest": "win64"
     },
     {
      "action": "override_dll",
@@ -5062,7 +4856,8 @@
       }
      ]
     }
-   ]
+   ],
+   "prebaked": true
   },
   {
    "name": "xna31",
