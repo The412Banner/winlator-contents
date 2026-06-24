@@ -83,54 +83,30 @@
       "description": "MS amstream.dll",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "for": "",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "amstream__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/amstream__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "amstream.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-directshow-other_31bf3856ad364e35_6.1.7601.17514_none_0f58f1e53efca91e",
+          "file_name": "*",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "amstream.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-directshow-other_31bf3856ad364e35_6.1.7601.17514_none_6b778d68f75a1a54",
-          "dest": "win64",
-          "for": ""
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
-          "bundle": [
-            {
-              "value": "amstream",
-              "data": "native,builtin"
-            }
-          ]
-        },
-        {
-          "action": "register_dll",
-          "dlls": ""
+          "dll": "amstream",
+          "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "art2k7min",
@@ -2124,45 +2100,30 @@
       "description": "Microsoft GDI+ (Graphics Device Interface)",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "file_size": "563934504",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "gdiplus__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/gdiplus__libs.tar.xz"
         },
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "file_size": "947070088",
-          "upstream": true
-        },
-        {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x86.exe",
-          "file_name": "gdiplus.dll",
+          "action": "copy_dll",
+          "file_name": "*",
           "dest": "win32"
         },
         {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x64.exe",
-          "file_name": "gdiplus.dll",
-          "dest": "win64/",
-          "for": ""
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
           "dll": "gdiplus",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "gecko",
@@ -2257,44 +2218,30 @@
       "description": "Microsoft iertutil Microsoft Foundation Classes from win7sp1",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "https://proxy.usebottles.com/redistributable/dependencies/windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "iertutil__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/iertutil__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "iertutil.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-ie-runtimeutilities_31bf3856ad364e35_8.0.7601.17514_none_64655b7c61c841cb",
-          "dest": "win32/"
+          "file_name": "*",
+          "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "iertutil.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-ie-runtimeutilities_31bf3856ad364e35_8.0.7601.17514_none_c083f7001a25b301",
-          "dest": "win64/"
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
           "dll": "iertutil",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "jet40",
@@ -2424,73 +2371,47 @@
       "description": "Microsoft Media Foundation",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "file_size": "563934504",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "mediafoundation__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/mediafoundation__libs.tar.xz"
         },
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "file_size": "947070088",
-          "for": "",
-          "upstream": true
-        },
-        {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x86.exe",
-          "file_name": "x86_microsoft-windows-mediafoundation_31bf3856ad364e35_6.1.7601.17514_none_9e6699276b03c38e/mf.dll",
+          "action": "copy_dll",
+          "file_name": "*",
           "dest": "win32"
         },
         {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x64.exe",
-          "file_name": "amd64_microsoft-windows-mediafoundation_31bf3856ad364e35_6.1.7601.17514_none_fa8534ab236134c4/mf.dll",
-          "dest": "win64/",
-          "for": ""
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
           "dll": "mf",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "mfc40",
       "description": "Microsoft mfc40 Microsoft Foundation Classes from win7sp1",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x86.exe",
-          "url": "https://proxy.usebottles.com/redistributable/dependencies/windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "file_size": "563934504",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "mfc40__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/mfc40__libs.tar.xz"
         },
         {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x86.exe",
-          "file_name": "x86_microsoft-windows-mfc40_31bf3856ad364e35_6.1.7601.17514_none_5c06580240091047/mfc40.dll",
-          "dest": "win32/"
-        },
-        {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x86.exe",
-          "file_name": "x86_microsoft-windows-mfc40u_31bf3856ad364e35_6.1.7601.17514_none_f51a7bf0b3d25294/mfc40u.dll",
-          "dest": "win32/"
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
         },
         {
           "action": "override_dll",
@@ -2502,35 +2423,33 @@
           "dll": "mfc40u",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "mfc42",
       "description": "Microsoft mfc42 Microsoft Foundation Classes from win7sp1",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x86.exe",
-          "url": "https://proxy.usebottles.com/redistributable/dependencies/windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "file_size": "563934504",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "mfc42__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/mfc42__libs.tar.xz"
         },
         {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x86.exe",
-          "file_name": "x86_microsoft-windows-mfc42x_31bf3856ad364e35_6.1.7601.17514_none_f51c382cb3d0d225/mfc42u.dll",
-          "dest": "win32/"
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
         },
         {
           "action": "override_dll",
           "dll": "mfc42u",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "mono",
@@ -2664,46 +2583,30 @@
       "description": "Microsoft RichEdit Control 4.1 (msftedit.dll)",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "file_size": "563934504",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "msftedit__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/msftedit__libs.tar.xz"
         },
         {
-          "action": "download_archive",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "file_size": "947070088",
-          "for": "",
-          "upstream": true
-        },
-        {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x86.exe",
-          "file_name": "x86_microsoft-windows-msftedit_31bf3856ad364e35_6.1.7601.17514_none_d7d862f19573a5ff/msftedit.dll",
+          "action": "copy_dll",
+          "file_name": "*",
           "dest": "win32"
         },
         {
-          "action": "get_from_cab",
-          "source": "windows6.1-kb976932-x64.exe",
-          "file_name": "amd64_microsoft-windows-msftedit_31bf3856ad364e35_6.1.7601.17514_none_33f6fe754dd11735/msftedit.dll",
-          "dest": "win64",
-          "for": ""
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
           "dll": "msftedit",
-          "type": "native, builtin"
+          "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "msls31",
@@ -2888,42 +2791,35 @@
       "dependencies": [
         "powershell_core"
       ],
-      "status": "pending-manual",
+      "status": "ready",
       "steps": [
         {
           "action": "archive_extract",
-          "file_name": "powershell-wrapper.zip",
-          "url": "https://github.com/ProjectSynchro/powershell-wrapper-for-wine/releases/download/v2.1.3/powershell-wrapper.zip",
-          "rename": "pswrapper-2.1.3.zip",
-          "file_checksum": "e60895ea12b80d67cd609446087307ed",
-          "file_size": "8866",
-          "pending": true
+          "file_name": "powershell__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/powershell__libs.tar.xz"
         },
         {
           "action": "copy_file",
           "file_name": "powershell.exe",
-          "url": "temp/pswrapper-2.1.3/32/",
-          "dest": "win32/WindowsPowerShell/v1.0/"
+          "dest": "win32/WindowsPowerShell/v1.0"
         },
         {
           "action": "copy_file",
           "file_name": "powershell.exe",
-          "url": "temp/pswrapper-2.1.3/64/",
-          "dest": "win64/WindowsPowerShell/v1.0/",
-          "for": ""
+          "dest": "win64/WindowsPowerShell/v1.0"
         },
         {
           "action": "copy_file",
           "file_name": "profile.ps1",
-          "url": "temp/pswrapper-2.1.3/",
-          "dest": "windows/../Program Files/PowerShell/7/"
+          "dest": "win64/../../Program Files/PowerShell/7"
         },
         {
           "action": "override_dll",
           "dll": "powershell.exe",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "powershell_core",
@@ -2961,270 +2857,150 @@
       "description": "MS qasf.dll",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "for": "",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "qasf__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/qasf__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "qasf.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-directshow-asf_31bf3856ad364e35_6.1.7601.17514_none_1cc4e9c15ccc8ae8",
+          "file_name": "*",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "qasf.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-directshow-asf_31bf3856ad364e35_6.1.7601.17514_none_78e385451529fc1e",
-          "dest": "win64",
-          "for": ""
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
-          "bundle": [
-            {
-              "value": "qasf",
-              "data": "native,builtin"
-            }
-          ]
-        },
-        {
-          "action": "register_dll",
-          "dlls": ""
+          "dll": "qasf",
+          "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "qcap",
       "description": "MS qcap.dll",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "for": "",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "qcap__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/qcap__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "qcap.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-directshow-capture_31bf3856ad364e35_6.1.7601.17514_none_bae08d1e7dcccf2a",
+          "file_name": "*",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "qcap.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-directshow-capture_31bf3856ad364e35_6.1.7601.17514_none_16ff28a2362a4060",
-          "dest": "win64",
-          "for": ""
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
-          "bundle": [
-            {
-              "value": "qcap",
-              "data": "native,builtin"
-            }
-          ]
-        },
-        {
-          "action": "register_dll",
-          "dlls": ""
+          "dll": "qcap",
+          "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "qdvd",
       "description": "MS qdvd.dll",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "for": "",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "qdvd__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/qdvd__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "qdvd.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-directshow-dvdsupport_31bf3856ad364e35_6.1.7601.17514_none_562994bd321aac67",
+          "file_name": "*",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "qdvd.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-directshow-dvdsupport_31bf3856ad364e35_6.1.7601.17514_none_b2483040ea781d9d",
-          "dest": "win64",
-          "for": ""
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
-          "bundle": [
-            {
-              "value": "qdvd",
-              "data": "native,builtin"
-            }
-          ]
-        },
-        {
-          "action": "register_dll",
-          "dlls": ""
+          "dll": "qdvd",
+          "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "qedit",
       "description": "MS qedit.dll",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "for": "",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "qedit__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/qedit__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "qedit.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-qedit_31bf3856ad364e35_6.1.7601.17514_none_5ca34698a5a970d2",
+          "file_name": "*",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "qedit.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-qedit_31bf3856ad364e35_6.1.7601.17514_none_b8c1e21c5e06e208",
-          "dest": "win64",
-          "for": ""
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
-          "bundle": [
-            {
-              "value": "qedit",
-              "data": "native,builtin"
-            }
-          ]
-        },
-        {
-          "action": "register_dll",
-          "dlls": ""
+          "dll": "qedit",
+          "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "quartz",
       "description": "MS quartz.dll",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "for": "",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "quartz__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/quartz__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "quartz.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-directshow-core_31bf3856ad364e35_6.1.7601.17514_none_a877a1cc4c284497",
+          "file_name": "*",
           "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "quartz.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-directshow-core_31bf3856ad364e35_6.1.7601.17514_none_04963d500485b5cd",
-          "dest": "win64",
-          "for": ""
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
-          "bundle": [
-            {
-              "value": "quartz",
-              "data": "native,builtin"
-            }
-          ]
-        },
-        {
-          "action": "register_dll",
-          "dlls": ""
+          "dll": "quartz",
+          "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "quicktime72",
@@ -3297,44 +3073,30 @@
       "description": "Microsoft urlmon Microsoft Foundation Classes from win7sp1",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "https://proxy.usebottles.com/redistributable/dependencies/windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "urlmon__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/urlmon__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "urlmon.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-i..ersandsecurityzones_31bf3856ad364e35_8.0.7601.17514_none_d1a4c8feac0dfcdb",
-          "dest": "win32/"
+          "file_name": "*",
+          "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "urlmon.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-i..ersandsecurityzones_31bf3856ad364e35_8.0.7601.17514_none_2dc36482646b6e11",
-          "dest": "win64/"
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
           "dll": "urlmon",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "vbrun6",
@@ -4197,44 +3959,30 @@
       "description": "Microsoft wininet Microsoft Foundation Classes from win7sp1",
       "provider": "Microsoft",
       "dependencies": [],
-      "status": "needs-upstream",
+      "status": "ready",
       "steps": [
         {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x86_c3516bc5c9e69fee6d9ac4f981f5b95977a8a2fa.exe",
-          "rename": "windows6.1-kb976932-x86.exe",
-          "url": "https://proxy.usebottles.com/redistributable/dependencies/windows6.1-kb976932-x86.exe",
-          "file_checksum": "4bf28fc00d86c936c89e2d91ef46758b",
-          "dest": "temp/windows6.1-kb976932-x86",
-          "upstream": true
-        },
-        {
-          "action": "cab_extract",
-          "file_name": "windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "rename": "windows6.1-kb976932-x64.exe",
-          "url": "http://download.windowsupdate.com/msdownload/update/software/svpk/2011/02/windows6.1-kb976932-x64_74865ef2562006e51d7f9333b4a8d45b7a749dab.exe",
-          "file_checksum": "28d3932f714bf71d78e75d36aa2e0fb8",
-          "dest": "temp/windows6.1-kb976932-x64",
-          "upstream": true
+          "action": "archive_extract",
+          "file_name": "wininet__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/wininet__libs.tar.xz"
         },
         {
           "action": "copy_dll",
-          "file_name": "wininet.dll",
-          "url": "temp/windows6.1-kb976932-x86/x86_microsoft-windows-i..tocolimplementation_31bf3856ad364e35_8.0.7601.17514_none_1eaaa4a07717236e",
-          "dest": "win32/"
+          "file_name": "*",
+          "dest": "win32"
         },
         {
           "action": "copy_dll",
-          "file_name": "wininet.dll",
-          "url": "temp/windows6.1-kb976932-x64/amd64_microsoft-windows-i..tocolimplementation_31bf3856ad364e35_8.0.7601.17514_none_7ac940242f7494a4",
-          "dest": "win64/"
+          "file_name": "*",
+          "dest": "win64"
         },
         {
           "action": "override_dll",
           "dll": "wininet",
           "type": "native,builtin"
         }
-      ]
+      ],
+      "prebaked": true
     },
     {
       "name": "wsh57",
