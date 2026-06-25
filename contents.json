@@ -367,6 +367,12 @@
   },
   {
     "type": "DXVK",
+    "verName": "dxvk-3.0",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk/dxvk-3.0.wcp"
+  },
+  {
+    "type": "DXVK",
     "verName": "dxvk-arm64ec-2.3.1",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk-arm64ec/dxvk-arm64ec-2.3.1.wcp"
@@ -400,6 +406,12 @@
     "verName": "dxvk-arm64ec-2.7.1",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk-arm64ec/dxvk-arm64ec-2.7.1.wcp"
+  },
+  {
+    "type": "DXVK",
+    "verName": "dxvk-arm64ec-3.0",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk-arm64ec/dxvk-arm64ec-3.0.wcp"
   },
   {
     "type": "DXVK",
@@ -445,6 +457,12 @@
   },
   {
     "type": "DXVK",
+    "verName": "dxvk-gplasync-3.0-1",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk-gplasync/dxvk-gplasync-3.0-1.wcp"
+  },
+  {
+    "type": "DXVK",
     "verName": "dxvk-gplasync-arm64ec-2.3.1-1",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk-gplasync-arm64ec/dxvk-gplasync-arm64ec-2.3.1-1.wcp"
@@ -478,6 +496,12 @@
     "verName": "dxvk-gplasync-arm64ec-2.7.1-1",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk-gplasync-arm64ec/dxvk-gplasync-arm64ec-2.7.1-1.wcp"
+  },
+  {
+    "type": "DXVK",
+    "verName": "dxvk-gplasync-arm64ec-3.0-1",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Dxvk-gplasync-arm64ec/dxvk-gplasync-arm64ec-3.0-1.wcp"
   },
   {
     "type": "FEXCore",
