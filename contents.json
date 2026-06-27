@@ -703,12 +703,6 @@
   },
   {
     "type": "Proton",
-    "verName": "proton-10-arm64ec-controller-fix",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/proton-10-arm64ec-controller-fix.wcp"
-  },
-  {
-    "type": "Proton",
     "verName": "proton-9.0-arm64ec",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/proton-9.0-arm64ec.wcp"
@@ -841,9 +835,9 @@
   },
   {
     "type": "Proton",
-    "verName": "proton-10-arm64ec",
+    "verName": "proton-10.0-arm64ec",
     "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/proton-10-arm64ec.wcp.xz"
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/proton-10.0-arm64ec.wcp"
   },
   {
     "type": "Proton",
