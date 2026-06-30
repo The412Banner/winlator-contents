@@ -3,7 +3,7 @@
   "category": "reshade-effect",
   "release": "reshade-v1",
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/",
-  "count": 100,
+  "count": 102,
   "note": "On-demand ReShade .fx effects for Bannerlator (vkBasalt). Each archive = one self-contained effect folder (.fx + .fxh includes + textures), extracted into getExternalFilesDir/ReShade/<id>/.",
   "effects": [
     {
@@ -1204,6 +1204,30 @@
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/ArtisticVignette.tzst",
       "file_size": "4643",
       "file_checksum": "6D06720E3DC0A940B9A29975EA92DAFA",
+      "version": 1
+    },
+    {
+      "id": "Vibrance",
+      "name": "Vibrance",
+      "description": "Vibrance \u2014 CeeJay.dk",
+      "category": "Color/Tone",
+      "author": "CeeJay.dk",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/Vibrance.tzst",
+      "file_size": "4083",
+      "file_checksum": "6209F00D46FDDBB3A46FDE449A042566",
+      "version": 1
+    },
+    {
+      "id": "Technicolor2",
+      "name": "Technicolor2",
+      "description": "Technicolor2 \u2014 Prod80, CeeJay.dk",
+      "category": "Color/Tone",
+      "author": "Prod80, CeeJay.dk",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/Technicolor2.tzst",
+      "file_size": "3649",
+      "file_checksum": "3B4A2F620ABE4B77D38D715ECAB75EAA",
       "version": 1
     }
   ]
