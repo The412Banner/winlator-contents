@@ -3,7 +3,7 @@
   "category": "reshade-effect",
   "release": "reshade-v1",
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/",
-  "count": 102,
+  "count": 108,
   "note": "On-demand ReShade .fx effects for Bannerlator (vkBasalt). Each archive = one self-contained effect folder (.fx + .fxh includes + textures), extracted into getExternalFilesDir/ReShade/<id>/.",
   "effects": [
     {
@@ -1228,6 +1228,78 @@
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/Technicolor2.tzst",
       "file_size": "3649",
       "file_checksum": "3B4A2F620ABE4B77D38D715ECAB75EAA",
+      "version": 1
+    },
+    {
+      "id": "ColorMatrix",
+      "name": "ColorMatrix",
+      "description": "ColorMatrix \u2014 CeeJay.dk",
+      "category": "Color/Tone",
+      "author": "CeeJay.dk",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/ColorMatrix.tzst",
+      "file_size": "3662",
+      "file_checksum": "EFEC42AC7A73D5CEDEDB8681A99C604D",
+      "version": 1
+    },
+    {
+      "id": "Sepia",
+      "name": "Sepia",
+      "description": "Sepia \u2014 CeeJay.dk",
+      "category": "Color/Tone",
+      "author": "CeeJay.dk",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/Sepia.tzst",
+      "file_size": "3402",
+      "file_checksum": "2806C1503EDDE2EF64C9BD88153BFB27",
+      "version": 1
+    },
+    {
+      "id": "DPX",
+      "name": "DPX",
+      "description": "Cinematic DPX \u2014 Loadus",
+      "category": "Color/Tone",
+      "author": "Loadus",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/DPX.tzst",
+      "file_size": "3976",
+      "file_checksum": "CAF2FA1EDE9CBFF610032EF06CCC7215",
+      "version": 1
+    },
+    {
+      "id": "Cartoon",
+      "name": "Cartoon",
+      "description": "Cartoon \u2014 CeeJay.dk",
+      "category": "Other",
+      "author": "CeeJay.dk",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/Cartoon.tzst",
+      "file_size": "3630",
+      "file_checksum": "18EDB046218B9DD94B6A69ABE5D0091B",
+      "version": 1
+    },
+    {
+      "id": "LiftGammaGain",
+      "name": "LiftGammaGain",
+      "description": "Lift Gamma Gain \u2014 3an, CeeJay.dk",
+      "category": "Color/Tone",
+      "author": "3an, CeeJay.dk",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/LiftGammaGain.tzst",
+      "file_size": "3574",
+      "file_checksum": "FC5ED84AD024F66A250B337F19BBE4AF",
+      "version": 1
+    },
+    {
+      "id": "SMAA",
+      "name": "SMAA",
+      "description": "SMAA antialiasing \u2014 Jorge Jimenez et al.",
+      "category": "Antialiasing",
+      "author": "Jorge Jimenez et al.",
+      "license": "MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/SMAA.tzst",
+      "file_size": "47942",
+      "file_checksum": "FBE05225D94EECD6EFBEE4BCAC230A91",
       "version": 1
     }
   ]
