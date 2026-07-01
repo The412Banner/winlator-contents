@@ -3,7 +3,7 @@
   "category": "reshade-effect",
   "release": "reshade-v1",
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/",
-  "count": 108,
+  "count": 109,
   "note": "On-demand ReShade .fx effects for Bannerlator (vkBasalt). Each archive = one self-contained effect folder (.fx + .fxh includes + textures), extracted into getExternalFilesDir/ReShade/<id>/.",
   "effects": [
     {
@@ -1300,6 +1300,18 @@
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/SMAA.tzst",
       "file_size": "47942",
       "file_checksum": "FBE05225D94EECD6EFBEE4BCAC230A91",
+      "version": 1
+    },
+    {
+      "id": "FXAA",
+      "name": "FXAA",
+      "description": "FXAA antialiasing \u2014 Timothy Lottes / NVIDIA",
+      "category": "Antialiasing",
+      "author": "Timothy Lottes (NVIDIA), port CeeJay.dk",
+      "license": "NVIDIA FXAA (permissive, non-standard)",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/reshade-v1/FXAA.tzst",
+      "file_size": "21540",
+      "file_checksum": "A2E5B44B526212C21B5FAB9B94A00BA6",
       "version": 1
     }
   ]
