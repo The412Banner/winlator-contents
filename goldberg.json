@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "category": "steam-emulator",
+  "release": "goldberg-v1",
+  "name": "Steam Emulator (Goldberg)",
+  "version": 1,
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/goldberg-v1/goldberg.tzst",
+  "file_size": "35938867",
+  "file_checksum": "BC48B103AD3B067D3ED7CDFDAF728A4A",
+  "note": "gbe_fork Goldberg build for the Bannerlator Steam-store auto-patch. Combined package; extracts to imagefs/opt/goldberg/ with regular/, experimental/, steamclient_experimental/ tiers."
+}
