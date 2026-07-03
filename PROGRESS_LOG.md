@@ -6,6 +6,16 @@
 
 ---
 
+## Session — 2026-07-03
+
+### [feat] — Add FEXCore 2607 stables (non-PPA + PPA) to contents.json (2026-07-03)
+
+#### What changed
+- Added two `FEXCore` entries to `contents.json` (142 → 144), inserted contiguously after the last FEXCore entry:
+  - `FEXCore-2607` → `Nightlies/releases/download/FexCore/FEXCore-2607.wcp`
+  - `FEXCore-2607-PPA` → `Nightlies/releases/download/FexCore/FEXCore-2607-PPA.wcp`
+- Both are the FEX-2607 stable builds (cut from the exact `FEX-2607` tag, commit `1cc4b93e`); `.wcp` assets already live on the Nightlies `FexCore` release (URLs verified 200). `verCode` `0`, naming matches the existing `FEXCore-2605` convention.
+
 ## Session — 2026-05-08
 
 ### [feat] — Add `.wcp.xz` Wine + Proton entries to catalog (2026-05-08)
