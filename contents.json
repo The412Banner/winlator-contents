@@ -853,6 +853,18 @@
   },
   {
     "type": "Proton",
+    "verName": "proton-11.0-1-arm64ec-sdk28",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260709/proton-11.0-1-arm64ec-sdk28.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "proton-11.0-1-arm64ec-sdk35",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260709/proton-11.0-1-arm64ec-sdk35.wcp"
+  },
+  {
+    "type": "Proton",
     "verName": "proton-11.0-5-arm64ec",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/Proton-11-B5-Arm64EC-Steam-FIXED.wcp"
