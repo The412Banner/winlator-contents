@@ -865,14 +865,14 @@
   },
   {
     "type": "Proton",
-    "verName": "proton-11.0-1-x86_64-fastyield-sdk28",
+    "verName": "proton-11.0-1-x86_64-sdk28",
     "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/proton-11.0-1-x86_64-fastyield-zstd/proton-11.0-1-x86_64-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/proton-11.0-1-x86_64/proton-11.0-1-x86_64-sdk28.wcp"
   },
   {
     "type": "Proton",
-    "verName": "proton-11.0-1-x86_64-fastyield-sdk35",
+    "verName": "proton-11.0-1-x86_64-sdk35",
     "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/proton-11.0-1-x86_64-fastyield-zstd/proton-11.0-1-x86_64-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/proton-11.0-1-x86_64/proton-11.0-1-x86_64-sdk35.wcp"
   }
 ]
