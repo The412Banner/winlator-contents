@@ -630,6 +630,12 @@
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2607-PPA.wcp"
   },
   {
+    "type": "FEXCore",
+    "verName": "FEXCore-2607-nightly-unix",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2607-nightly-unix.wcp"
+  },
+  {
     "type": "VKD3D",
     "verName": "Vk3dk-3.0b-arm64ec-Tfix",
     "verCode": "0",
