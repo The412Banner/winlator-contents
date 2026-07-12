@@ -6,6 +6,19 @@
 
 ---
 
+## Session — 2026-07-12
+
+### [chore] — Point Proton 11.0-1 entries at rebuilt `build-p11-20260712` (2026-07-12)
+
+#### What changed
+- Repointed all four `proton-11.0-1-{arm64ec,x86_64}-sdk{28,35}` `remoteUrl`s from the older sources to the new `The412Banner/proton-wine` release `build-p11-20260712`. Filenames + `verName`s unchanged (drop-in), so clients see the same catalog identity.
+  - arm64ec pair: `build-p11-20260709` → `build-p11-20260712`.
+  - x86_64 pair: moved off this repo's own `proton-11.0-1-x86_64` self-release → `proton-wine/build-p11-20260712`, consolidating all four assets under one tag.
+- New builds are debug-stripped + zstd-compressed: arm64ec ~94.5 MB, x86_64 ~61.5 MB (~⅓ prior download, ~730 MB installed vs ~2 GB). Runtime unchanged (still Proton 11.0-1). All four asset URLs HEAD-verified `302`.
+
+#### Files touched
+- `contents.json`
+
 ## Session — 2026-07-03
 
 ### [feat] — Add FEXCore 2607 stables (non-PPA + PPA) to contents.json (2026-07-03)
