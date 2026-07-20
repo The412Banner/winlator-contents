@@ -4,7 +4,7 @@
   "wrappers": [
     {
       "id": "bannerlator-wrapper",
-      "name": "Bannerlator \u2014 Wrapper (default)",
+      "name": "Bannerlator — Wrapper (default)",
       "description": "Bannerlator's default graphics wrapper. Byte-identical to WinlatorMali's Wrapper (same file); also identical to Ludashi's Wrapper (Steven).",
       "author": "Bruno/Winlator + Bannerlator",
       "license": "Winlator lineage",
@@ -18,9 +18,9 @@
     },
     {
       "id": "bannerlator-original",
-      "name": "Bannerlator \u2014 Wrapper (original)",
+      "name": "Bannerlator — Wrapper (original)",
       "description": "The original Winlator wrapper (Bruno's base). Byte-identical to WinNative's Wrapper and WinlatorMali's Wrapper v2 (verified same file).",
-      "author": "Bruno (brunodev85) \u2014 Winlator",
+      "author": "Bruno (brunodev85) — Winlator",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
       "file_size": "3816921",
@@ -32,8 +32,8 @@
     },
     {
       "id": "bannerlator-legacy",
-      "name": "Bannerlator \u2014 Wrapper (legacy)",
-      "description": "Bannerlator's 'legacy' wrapper \u2014 this is Pipetto-crypto's Winlator Bionic wrapper (same file). Ludashi descends from this upstream.",
+      "name": "Bannerlator — Wrapper (legacy)",
+      "description": "Bannerlator's 'legacy' wrapper — this is Pipetto-crypto's Winlator Bionic wrapper (same file). Ludashi descends from this upstream.",
       "author": "Pipetto-crypto (Winlator Bionic) + Bannerlator",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bannerlator-legacy.tzst",
@@ -46,7 +46,7 @@
     },
     {
       "id": "bannerlator-leegao",
-      "name": "Bannerlator \u2014 leegao",
+      "name": "Bannerlator — leegao",
       "description": "Bannerlator's leegao ICD build. Each project ships its own leegao build (this one differs from WinlatorMali's and WinNative's).",
       "author": "leegao + Bannerlator",
       "license": "credit leegao",
@@ -60,7 +60,7 @@
     },
     {
       "id": "bannerlator-gamenative",
-      "name": "Bannerlator \u2014 GameNative",
+      "name": "Bannerlator — GameNative",
       "description": "The GameNative wrapper (DX12 + integrated BCn). Byte-identical to WinlatorMali's GameNative (same file); WinNative ships a different build.",
       "author": "GameNative",
       "license": "credit GameNative",
@@ -74,7 +74,7 @@
     },
     {
       "id": "bannerlator-bcn-leegao",
-      "name": "Bannerlator \u2014 BCn layer (leegao)",
+      "name": "Bannerlator — BCn layer (leegao)",
       "description": "leegao BCn texture-transcode layer (upstream shader-v3). Import into the BCn layer slot. For non-Adreno GPUs.",
       "author": "leegao",
       "license": "credit leegao",
@@ -90,7 +90,7 @@
     },
     {
       "id": "bannerlator-compat-bcn",
-      "name": "Bannerlator \u2014 Wrapper + compat + bcn (Mali DX12)",
+      "name": "Bannerlator — Wrapper + compat + bcn (Mali DX12)",
       "description": "Full Mali DX12 stack: leegao ICD + BCn layer + DXVK-Mali compat layer. Valhall Mali r32p1+.",
       "author": "leegao + Bannerlator",
       "license": "credit leegao + Bannerlator",
@@ -105,7 +105,7 @@
     },
     {
       "id": "wmali-wrapper",
-      "name": "WinlatorMali \u2014 Wrapper",
+      "name": "WinlatorMali — Wrapper",
       "description": "WinlatorMali's default wrapper. Byte-identical to Bannerlator's Wrapper (default) (same file); also identical to Ludashi's Wrapper (Steven).",
       "author": "GunaCharanTeja (WinlatorMali)",
       "license": "Winlator lineage",
@@ -120,8 +120,8 @@
     },
     {
       "id": "wmali-v2",
-      "name": "WinlatorMali \u2014 Wrapper v2",
-      "description": "WinlatorMali's 'v2' wrapper \u2014 byte-identical to the Bruno original (Bannerlator Wrapper original / WinNative Wrapper).",
+      "name": "WinlatorMali — Wrapper v2",
+      "description": "WinlatorMali's 'v2' wrapper — byte-identical to the Bruno original (Bannerlator Wrapper original / WinNative Wrapper).",
       "author": "GunaCharanTeja (WinlatorMali)",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
@@ -135,7 +135,7 @@
     },
     {
       "id": "wmali-leegao",
-      "name": "WinlatorMali \u2014 leegao",
+      "name": "WinlatorMali — leegao",
       "description": "WinlatorMali's leegao ICD build (differs from Bannerlator's and WinNative's leegao).",
       "author": "leegao + GunaCharanTeja",
       "license": "credit leegao",
@@ -150,7 +150,7 @@
     },
     {
       "id": "wmali-gamenative",
-      "name": "WinlatorMali \u2014 GameNative",
+      "name": "WinlatorMali — GameNative",
       "description": "WinlatorMali's GameNative wrapper. Byte-identical to Bannerlator's GameNative (same file).",
       "author": "GameNative",
       "license": "credit GameNative",
@@ -165,7 +165,7 @@
     },
     {
       "id": "wmali-bcn-fcharan",
-      "name": "WinlatorMali \u2014 BCn layer (Fcharan fork)",
+      "name": "WinlatorMali — BCn layer (Fcharan fork)",
       "description": "Performance/stability-tuned BCn layer, a fork of leegao's with extra ASTC-quality, staging-cache and queue-throttle controls. Import into the BCn layer slot.",
       "author": "Fcharan / WinMali-Dev (fork of leegao)",
       "license": "credit Fcharan + leegao",
@@ -180,8 +180,8 @@
     },
     {
       "id": "winnative-wrapper",
-      "name": "WinNative \u2014 Wrapper",
-      "description": "WinNative's default wrapper \u2014 byte-identical to the Bruno original (same file).",
+      "name": "WinNative — Wrapper",
+      "description": "WinNative's default wrapper — byte-identical to the Bruno original (same file).",
       "author": "Bruno/Winlator + WinNative",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
@@ -194,7 +194,7 @@
     },
     {
       "id": "winnative-gamenative",
-      "name": "WinNative \u2014 GameNative",
+      "name": "WinNative — GameNative",
       "description": "WinNative's own GameNative wrapper build (differs from Bannerlator's/WinlatorMali's GameNative).",
       "author": "GameNative + WinNative",
       "license": "credit GameNative",
@@ -208,7 +208,7 @@
     },
     {
       "id": "winnative-leegao",
-      "name": "WinNative \u2014 leegao",
+      "name": "WinNative — leegao",
       "description": "WinNative's own leegao ICD build (differs from Bannerlator's and WinlatorMali's).",
       "author": "leegao + WinNative",
       "license": "credit leegao",
@@ -222,23 +222,23 @@
     },
     {
       "id": "gamenative-wrapper",
-      "name": "GameNative \u2014 GameNative Wrapper",
-      "description": "The canonical GameNative wrapper (DX12 + integrated BCn), from the GameNative project. Bannerlator and WinlatorMali ship this exact file.",
+      "name": "GameNative — GameNative Wrapper",
+      "description": "The canonical GameNative wrapper — latest upstream build (20260719, GameNative #1743): updated for 32-bit games, adds ICD-side push-descriptor + device-fault support. Newer than the July-5 build the forks currently bundle.",
       "author": "GameNative",
       "license": "credit GameNative",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative.tzst",
-      "file_size": "740926",
-      "file_checksum": "161743CD9DBEFD7070AEAA9314F7AFFB",
-      "version": 1,
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20260719.tzst",
+      "file_size": "745944",
+      "file_checksum": "B750AFB3F536B9FE3E0986D0B6BAA6EC",
+      "version": 2,
       "gpuTargets": [
         "all"
       ]
     },
     {
       "id": "ludashi-wrapper",
-      "name": "Ludashi \u2014 Wrapper (Steven)",
-      "description": "Winlator\u2011Ludashi's default wrapper (StevenMXZ, ludashi-3.1). Byte\u2011identical to the Bannerlator/WinlatorMali default Wrapper (same file).",
-      "author": "StevenMXZ (Winlator\u2011Ludashi)",
+      "name": "Ludashi — Wrapper (Steven)",
+      "description": "Winlator‑Ludashi's default wrapper (StevenMXZ, ludashi-3.1). Byte‑identical to the Bannerlator/WinlatorMali default Wrapper (same file).",
+      "author": "StevenMXZ (Winlator‑Ludashi)",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
       "file_size": "3795109",
@@ -250,8 +250,8 @@
     },
     {
       "id": "pipetto-bionic",
-      "name": "Pipetto \u2014 Winlator Bionic Wrapper",
-      "description": "Pipetto-crypto's Winlator Bionic wrapper (dev branch) \u2014 the bionic upstream that Ludashi and other bionic forks descend from. Byte-identical to Bannerlator's 'legacy' wrapper (same file).",
+      "name": "Pipetto — Winlator Bionic Wrapper",
+      "description": "Pipetto-crypto's Winlator Bionic wrapper (dev branch) — the bionic upstream that Ludashi and other bionic forks descend from. Byte-identical to Bannerlator's 'legacy' wrapper (same file).",
       "author": "Pipetto-crypto (Winlator Bionic)",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bannerlator-legacy.tzst",
