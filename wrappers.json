@@ -1,90 +1,238 @@
 {
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/",
-  "count": 7,
+  "count": 16,
   "wrappers": [
     {
-      "id": "gamenative",
-      "name": "GameNative Wrapper",
-      "description": "DX12-capable Vulkan wrapper with integrated BCn. Reports Vulkan 1.3 and provides the promoted entrypoints. Works broadly (Mali/Exynos/Adreno).",
-      "author": "GameNative",
-      "license": "Open source (Winlator lineage) — credit GameNative",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative.tzst",
-      "file_size": "740926",
-      "file_checksum": "161743CD9DBEFD7070AEAA9314F7AFFB",
-      "version": 1,
-      "gpuTargets": ["all"]
-    },
-    {
-      "id": "leegao",
-      "name": "leegao Wrapper",
-      "description": "leegao's Vulkan wrapper ICD — the base engine used by the BCn and compat layers.",
-      "author": "leegao",
-      "license": "Open source — credit leegao",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/leegao.tzst",
-      "file_size": "2377465",
-      "file_checksum": "4339B2A00B8B09275E6F5AD3513D6065",
-      "version": 1,
-      "gpuTargets": ["all"]
-    },
-    {
-      "id": "original",
-      "name": "Wrapper (original)",
-      "description": "The original Winlator graphics wrapper — the shared base all forks descend from.",
-      "author": "Bruno (brunodev85) — Winlator",
-      "license": "Winlator lineage — credit Bruno / Winlator",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
-      "file_size": "3816921",
-      "file_checksum": "2C15B194A1D86A9AC86A2C3AB1A0FFB2",
-      "version": 1,
-      "gpuTargets": ["all"]
-    },
-    {
-      "id": "bcn-leegao",
-      "name": "BCn Layer (leegao)",
-      "description": "BCn texture transcode layer, upstream leegao (shader-v3). For GPUs without native BCn. Import into the BCn layer slot.",
-      "author": "leegao",
-      "license": "Open source — credit leegao",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bcn-leegao.tzst",
-      "file_size": "2905441",
-      "file_checksum": "4908D2D952491B6977856CE03C7169D0",
-      "version": 1,
-      "gpuTargets": ["mali", "exynos", "powervr"]
-    },
-    {
-      "id": "bcn-fcharan",
-      "name": "BCn Layer (Fcharan fork)",
-      "description": "Performance/stability-tuned BCn layer — a fork of leegao's with extra ASTC-quality, staging-cache and queue-throttle controls (from WinlatorMali).",
-      "author": "Fcharan / WinMali-Dev (fork of leegao's bcn_layer)",
-      "license": "Fork of leegao — credit Fcharan / WinMali-Dev + leegao",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bcn-fcharan.tzst",
-      "file_size": "1101635",
-      "file_checksum": "B0F38E7DFF148B4C054DFD2602115F26",
-      "version": 1,
-      "gpuTargets": ["mali", "exynos"]
-    },
-    {
-      "id": "compat-bcn",
-      "name": "Wrapper + compat + bcn (Mali DX12)",
-      "description": "Full Mali DX12 stack: leegao ICD + BCn layer + DXVK-Mali compat layer. Aimed at Valhall Mali (r32p1+). Assembled for the Bannerlator Mali test line.",
-      "author": "leegao + Bannerlator",
-      "license": "Open source (Winlator lineage) — credit leegao + Bannerlator",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/compat-bcn.tzst",
-      "file_size": "7324605",
-      "file_checksum": "A1B59F2A70236810AE4840C929328D0B",
-      "version": 1,
-      "gpuTargets": ["mali", "exynos"]
-    },
-    {
-      "id": "wmali-wrapper",
-      "name": "WinlatorMali Wrapper",
-      "description": "The default graphics wrapper shipped by WinlatorMali (bionic-mali line).",
-      "author": "GunaCharanTeja (WinlatorMali)",
-      "license": "Winlator lineage — credit GunaCharanTeja / WinlatorMali",
+      "id": "bannerlator-wrapper",
+      "name": "Bannerlator \u2014 Wrapper (default)",
+      "description": "Bannerlator's default graphics wrapper. Byte-identical to WinlatorMali's Wrapper (same file).",
+      "author": "Bruno/Winlator + Bannerlator",
+      "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
       "file_size": "3795109",
       "file_checksum": "D0A31C96529F4CFD98B7327D3C5D7F23",
       "version": 1,
-      "gpuTargets": ["mali", "exynos"]
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "bannerlator-original",
+      "name": "Bannerlator \u2014 Wrapper (original)",
+      "description": "The original Winlator wrapper (Bruno's base). Byte-identical to WinNative's Wrapper and WinlatorMali's Wrapper v2 (verified same file).",
+      "author": "Bruno (brunodev85) \u2014 Winlator",
+      "license": "Winlator lineage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
+      "file_size": "3816921",
+      "file_checksum": "2C15B194A1D86A9AC86A2C3AB1A0FFB2",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "bannerlator-legacy",
+      "name": "Bannerlator \u2014 Wrapper (legacy)",
+      "description": "Bannerlator's legacy wrapper build. Unique to Bannerlator.",
+      "author": "Bannerlator",
+      "license": "Winlator lineage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bannerlator-legacy.tzst",
+      "file_size": "5725821",
+      "file_checksum": "ED5AF1577A5EB7BE529B0B5FD3142099",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "bannerlator-leegao",
+      "name": "Bannerlator \u2014 leegao",
+      "description": "Bannerlator's leegao ICD build. Each project ships its own leegao build (this one differs from WinlatorMali's and WinNative's).",
+      "author": "leegao + Bannerlator",
+      "license": "credit leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/leegao.tzst",
+      "file_size": "2377465",
+      "file_checksum": "4339B2A00B8B09275E6F5AD3513D6065",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "bannerlator-gamenative",
+      "name": "Bannerlator \u2014 GameNative",
+      "description": "The GameNative wrapper (DX12 + integrated BCn). Byte-identical to WinlatorMali's GameNative (same file); WinNative ships a different build.",
+      "author": "GameNative",
+      "license": "credit GameNative",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative.tzst",
+      "file_size": "740926",
+      "file_checksum": "161743CD9DBEFD7070AEAA9314F7AFFB",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "bannerlator-bcn-leegao",
+      "name": "Bannerlator \u2014 BCn layer (leegao)",
+      "description": "leegao BCn texture-transcode layer (upstream shader-v3). Import into the BCn layer slot. For non-Adreno GPUs.",
+      "author": "leegao",
+      "license": "credit leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bcn-leegao.tzst",
+      "file_size": "2905441",
+      "file_checksum": "4908D2D952491B6977856CE03C7169D0",
+      "version": 1,
+      "gpuTargets": [
+        "mali",
+        "exynos",
+        "powervr"
+      ]
+    },
+    {
+      "id": "bannerlator-compat-bcn",
+      "name": "Bannerlator \u2014 Wrapper + compat + bcn (Mali DX12)",
+      "description": "Full Mali DX12 stack: leegao ICD + BCn layer + DXVK-Mali compat layer. Valhall Mali r32p1+.",
+      "author": "leegao + Bannerlator",
+      "license": "credit leegao + Bannerlator",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/compat-bcn.tzst",
+      "file_size": "7324605",
+      "file_checksum": "A1B59F2A70236810AE4840C929328D0B",
+      "version": 1,
+      "gpuTargets": [
+        "mali",
+        "exynos"
+      ]
+    },
+    {
+      "id": "wmali-wrapper",
+      "name": "WinlatorMali \u2014 Wrapper",
+      "description": "WinlatorMali's default wrapper. Byte-identical to Bannerlator's Wrapper (default) (same file).",
+      "author": "GunaCharanTeja (WinlatorMali)",
+      "license": "Winlator lineage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
+      "file_size": "3795109",
+      "file_checksum": "D0A31C96529F4CFD98B7327D3C5D7F23",
+      "version": 1,
+      "gpuTargets": [
+        "mali",
+        "exynos"
+      ]
+    },
+    {
+      "id": "wmali-v2",
+      "name": "WinlatorMali \u2014 Wrapper v2",
+      "description": "WinlatorMali's 'v2' wrapper \u2014 byte-identical to the Bruno original (Bannerlator Wrapper original / WinNative Wrapper).",
+      "author": "GunaCharanTeja (WinlatorMali)",
+      "license": "Winlator lineage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
+      "file_size": "3816921",
+      "file_checksum": "2C15B194A1D86A9AC86A2C3AB1A0FFB2",
+      "version": 1,
+      "gpuTargets": [
+        "mali",
+        "exynos"
+      ]
+    },
+    {
+      "id": "wmali-leegao",
+      "name": "WinlatorMali \u2014 leegao",
+      "description": "WinlatorMali's leegao ICD build (differs from Bannerlator's and WinNative's leegao).",
+      "author": "leegao + GunaCharanTeja",
+      "license": "credit leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-leegao.tzst",
+      "file_size": "2365265",
+      "file_checksum": "44CB91E39891A6B79E011CE0D9041240",
+      "version": 1,
+      "gpuTargets": [
+        "mali",
+        "exynos"
+      ]
+    },
+    {
+      "id": "wmali-gamenative",
+      "name": "WinlatorMali \u2014 GameNative",
+      "description": "WinlatorMali's GameNative wrapper. Byte-identical to Bannerlator's GameNative (same file).",
+      "author": "GameNative",
+      "license": "credit GameNative",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative.tzst",
+      "file_size": "740926",
+      "file_checksum": "161743CD9DBEFD7070AEAA9314F7AFFB",
+      "version": 1,
+      "gpuTargets": [
+        "mali",
+        "exynos"
+      ]
+    },
+    {
+      "id": "wmali-bcn-fcharan",
+      "name": "WinlatorMali \u2014 BCn layer (Fcharan fork)",
+      "description": "Performance/stability-tuned BCn layer, a fork of leegao's with extra ASTC-quality, staging-cache and queue-throttle controls. Import into the BCn layer slot.",
+      "author": "Fcharan / WinMali-Dev (fork of leegao)",
+      "license": "credit Fcharan + leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bcn-fcharan.tzst",
+      "file_size": "1101635",
+      "file_checksum": "B0F38E7DFF148B4C054DFD2602115F26",
+      "version": 1,
+      "gpuTargets": [
+        "mali",
+        "exynos"
+      ]
+    },
+    {
+      "id": "winnative-wrapper",
+      "name": "WinNative \u2014 Wrapper",
+      "description": "WinNative's default wrapper \u2014 byte-identical to the Bruno original (same file).",
+      "author": "Bruno/Winlator + WinNative",
+      "license": "Winlator lineage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
+      "file_size": "3816921",
+      "file_checksum": "2C15B194A1D86A9AC86A2C3AB1A0FFB2",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "winnative-gamenative",
+      "name": "WinNative \u2014 GameNative",
+      "description": "WinNative's own GameNative wrapper build (differs from Bannerlator's/WinlatorMali's GameNative).",
+      "author": "GameNative + WinNative",
+      "license": "credit GameNative",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/winnative-gamenative.tzst",
+      "file_size": "758031",
+      "file_checksum": "6EC9587318ECA68982A660DDECD4D3B6",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "winnative-leegao",
+      "name": "WinNative \u2014 leegao",
+      "description": "WinNative's own leegao ICD build (differs from Bannerlator's and WinlatorMali's).",
+      "author": "leegao + WinNative",
+      "license": "credit leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/winnative-leegao.tzst",
+      "file_size": "3057352",
+      "file_checksum": "908B2DE10A49A052770E87D1E7890061",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "gamenative-wrapper",
+      "name": "GameNative \u2014 GameNative Wrapper",
+      "description": "The canonical GameNative wrapper (DX12 + integrated BCn), from the GameNative project. Bannerlator and WinlatorMali ship this exact file.",
+      "author": "GameNative",
+      "license": "credit GameNative",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative.tzst",
+      "file_size": "740926",
+      "file_checksum": "161743CD9DBEFD7070AEAA9314F7AFFB",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
     }
   ]
 }
