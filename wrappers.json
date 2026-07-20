@@ -1,11 +1,11 @@
 {
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/",
-  "count": 16,
+  "count": 17,
   "wrappers": [
     {
       "id": "bannerlator-wrapper",
       "name": "Bannerlator \u2014 Wrapper (default)",
-      "description": "Bannerlator's default graphics wrapper. Byte-identical to WinlatorMali's Wrapper (same file).",
+      "description": "Bannerlator's default graphics wrapper. Byte-identical to WinlatorMali's Wrapper (same file); also identical to Ludashi's Wrapper (Steven).",
       "author": "Bruno/Winlator + Bannerlator",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
@@ -106,7 +106,7 @@
     {
       "id": "wmali-wrapper",
       "name": "WinlatorMali \u2014 Wrapper",
-      "description": "WinlatorMali's default wrapper. Byte-identical to Bannerlator's Wrapper (default) (same file).",
+      "description": "WinlatorMali's default wrapper. Byte-identical to Bannerlator's Wrapper (default) (same file); also identical to Ludashi's Wrapper (Steven).",
       "author": "GunaCharanTeja (WinlatorMali)",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
@@ -229,6 +229,20 @@
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative.tzst",
       "file_size": "740926",
       "file_checksum": "161743CD9DBEFD7070AEAA9314F7AFFB",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "ludashi-wrapper",
+      "name": "Ludashi \u2014 Wrapper (Steven)",
+      "description": "Winlator\u2011Ludashi's default wrapper (StevenMXZ, ludashi-3.1). Byte\u2011identical to the Bannerlator/WinlatorMali default Wrapper (same file).",
+      "author": "StevenMXZ (Winlator\u2011Ludashi)",
+      "license": "Winlator lineage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
+      "file_size": "3795109",
+      "file_checksum": "D0A31C96529F4CFD98B7327D3C5D7F23",
       "version": 1,
       "gpuTargets": [
         "all"
