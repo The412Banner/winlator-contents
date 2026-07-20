@@ -1,6 +1,6 @@
 {
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/",
-  "count": 17,
+  "count": 18,
   "wrappers": [
     {
       "id": "bannerlator-wrapper",
@@ -33,8 +33,8 @@
     {
       "id": "bannerlator-legacy",
       "name": "Bannerlator \u2014 Wrapper (legacy)",
-      "description": "Bannerlator's legacy wrapper build. Unique to Bannerlator.",
-      "author": "Bannerlator",
+      "description": "Bannerlator's 'legacy' wrapper \u2014 this is Pipetto-crypto's Winlator Bionic wrapper (same file). Ludashi descends from this upstream.",
+      "author": "Pipetto-crypto (Winlator Bionic) + Bannerlator",
       "license": "Winlator lineage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bannerlator-legacy.tzst",
       "file_size": "5725821",
@@ -243,6 +243,20 @@
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
       "file_size": "3795109",
       "file_checksum": "D0A31C96529F4CFD98B7327D3C5D7F23",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "pipetto-bionic",
+      "name": "Pipetto \u2014 Winlator Bionic Wrapper",
+      "description": "Pipetto-crypto's Winlator Bionic wrapper (dev branch) \u2014 the bionic upstream that Ludashi and other bionic forks descend from. Byte-identical to Bannerlator's 'legacy' wrapper (same file).",
+      "author": "Pipetto-crypto (Winlator Bionic)",
+      "license": "Winlator lineage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bannerlator-legacy.tzst",
+      "file_size": "5725821",
+      "file_checksum": "ED5AF1577A5EB7BE529B0B5FD3142099",
       "version": 1,
       "gpuTargets": [
         "all"
