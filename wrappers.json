@@ -1,0 +1,90 @@
+{
+  "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/",
+  "count": 7,
+  "wrappers": [
+    {
+      "id": "gamenative",
+      "name": "GameNative Wrapper",
+      "description": "DX12-capable Vulkan wrapper with integrated BCn. Reports Vulkan 1.3 and provides the promoted entrypoints. Works broadly (Mali/Exynos/Adreno).",
+      "author": "GameNative",
+      "license": "Open source (Winlator lineage) — credit GameNative",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative.tzst",
+      "file_size": "740926",
+      "file_checksum": "161743CD9DBEFD7070AEAA9314F7AFFB",
+      "version": 1,
+      "gpuTargets": ["all"]
+    },
+    {
+      "id": "leegao",
+      "name": "leegao Wrapper",
+      "description": "leegao's Vulkan wrapper ICD — the base engine used by the BCn and compat layers.",
+      "author": "leegao",
+      "license": "Open source — credit leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/leegao.tzst",
+      "file_size": "2377465",
+      "file_checksum": "4339B2A00B8B09275E6F5AD3513D6065",
+      "version": 1,
+      "gpuTargets": ["all"]
+    },
+    {
+      "id": "original",
+      "name": "Wrapper (original)",
+      "description": "The original Winlator graphics wrapper — the shared base all forks descend from.",
+      "author": "Bruno (brunodev85) — Winlator",
+      "license": "Winlator lineage — credit Bruno / Winlator",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/original.tzst",
+      "file_size": "3816921",
+      "file_checksum": "2C15B194A1D86A9AC86A2C3AB1A0FFB2",
+      "version": 1,
+      "gpuTargets": ["all"]
+    },
+    {
+      "id": "bcn-leegao",
+      "name": "BCn Layer (leegao)",
+      "description": "BCn texture transcode layer, upstream leegao (shader-v3). For GPUs without native BCn. Import into the BCn layer slot.",
+      "author": "leegao",
+      "license": "Open source — credit leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bcn-leegao.tzst",
+      "file_size": "2905441",
+      "file_checksum": "4908D2D952491B6977856CE03C7169D0",
+      "version": 1,
+      "gpuTargets": ["mali", "exynos", "powervr"]
+    },
+    {
+      "id": "bcn-fcharan",
+      "name": "BCn Layer (Fcharan fork)",
+      "description": "Performance/stability-tuned BCn layer — a fork of leegao's with extra ASTC-quality, staging-cache and queue-throttle controls (from WinlatorMali).",
+      "author": "Fcharan / WinMali-Dev (fork of leegao's bcn_layer)",
+      "license": "Fork of leegao — credit Fcharan / WinMali-Dev + leegao",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bcn-fcharan.tzst",
+      "file_size": "1101635",
+      "file_checksum": "B0F38E7DFF148B4C054DFD2602115F26",
+      "version": 1,
+      "gpuTargets": ["mali", "exynos"]
+    },
+    {
+      "id": "compat-bcn",
+      "name": "Wrapper + compat + bcn (Mali DX12)",
+      "description": "Full Mali DX12 stack: leegao ICD + BCn layer + DXVK-Mali compat layer. Aimed at Valhall Mali (r32p1+). Assembled for the Bannerlator Mali test line.",
+      "author": "leegao + Bannerlator",
+      "license": "Open source (Winlator lineage) — credit leegao + Bannerlator",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/compat-bcn.tzst",
+      "file_size": "7324605",
+      "file_checksum": "A1B59F2A70236810AE4840C929328D0B",
+      "version": 1,
+      "gpuTargets": ["mali", "exynos"]
+    },
+    {
+      "id": "wmali-wrapper",
+      "name": "WinlatorMali Wrapper",
+      "description": "The default graphics wrapper shipped by WinlatorMali (bionic-mali line).",
+      "author": "GunaCharanTeja (WinlatorMali)",
+      "license": "Winlator lineage — credit GunaCharanTeja / WinlatorMali",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/wmali-wrapper.tzst",
+      "file_size": "3795109",
+      "file_checksum": "D0A31C96529F4CFD98B7327D3C5D7F23",
+      "version": 1,
+      "gpuTargets": ["mali", "exynos"]
+    }
+  ]
+}
