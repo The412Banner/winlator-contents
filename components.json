@@ -4,7 +4,7 @@
   "format": "bottles-dependency",
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/",
   "release": "system-libraries-v1",
-  "count": 114,
+  "count": 120,
   "note": "Type-6 Wine dependency components for Bannerlator's Components installer. Step URLs rewritten to the winlator-contents mirror; status=needs-upstream uses the un-mirrored Win7-SP1 packages, status=pending-manual awaits a re-sourced binary.",
   "components": [
     {
@@ -3218,6 +3218,46 @@
       ]
     },
     {
+      "name": "vcredist2005_dll",
+      "description": "Microsoft Visual C++ 2005 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Core CRT/MFC runtime only (atl80/vcomp not included).",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2005_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2005_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcm80",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp80",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcr80",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
+    },
+    {
       "name": "vcredist2008",
       "description": "Microsoft Visual C++ Redistributable for Visual Studio 2008",
       "provider": "Microsoft",
@@ -3273,6 +3313,46 @@
       ]
     },
     {
+      "name": "vcredist2008_dll",
+      "description": "Microsoft Visual C++ 2008 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Core CRT/MFC runtime only (atl90/vcomp90 not included).",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2008_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2008_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcm90",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp90",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcr90",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
+    },
+    {
       "name": "vcredist2010",
       "description": "Microsoft Visual C++ Redistributable for Visual Studio 2010",
       "provider": "Microsoft",
@@ -3321,6 +3401,41 @@
           "type": "native,builtin"
         }
       ]
+    },
+    {
+      "name": "vcredist2010_dll",
+      "description": "Microsoft Visual C++ 2010 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Core CRT runtime (atl100/vcomp100 not included).",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2010_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2010_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp100",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcr100",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
     },
     {
       "name": "vcredist2012",
@@ -3373,6 +3488,41 @@
       ]
     },
     {
+      "name": "vcredist2012_dll",
+      "description": "Microsoft Visual C++ 2012 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Core CRT runtime (atl110/vcomp110 not included).",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2012_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2012_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp110",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcr110",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
+    },
+    {
       "name": "vcredist2013",
       "description": "Microsoft Visual C++ Redistributable (2013) 12.0",
       "provider": "Microsoft",
@@ -3421,6 +3571,41 @@
           "type": "native,builtin"
         }
       ]
+    },
+    {
+      "name": "vcredist2013_dll",
+      "description": "Microsoft Visual C++ 2013 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Core CRT runtime (atl120/vcomp120 not included).",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2013_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2013_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp120",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcr120",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
     },
     {
       "name": "vcredist2015",
@@ -3761,6 +3946,86 @@
           "type": "native,builtin"
         }
       ]
+    },
+    {
+      "name": "vcredist2022_dll",
+      "description": "Microsoft Visual C++ 2015-2022 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Supersedes vcredist2015/2019. UCRT (ucrtbase/api-ms-win-crt-*) provided by Wine builtin.",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2022_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "concrt140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp140_1",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp140_2",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp140_atomic_wait",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp140_codecvt_ids",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcamp140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vccorlib140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcomp140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcruntime140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcruntime140_1",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
     },
     {
       "name": "vcredist6",
