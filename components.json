@@ -2770,6 +2770,36 @@
         }
       ]
     },
+      {
+      "name": "oalinst_dll",
+      "description": "OpenAL (OpenAL Soft 1.25.2) - direct DLL copy (no installer; works on Proton 11 arm64ec).",
+      "provider": "OpenAL",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "oalinst_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/oalinst_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "openal32",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
+    },
     {
       "name": "physx",
       "description": "NVIDIA PhysX System 9.14.0702",
