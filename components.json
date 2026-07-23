@@ -4057,6 +4057,76 @@
       ],
       "prebaked": true
     },
+      {
+      "name": "vcredist2015_dll",
+      "description": "Microsoft Visual C++ 2015 Redistributable - direct DLL copy (14.x runtime, same as 2015-2022; no installer; works on Proton 11).",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2022_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcruntime140",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
+    },
+      {
+      "name": "vcredist2019_dll",
+      "description": "Microsoft Visual C++ 2019 Redistributable - direct DLL copy (14.x runtime, same as 2015-2022; no installer; works on Proton 11).",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "archive_extract",
+          "file_name": "vcredist2022_dll__libs.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs.tar.xz"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win64"
+        },
+        {
+          "action": "copy_dll",
+          "file_name": "*",
+          "dest": "win32"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp140",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcruntime140",
+          "type": "native,builtin"
+        }
+      ],
+      "prebaked": true
+    },
     {
       "name": "vcredist6",
       "description": "Microsoft Visual C++ 6 SP4 libraries",
