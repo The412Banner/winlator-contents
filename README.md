@@ -51,10 +51,10 @@ Each entry:
   "description": "…",
   "author": "GameNative",
   "license": "credit GameNative",
-  "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20260719.tzst",
-  "file_size": "745944",
-  "file_checksum": "B750AFB3F536B9FE3E0986D0B6BAA6EC",
-  "version": 2,
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20260723.tzst",
+  "file_size": "747484",
+  "file_checksum": "D6F3A6371FD5E8ECEC1053EBFBE5638B",
+  "version": 3,
   "gpuTargets": ["all"]
 }
 ```
