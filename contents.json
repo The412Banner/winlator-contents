@@ -884,25 +884,25 @@
   {
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk28",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260712/proton-11.0-1-arm64ec-sdk28.wcp"
+    "verCode": "2",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-arm64ec-refresh-20260722/proton-11.0-1-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk35",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260712/proton-11.0-1-arm64ec-sdk35.wcp"
+    "verCode": "2",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-arm64ec-refresh-20260722/proton-11.0-1-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk28",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p10-20260713/proton-10.0-4-arm64ec-sdk28.wcp"
+    "verCode": "3",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-arm64ec-refresh-20260722/proton-10.0-4-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk35",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p10-20260713/proton-10.0-4-arm64ec-sdk35.wcp"
+    "verCode": "3",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-arm64ec-refresh-20260722/proton-10.0-4-arm64ec-sdk35.wcp"
   }
 ]
