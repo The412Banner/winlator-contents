@@ -6,6 +6,21 @@
 
 ---
 
+## Session — 2026-07-24
+
+### [chore] — Replace the `fexcore-v1` nightly-unix build with FEX-2607+312 (2026-07-24)
+
+#### What changed
+- Swapped the single asset on this repo's `fexcore-v1` release: deleted `FEXCore-2607-nightly-unix.wcp` (982,604 B, sha256 `6d3974dc…`) and uploaded `FEX-2607+312-Nightly-464ec9d0b-unix.wcp` (990,348 B, sha256 `de3a3ac027201f80a9c35c1718593e7dd1d578a0be68d8aa176c5b5b4d0722d1`, built 2026-07-24).
+- Repointed the matching `contents.json` entry (still 151 entries, 22 FEXCore): `verName` `FEXCore-2607-nightly-unix` → `FEX-2607+312-Nightly-464ec9d0b-unix` (matches the `versionName` inside the new `profile.json`, so the installed component and the catalog row dedupe as one), `remoteUrl` → the new asset. `verCode` stays `0`.
+- URL uses `%2B` for the `+` in the filename. Both `%2B` and literal `+` were curl-verified `200` with the correct sha256; the encoded form is the canonical one in the catalog.
+- Same 4-file unixlib layout as the outgoing build — `system32/lib{arm64ec,wow64}fex.dll` + `aarch64-unix/lib{arm64ec,wow64}fex.so` — so it is a drop-in for the FEXCore unixlib slot.
+- Old asset kept as a local backup only (not on the release anymore).
+
+#### Files touched
+- `contents.json`
+- `PROGRESS_LOG.md`
+
 ## Session — 2026-07-12
 
 ### [chore] — Point Proton 11.0-1 entries at rebuilt `build-p11-20260712` (2026-07-12)

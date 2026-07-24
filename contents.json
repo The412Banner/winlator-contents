@@ -655,9 +655,9 @@
   },
   {
     "type": "FEXCore",
-    "verName": "FEXCore-2607-nightly-unix",
+    "verName": "FEX-2607+312-Nightly-464ec9d0b-unix",
     "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2607-nightly-unix.wcp"
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEX-2607%2B312-Nightly-464ec9d0b-unix.wcp"
   },
   {
     "type": "VKD3D",
