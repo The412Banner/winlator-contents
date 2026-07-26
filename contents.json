@@ -858,12 +858,6 @@
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/wine-v1/wine-9.7-x86_64-ref.wcp"
   },
   {
-    "type": "Wine",
-    "verName": "wine-11.3-arm64ec",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Proton/wine/wine-11.3-arm64ec.wcp.xz"
-  },
-  {
     "type": "Proton",
     "verName": "proton-10.0-arm64ec",
     "verCode": "0",
