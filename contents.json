@@ -904,5 +904,17 @@
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk35",
     "verCode": "3",
     "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-arm64ec-refresh-20260722/proton-10.0-4-arm64ec-sdk35.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "ge-proton-11.0-3-arm64ec-sdk28",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260725/GE-proton-11.0-3-arm64ec-sdk28.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "ge-proton-11.0-3-arm64ec-sdk35",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260725/GE-proton-11.0-3-arm64ec-sdk35.wcp"
   }
 ]
