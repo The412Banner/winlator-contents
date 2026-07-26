@@ -223,13 +223,13 @@
     {
       "id": "gamenative-wrapper",
       "name": "GameNative — GameNative Wrapper",
-      "description": "The canonical GameNative wrapper — latest upstream build (20260723, GameNative #1762): leegao's latest changes for older devices, on top of the #1743 32-bit + ICD push-descriptor/device-fault work. Newer than the build the forks currently bundle.",
+      "description": "The canonical GameNative wrapper — latest upstream build (20260725, GameNative #1771): leegao's latest changes on top of the #1762 older-device work and #1743 32-bit + ICD push-descriptor/device-fault work. Newer than the build the forks currently bundle.",
       "author": "GameNative",
       "license": "credit GameNative",
-      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20260723.tzst",
-      "file_size": "747484",
-      "file_checksum": "D6F3A6371FD5E8ECEC1053EBFBE5638B",
-      "version": 3,
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20260725.tzst",
+      "file_size": "748724",
+      "file_checksum": "CE7E20E37431FD808C361B8C33ED53E9",
+      "version": 4,
       "gpuTargets": [
         "all"
       ]

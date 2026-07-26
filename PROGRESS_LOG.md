@@ -6,6 +6,22 @@
 
 ---
 
+## Session — 2026-07-25
+
+### [wrapper] — Bump `gamenative-wrapper` catalog entry to upstream GameNative #1771 (2026-07-25)
+
+#### What changed
+- Uploaded `gamenative-20260725.tzst` (748,724 B, md5 `CE7E20E37431FD808C361B8C33ED53E9`) to this repo's `wrappers-v1` release.
+- Repointed the `gamenative-wrapper` entry in `wrappers.json` (the "canonical latest upstream" GameNative wrapper): `url` → the new asset, `file_size` `747484`→`748724`, `file_checksum` `D6F3A6371FD5E8ECEC1053EBFBE5638B`→`CE7E20E37431FD808C361B8C33ED53E9`, `version` `3`→`4`, description updated to `20260725 / #1771`. Previous state was `20260723 / #1762`.
+- **Source:** `utkarshdalal/GameNative` `master`, file `app/src/legacy/assets/graphics_driver/wrapper-gamenative.tzst`, last updated by **PR #1771** (commit `790ce5d264a0d13e3f61cefdb219a7c82b4504d6`, 2026-07-25, "Updated wrapper-gamenative with leegao's latest changes"). Upstream `.tzst` was byte-verified against the pinned commit.
+- **Repacked clean:** upstream archive was Mac-packed (carried `LIBARCHIVE.xattr.com.apple.provenance` pax headers). Re-tarred from the extracted tree (`--sort=name --owner=0 --group=0 --numeric-owner`, zstd -19) so the shipped archive has no Apple xattrs / `._` junk. **Payload byte-identical to upstream** — the only file that changes vs our prior #1762 build is `libvulkan_wrapper.so` (md5 `b3e8d9797ce8146c63bcda964d6df01a`, compiled `Jul 24 2026`); adrenotools/hook libs/ICD json are unchanged across #1762→#1771.
+- **Scope:** ONLY `gamenative-wrapper` updated. `bannerlator-gamenative` / `wmali-gamenative` left as-is on purpose — those entries mirror the forks' *actual* shipped builds (`gamenative.tzst`, Jul 5), so rebranding them to upstream would falsify their "byte-identical to WinlatorMali's build" descriptions.
+- Old assets (`gamenative-20260723.tzst` etc.) left attached to the release for rollback.
+
+#### Files touched
+- `wrappers.json`
+- `PROGRESS_LOG.md`
+
 ## Session — 2026-07-24
 
 ### [chore] — Replace the `fexcore-v1` nightly-unix build with FEX-2607+312 (2026-07-24)
