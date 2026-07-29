@@ -655,9 +655,15 @@
   },
   {
     "type": "FEXCore",
-    "verName": "FEX-2607+312-Nightly-464ec9d0b-unix",
+    "verName": "FEX-2607+323-Nightly-unix",
     "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEX-2607%2B312-Nightly-464ec9d0b-unix.wcp"
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEX-2607%2B323-Nightly-unix.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEX-2607+323-Nightly",
+    "verCode": "1605",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEX-2607%2B323-Nightly.wcp"
   },
   {
     "type": "VKD3D",
