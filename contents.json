@@ -138,6 +138,36 @@
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/WOWBox64-Hybrid-0f94ebfe6.zip"
   },
   {
+    "type": "Box64",
+    "verName": "Box64-0.4.4",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64/Box64-0.4.4.wcp"
+  },
+  {
+    "type": "Box64",
+    "verName": "Box64-0.4.4-Bionic",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Bionic/Box64-0.4.4-Bionic.wcp"
+  },
+  {
+    "type": "Box64",
+    "verName": "Box64-0.4.4-Hybrid-Native",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/Box64-0.4.4-Hybrid-Native.wcp"
+  },
+  {
+    "type": "Box64",
+    "verName": "Box64-0.4.4-Hybrid-Bionic",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/Box64-0.4.4-Hybrid-Bionic.wcp"
+  },
+  {
+    "type": "Box64",
+    "verName": "WOWBox64-0.4.4-Hybrid",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/WOWBox64-0.4.4-Hybrid.wcp"
+  },
+  {
     "type": "WOWBox64",
     "verName": "Wowbox64-0.3.4",
     "verCode": "0",
@@ -208,6 +238,12 @@
     "verName": "WOWBox64-0.4.3",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Wowbox64/WOWBox64-0.4.3.wcp"
+  },
+  {
+    "type": "WOWBox64",
+    "verName": "WOWBox64-0.4.4",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Wowbox64/WOWBox64-0.4.4.wcp"
   },
   {
     "type": "DXVK",
