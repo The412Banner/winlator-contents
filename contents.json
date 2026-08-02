@@ -126,13 +126,13 @@
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/Box64-Hybrid-Native-0611649f4.zip"
   },
   {
-    "type": "Box64",
+    "type": "WOWBox64",
     "verName": "WOWBox64-Hybrid-0f94ebfe6",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/WOWBox64-Hybrid-0f94ebfe6.wcp"
   },
   {
-    "type": "Box64",
+    "type": "WOWBox64",
     "verName": "WOWBox64-Hybrid-0f94ebfe6",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/WOWBox64-Hybrid-0f94ebfe6.zip"
