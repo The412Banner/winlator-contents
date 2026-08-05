@@ -916,5 +916,29 @@
     "verName": "ge-proton-11.0-3-arm64ec-sdk35",
     "verCode": "1",
     "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260725/GE-proton-11.0-3-arm64ec-sdk35.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEXCore-2608-stable",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2608-stable.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEXCore-2608-stable-unix",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2608-stable-unix.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEXCore-2608-PPA",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2608-PPA.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEXCore-2608-PPA-unix",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2608-PPA-unix.wcp"
   }
 ]
