@@ -940,5 +940,11 @@
     "verName": "FEXCore-2608-PPA-unix",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2608-PPA-unix.wcp"
+  },
+  {
+    "type": "D7VK",
+    "verName": "v2.1-bc3b29b9e-nightly",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/d7vk-v1/d7vk-v2.1-bc3b29b9e-nightly.wcp"
   }
 ]
