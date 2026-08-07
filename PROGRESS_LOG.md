@@ -6,6 +6,29 @@
 
 ---
 
+## Session — 2026-08-06
+
+### [d7vk] — Add D7VK (DirectDraw/D3D7) component + `d7vk-v1` release (2026-08-06)
+
+#### What changed
+- Created release **`d7vk-v1`** on this repo and uploaded `d7vk-v2.1-bc3b29b9e-nightly.wcp`
+  (2,472,124 B — `syswow64/ddraw.dll` + `profile.json` type `D7VK`). Built by the new
+  Nightlies `build-d7vk` job from `WinterSnowfall/d7vk` `devel` (2.x product line, commit
+  `bc3b29b9e`), 32-bit only, GCC `std::sqrtf`→`std::sqrt` shim applied.
+- Added a `contents.json` entry (last element, #158):
+  `{type:"D7VK", verName:"v2.1-bc3b29b9e-nightly", verCode:"0",
+   remoteUrl:.../releases/download/d7vk-v1/d7vk-v2.1-bc3b29b9e-nightly.wcp}`.
+- **verName is the .wcp's internal `profile.json` versionName (`v2.1-bc3b29b9e-nightly`),
+  NOT the filename stem** — required so `ContentsManager.java:160` reconciles the catalog
+  entry against the installed profile (verName equality). Device-proven: installed+applied
+  on device via the app's "D7VK Version" cloud dropdown (`CONTENT_TYPE_D7VK`).
+- Handled a concurrent FEXCore-2608 push mid-edit: reset to latest origin and re-appended
+  cleanly (no clobber).
+
+#### Files touched
+- `contents.json`
+- `PROGRESS_LOG.md`
+
 ## Session — 2026-07-25
 
 ### [wrapper] — Bump `gamenative-wrapper` catalog entry to upstream GameNative #1771 (2026-07-25)
