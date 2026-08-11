@@ -918,6 +918,18 @@
     "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260725/GE-proton-11.0-3-arm64ec-sdk35.wcp"
   },
   {
+    "type": "Proton",
+    "verName": "ge-proton-11.0-5-arm64ec-sdk28",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.5-20260811/GE-proton-11.0-5-arm64ec-sdk28.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "ge-proton-11.0-5-arm64ec-sdk35",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.5-20260811/GE-proton-11.0-5-arm64ec-sdk35.wcp"
+  },
+  {
     "type": "FEXCore",
     "verName": "FEXCore-2608-stable",
     "verCode": "0",
