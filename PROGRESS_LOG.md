@@ -6,6 +6,19 @@
 
 ---
 
+## Session — 2026-08-15
+
+### [proton] — Repoint the two Proton 11.0-1 "unixlibs" options to the rebuilt `build-p11-20260815` release
+
+#### What changed
+- `contents.json` — both `proton-11.0-1-arm64ec-unixlibs-sdk28` and `-sdk35` entries repointed from the old
+  `build-arm64ec-refresh-20260722` assets to the rebuilt DirectAudio-v1.3.1 assets on the new release
+  (`proton-11.0-1-arm64ec-sdk{28,35}.wcp` under `build-p11-20260815`), and `verCode` bumped `2 → 3` so clients re-pull.
+- Context: the old refresh build was a skeleton (missing the DirectAudio PE side); rebuilt from
+  `proton_11.0` @ `3e9d0c8`, 4/4 CI green. New assets carry the corrected layer (no DXVK bundled, verified).
+
+---
+
 ## Session — 2026-08-06
 
 ### [d7vk] — Add D7VK (DirectDraw/D3D7) component + `d7vk-v1` release (2026-08-06)
