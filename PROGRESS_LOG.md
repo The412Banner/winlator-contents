@@ -8,6 +8,20 @@
 
 ## Session — 2026-08-15
 
+### [proton] — Repoint the two Proton 10.0-4 "unixlibs" options to the DirectAudio `build-p10-20260815` release
+
+#### What changed
+- `contents.json` — both `proton-10.0-4-arm64ec-unixlibs-sdk28` and `-sdk35` entries repointed from the old
+  `build-arm64ec-refresh-20260722` assets to the DirectAudio-v1.3.1 assets on the new release
+  (`proton-10.0-4-arm64ec-sdk{28,35}.wcp` under `build-p10-20260815`), and `verCode` bumped `3 → 4` so clients re-pull.
+- Context: the new release is a refresh of `build-p10-20260713` with DirectAudio v1.3.1 (Wine 10 ABI port) folded in;
+  built from `proton_10.0` @ `5bffd6e7`, SDK28 `31898126463` + SDK35 `31898126471` CI green. Device-verified on
+  DiRT Showdown (DirectAudio live via AAudio). vc bump 3→4 matches the release profile stamp so it installs as a new layer.
+
+---
+
+## Session — 2026-08-15
+
 ### [proton] — Repoint the two Proton 11.0-1 "unixlibs" options to the rebuilt `build-p11-20260815` release
 
 #### What changed
