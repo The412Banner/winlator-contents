@@ -908,13 +908,13 @@
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk28",
-    "verCode": "1",
+    "verCode": "7",
     "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260816-da131/GE-proton-11.0-3-arm64ec-sdk28-DA.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk35",
-    "verCode": "1",
+    "verCode": "7",
     "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260816-da131/GE-proton-11.0-3-arm64ec-sdk35-DA.wcp"
   },
   {
