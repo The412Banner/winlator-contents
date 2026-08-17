@@ -6,6 +6,32 @@
 
 ---
 
+## Session — 2026-08-17
+
+### [proton] — Consolidate all arm64ec bionic Proton entries onto `build-bionic-layers-20260817-arihany` and add GE-Proton 10.0-34
+
+#### What changed
+- `contents.json` — all six existing arm64ec bionic Proton entries repointed from their per-tag DirectAudio releases
+  (`build-p11-20260815`, `build-p10-20260815`, `build-ge11.3-20260816-da131`, `build-ge11.5-20260811`) to the new
+  consolidated release `build-bionic-layers-20260817-arihany`, and `verCode`s bumped to match the release profile stamps
+  so clients re-pull:
+    - `proton-11.0-1-arm64ec-unixlibs-sdk{28,35}`  vc 3 → **4**
+    - `proton-10.0-4-arm64ec-unixlibs-sdk{28,35}`  vc 4 → **5**
+    - `ge-proton-11.0-3-arm64ec-sdk{28,35}`        vc 7 → **8**  (also drops the `-DA.wcp` asset-name suffix — the consolidated release uses the plain name)
+    - `ge-proton-11.0-5-arm64ec-sdk{28,35}`        vc 1 → **6**
+- Added two brand-new entries for the new **GE-Proton 10.0-34** Wine-10 layer (Valve Proton 10.0-4 base + GE-Proton10-34
+  game-fix tier + our extras — battlenet / maplestory×2 / WM_ACTIVATEAPP), vc 1:
+    - `ge-proton-10.0-34-arm64ec-sdk28`  → `GE-proton-10.0-34-arm64ec-sdk28.wcp`
+    - `ge-proton-10.0-34-arm64ec-sdk35`  → `GE-proton-10.0-34-arm64ec-sdk35.wcp`
+- Context: today's `build-bionic-layers-20260817-arihany` is one consolidated release carrying all five bionic
+  arm64ec layers with the three arihany Android compat fixes (SD-card `noexec`/`force_anon` boot fix, File Explorer
+  drive-root → drive-root copy, `C.UTF-8` locale default) + DirectAudio v1.3.1 (Wine-11 layers vendored, Wine-10 layers
+  use the Wine-10 ABI port `directaudio@4241123a`). Each layer's vc = the release's profile stamp so this installs as a
+  distinct new layer alongside anything users already had installed. The three legacy Nightlies rows
+  (`proton-9.0-arm64ec`, `proton-9.0-x86_64`, `proton-10.0-arm64ec`) are intentionally untouched.
+
+---
+
 ## Session — 2026-08-15
 
 ### [proton] — Repoint the two Proton 10.0-4 "unixlibs" options to the DirectAudio `build-p10-20260815` release

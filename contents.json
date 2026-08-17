@@ -884,50 +884,62 @@
   {
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk28",
-    "verCode": "3",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260815/proton-11.0-1-arm64ec-sdk28.wcp"
+    "verCode": "4",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-11.0-1-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk35",
-    "verCode": "3",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260815/proton-11.0-1-arm64ec-sdk35.wcp"
+    "verCode": "4",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-11.0-1-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk28",
-    "verCode": "4",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p10-20260815/proton-10.0-4-arm64ec-sdk28.wcp"
+    "verCode": "5",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-10.0-4-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk35",
-    "verCode": "4",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p10-20260815/proton-10.0-4-arm64ec-sdk35.wcp"
+    "verCode": "5",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-10.0-4-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk28",
-    "verCode": "7",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260816-da131/GE-proton-11.0-3-arm64ec-sdk28-DA.wcp"
+    "verCode": "8",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-3-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk35",
-    "verCode": "7",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.3-20260816-da131/GE-proton-11.0-3-arm64ec-sdk35-DA.wcp"
+    "verCode": "8",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-3-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-5-arm64ec-sdk28",
-    "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.5-20260811/GE-proton-11.0-5-arm64ec-sdk28.wcp"
+    "verCode": "6",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-5-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-5-arm64ec-sdk35",
+    "verCode": "6",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-5-arm64ec-sdk35.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "ge-proton-10.0-34-arm64ec-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-ge11.5-20260811/GE-proton-11.0-5-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-10.0-34-arm64ec-sdk28.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "ge-proton-10.0-34-arm64ec-sdk35",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-10.0-34-arm64ec-sdk35.wcp"
   },
   {
     "type": "FEXCore",
