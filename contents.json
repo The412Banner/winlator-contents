@@ -884,62 +884,62 @@
   {
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk28",
-    "verCode": "4",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-11.0-1-arm64ec-sdk28.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-11.0-1-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk35",
-    "verCode": "4",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-11.0-1-arm64ec-sdk35.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-11.0-1-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk28",
-    "verCode": "5",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-10.0-4-arm64ec-sdk28.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-10.0-4-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk35",
-    "verCode": "5",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/proton-10.0-4-arm64ec-sdk35.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-10.0-4-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk28",
-    "verCode": "8",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-3-arm64ec-sdk28.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-3-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk35",
-    "verCode": "8",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-3-arm64ec-sdk35.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-3-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-5-arm64ec-sdk28",
-    "verCode": "6",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-5-arm64ec-sdk28.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-5-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-5-arm64ec-sdk35",
-    "verCode": "6",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-11.0-5-arm64ec-sdk35.wcp"
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-5-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-10.0-34-arm64ec-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-10.0-34-arm64ec-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-10.0-34-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-10.0-34-arm64ec-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260817-arihany/GE-proton-10.0-34-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-10.0-34-arm64ec-sdk35.wcp"
   },
   {
     "type": "FEXCore",
