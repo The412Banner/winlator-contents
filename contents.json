@@ -895,6 +895,18 @@
   },
   {
     "type": "Proton",
+    "verName": "proton-11.0-2-arm64ec-unixlibs-sdk28",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260821/proton-11.0-2-arm64ec-sdk28.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "proton-11.0-2-arm64ec-unixlibs-sdk35",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260821/proton-11.0-2-arm64ec-sdk35.wcp"
+  },
+  {
+    "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk28",
     "verCode": "1",
     "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-10.0-4-arm64ec-sdk28.wcp"
