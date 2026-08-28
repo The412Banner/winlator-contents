@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "category": "steam-client",
+  "release": "steamlite-v1",
+  "name": "SteamLite (Real Steam / VAC)",
+  "version": 1,
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamlite-v1/steamlite.tzst",
+  "file_size": "18011869",
+  "file_checksum": "51E1BF9E15FDB8FA53C4F18AD54E1DCA",
+  "note": "Self-contained clean-room Steam client for Bannerlator's Real-Steam (VAC) launch mode. Combined package; extracts to imagefs/opt/steamlite/. Bundles our GPL-3.0 agent (steam.exe, WinNative-derived) + the matched genuine Valve Steam client set (steamclient64/steamclient + tier0_s/vstdlib_s + Steam/Steam2, plus CommonFilesSteam/steamservice, build 2026-05-21) so the game connects to VAC-secured servers. At launch the agent logs into genuine Steam and securely LaunchApp's the game (-steam). See NOTICE.md / SOURCE.txt / VALVE_COMPONENTS.txt inside the package."
+}
