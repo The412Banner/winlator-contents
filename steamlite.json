@@ -3,9 +3,9 @@
   "category": "steam-client",
   "release": "steamlite-v1",
   "name": "SteamLite (Real Steam / VAC)",
-  "version": 2,
+  "version": 3,
   "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamlite-v1/steamlite.tzst",
-  "file_size": "18014778",
-  "file_checksum": "08D7D098DD8FE8FFA5E8670AE65EADBF",
+  "file_size": "18015696",
+  "file_checksum": "AF13D14B92D730DAC6E6B783AE7709C6",
   "note": "Self-contained clean-room Steam client for Bannerlator's Real-Steam (VAC) launch mode. Combined package; extracts to imagefs/opt/steamlite/. Bundles our GPL-3.0 agent (steam.exe, WinNative-derived) + the matched genuine Valve Steam client set (steamclient64/steamclient + tier0_s/vstdlib_s + Steam/Steam2, plus CommonFilesSteam/steamservice, build 2026-05-21) so the game connects to VAC-secured servers. At launch the agent logs into genuine Steam and securely LaunchApp's the game (-steam). v2 agent: adds ownership sync + on-demand achievement fire, and honors WN_STEAM_APPINFO_WAIT_MS / WN_STEAM_SKIP_APPINFO so the launcher can cap the app-info wait (removes the pre-launch black screen on token-denied titles). See NOTICE.md / SOURCE.txt / VALVE_COMPONENTS.txt inside the package. Credits: agent is a clean-room derivative of WinNative (GPL-3.0, https://github.com/WinNative-Emu/WinNative); built on the Winlator lineage (brunodev85/winlator, Pipetto-crypto/winlator)."
 }
