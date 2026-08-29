@@ -23,6 +23,17 @@
   `.wcp` files are uploaded to the `Dxvk` / `Dxvk-arm64ec` / `Dxvk-gplasync` / `Dxvk-gplasync-arm64ec` release tags
   with the EXACT filenames above. (Source files staged in device Downloads as `DXVK-v3.1*.wcp`.)
 
+### [dxvk] — Add DXVK 3.1 binsem-gplasync entries (std + arm64ec) — supersedes the "binsem NOT added" note above
+
+#### What changed
+- Reversed the earlier decision (user request) — the catalog now DOES carry binsem. Added 2 `DXVK` entries after the last DXVK entry:
+    - `dxvk-binsem-gplasync-3.1-1`         → `Dxvk-binsem-gplasync/dxvk-binsem-gplasync-3.1-1.wcp`
+    - `dxvk-binsem-gplasync-arm64ec-3.1-1` → `Dxvk-binsem-gplasync-arm64ec/dxvk-binsem-gplasync-arm64ec-3.1-1.wcp`
+- DXVK entries 58 → 60; total 171 → 173.
+- Binaries uploaded to the two dedicated stable releases from the device Downloads copies (sha256-verified) and renamed in place
+  (`gh` `#rename` was a no-op in this build, so used `gh api -X PATCH .../releases/assets/{id} -f name=...`, same as the vanilla-std fix).
+  Both URLs verified **200** (std 7,797,976 B / arm64ec 6,318,986 B). Full DXVK 3.1 stable set (vanilla + gplasync + binsem, std + arm64ec) now live.
+
 ---
 
 ## Session — 2026-08-17
