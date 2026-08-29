@@ -6,6 +6,25 @@
 
 ---
 
+## Session — 2026-08-29
+
+### [dxvk] — Add DXVK 3.1 stable entries (vanilla + gplasync, std + arm64ec)
+
+#### What changed
+- `contents.json` — added 4 new `DXVK` entries, one per catalog family, each inserted directly after
+  that family's `3.0.2` entry. `verCode` "0" like every other DXVK entry:
+    - `dxvk-3.1`                     → `Dxvk/dxvk-3.1.wcp` (vanilla std)
+    - `dxvk-arm64ec-3.1`            → `Dxvk-arm64ec/dxvk-arm64ec-3.1.wcp` (vanilla arm64ec)
+    - `dxvk-gplasync-3.1-1`         → `Dxvk-gplasync/dxvk-gplasync-3.1-1.wcp` (gplasync std)
+    - `dxvk-gplasync-arm64ec-3.1-1` → `Dxvk-gplasync-arm64ec/dxvk-gplasync-arm64ec-3.1-1.wcp` (gplasync arm64ec)
+- DXVK entries 54 → 58; total 167 → 171.
+- **binsem-gplasync 3.1 NOT added** — the Bannerlator catalog has never carried binsem entries (only vanilla + gplasync).
+- ⚠️ **Binaries not yet on the dedicated Nightlies stable releases** — these 4 URLs 404 until the matching
+  `.wcp` files are uploaded to the `Dxvk` / `Dxvk-arm64ec` / `Dxvk-gplasync` / `Dxvk-gplasync-arm64ec` release tags
+  with the EXACT filenames above. (Source files staged in device Downloads as `DXVK-v3.1*.wcp`.)
+
+---
+
 ## Session — 2026-08-17
 
 ### [proton] — Consolidate all arm64ec bionic Proton entries onto `build-bionic-layers-20260817-arihany` and add GE-Proton 10.0-34
