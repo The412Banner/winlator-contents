@@ -927,85 +927,97 @@
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-11.0-1-arm64ec-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-11.0-1-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-1-arm64ec-unixlibs-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-11.0-1-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-11.0-1-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-2-arm64ec-unixlibs-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260821/proton-11.0-2-arm64ec-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-11.0-2-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-2-arm64ec-unixlibs-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260821/proton-11.0-2-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-11.0-2-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-2-x86_64-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260821/proton-11.0-2-x86_64-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-11.0-2-x86_64-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-11.0-2-x86_64-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-p11-20260821/proton-11.0-2-x86_64-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-11.0-2-x86_64-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-10.0-4-arm64ec-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-10.0-4-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "proton-10.0-4-arm64ec-unixlibs-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/proton-10.0-4-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/proton-10.0-4-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-3-arm64ec-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-11.0-3-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-3-arm64ec-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-3-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-11.0-3-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-5-arm64ec-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-5-arm64ec-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-11.0-5-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-11.0-5-arm64ec-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-11.0-5-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-11.0-5-arm64ec-sdk35.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "ge-proton-11.0-6-arm64ec-sdk28",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-11.0-6-arm64ec-sdk28.wcp"
+  },
+  {
+    "type": "Proton",
+    "verName": "ge-proton-11.0-6-arm64ec-sdk35",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-11.0-6-arm64ec-sdk35.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-10.0-34-arm64ec-sdk28",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-10.0-34-arm64ec-sdk28.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-10.0-34-arm64ec-sdk28.wcp"
   },
   {
     "type": "Proton",
     "verName": "ge-proton-10.0-34-arm64ec-sdk35",
     "verCode": "1",
-    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260819-vmem/GE-proton-10.0-34-arm64ec-sdk35.wcp"
+    "remoteUrl": "https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260830-fontcap/GE-proton-10.0-34-arm64ec-sdk35.wcp"
   },
   {
     "type": "FEXCore",
