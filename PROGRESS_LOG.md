@@ -210,3 +210,8 @@
 - Workflows on this repo: **none**. No GitHub Actions, no automation, no cross-repo writes. `contents.json` only changes via direct manual edits + push.
 - Source-of-truth model: `Nightlies/nightlies_components.json` is upstream; mirrored manually here, with selective edits (e.g. the `nightly-latest` strip above) preserved on the mirror side.
 - Future plan (deferred): an auto-update workflow living **inside this repo** (not cross-pushed from Nightlies) that pulls + filters from the upstream JSON. Not built yet.
+
+## 2026-09-05 — SteamLite v6 (agent p5): launcher-chain awareness for EA titles
+- `steamlite.json` → version 6, new size/md5; asset `steamlite.tzst` on release `steamlite-v1` replaced in place (same URL). Agent `steam.exe` p5 md5 `e12332acd13f49446549c3762a817c22`; every Valve component byte-identical to v5.
+- New env-gated behaviour: `WN_STEAM_LAUNCH_CHAIN` (exe names) + `WN_STEAM_CHAIN_WAIT_S` (900 s) — wait for the real game exe while the chain is alive, hold the session across the stub exe hand-off (one relaunch). Without the env var the game watch is identical to v5. Device-proven: Need for Speed Payback online via EA Desktop.
+- GPL corresponding source now hosted in-repo: `steamlite/agent-src/` (package `SOURCE.txt` points here). Previously the agent source was not published anywhere.
