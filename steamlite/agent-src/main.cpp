@@ -2366,12 +2366,22 @@ static int agent_main(int argc, char** argv) {
         // off to the chain (ActivationUI / EASteamProxy / EADesktop relaunch the real exe up
         // to a minute later, after the user's EA sign-in). While the chain is alive and the
         // exe has NOT yet been relaunched once, its absence is a hand-off, not an exit.
+        // (p6: later hand-offs are covered too, with a short window - see below.)
         int absent = 0;
         int chainHoldTicks = 0;      // consecutive ticks spent holding for the relaunch
         int relaunches = 0;          // times the exe came back after vanishing
         bool gameGone = false;
         int chainHoldCapS = 900;
         if (const char* cw = getenv("WN_STEAM_CHAIN_WAIT_S")) { int v = atoi(cw); if (v > 0) chainHoldCapS = v; }
+        // p6: a chain title can hand off MORE than once - EA restarts the game a second time
+        // after a first-ever activation (licence written by ActivationUI, then EA Desktop
+        // relaunches). Later hand-offs get a SHORT window (WN_STEAM_CHAIN_RELAUNCH_S, default
+        // 60 s) so a resident EADesktop/EABackgroundService can't pin the session after a real
+        // quit, and there are at most WN_STEAM_CHAIN_RELAUNCHES (default 3) relaunches.
+        int maxRelaunches = 3;
+        if (const char* cr = getenv("WN_STEAM_CHAIN_RELAUNCHES")) { int v = atoi(cr); if (v >= 0) maxRelaunches = v; }
+        int relaunchHoldS = 60;
+        if (const char* cr = getenv("WN_STEAM_CHAIN_RELAUNCH_S")) { int v = atoi(cr); if (v > 0) relaunchHoldS = v; }
         while (absent < 2) {
             Sleep(1000);
             if (!relayStarted && ++relayTicks >= kRelayGraceTicks && absent == 0) {
@@ -2444,13 +2454,18 @@ static int agent_main(int argc, char** argv) {
                     chainHoldTicks = 0;
                 }
                 absent = 0;
-            } else if (relaunches == 0 && !g_launchChain.empty() && chainHoldTicks < chainHoldCapS
+            } else if (!g_launchChain.empty() && relaunches < maxRelaunches
+                       && chainHoldTicks < (relaunches == 0 ? chainHoldCapS : relaunchHoldS)
                        && count_chain_processes() > 0) {
                 if (!gameGone) {
                     gameGone = true;
                     g_chainSeen = true;
-                    log_line("[wn-launcher] \"%s\" is gone but the launcher chain is alive - holding the Steam session for the relaunch (cap %d s)",
-                             exeName, chainHoldCapS);
+                    if (relaunches == 0)
+                        log_line("[wn-launcher] \"%s\" is gone but the launcher chain is alive - holding the Steam session for the relaunch (cap %d s)",
+                                 exeName, chainHoldCapS);
+                    else
+                        log_line("[wn-launcher] \"%s\" exited after relaunch #%d but the launcher chain is alive - holding %d s for another relaunch (activation restart?)",
+                                 exeName, relaunches, relaunchHoldS);
                 }
                 chainHoldTicks++;
                 if (chainHoldTicks % 60 == 0)
