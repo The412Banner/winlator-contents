@@ -925,49 +925,49 @@
   },
   {
     "type": "Proton",
-    "verName": "proton-11.0-1-arm64ec-unixlibs",
+    "verName": "Proton-11.0-1-arm64ec (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/proton-11.0-1-arm64ec.wcp"
   },
   {
     "type": "Proton",
-    "verName": "proton-11.0-2-arm64ec-unixlibs",
+    "verName": "Proton-11.0-2-arm64ec (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/proton-11.0-2-arm64ec.wcp"
   },
   {
     "type": "Proton",
-    "verName": "proton-11.0-2-x86_64",
+    "verName": "Proton-11.0-2-x86_64 (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/proton-11.0-2-x86_64.wcp"
   },
   {
     "type": "Proton",
-    "verName": "proton-10.0-4-arm64ec-unixlibs",
+    "verName": "Proton-10.0-4-arm64ec (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/proton-10.0-4-arm64ec.wcp"
   },
   {
     "type": "Proton",
-    "verName": "ge-proton-11.0-3-arm64ec",
+    "verName": "GE-Proton-11.0-3-arm64ec (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/GE-proton-11.0-3-arm64ec.wcp"
   },
   {
     "type": "Proton",
-    "verName": "ge-proton-11.0-5-arm64ec",
+    "verName": "GE-Proton-11.0-5-arm64ec (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/GE-proton-11.0-5-arm64ec.wcp"
   },
   {
     "type": "Proton",
-    "verName": "ge-proton-11.0-6-arm64ec",
+    "verName": "GE-Proton-11.0-6-arm64ec (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/GE-proton-11.0-6-arm64ec.wcp"
   },
   {
     "type": "Proton",
-    "verName": "ge-proton-10.0-34-arm64ec",
+    "verName": "GE-Proton-10.0-34-arm64ec (v5)",
     "verCode": "5",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260907-eccode/GE-proton-10.0-34-arm64ec.wcp"
   },
