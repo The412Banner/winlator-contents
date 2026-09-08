@@ -1004,6 +1004,30 @@
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/fexcore-v1/FEXCore-2608-PPA-unix.wcp"
   },
   {
+    "type": "FEXCore",
+    "verName": "FEXCore-2609",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2609.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEXCore-2609-unix",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2609-unix.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEXCore-2609-PPA",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2609-PPA.wcp"
+  },
+  {
+    "type": "FEXCore",
+    "verName": "FEXCore-2609-PPA-unix",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2609-PPA-unix.wcp"
+  },
+  {
     "type": "D7VK",
     "verName": "v2.1-bc3b29b9e-nightly",
     "verCode": "0",
