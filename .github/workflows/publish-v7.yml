@@ -1,0 +1,52 @@
+name: Publish the v7 Wine XP layer delivery copies
+
+# One-off, server-side publish of the catalog's delivery copies. The eight layers are taken from
+# the proton-wine all-in-one release and only published when each file is byte-identical to the
+# one verified before release.
+on:
+  push:
+    branches: [publish/v7-xp]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: bionic-layers-20260911-xp
+      SRC: https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260911-xp
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the eight layers from the proton-wine release
+        run: |
+          set -e
+          mkdir -p assets
+          for f in GE-proton-10.0-34-arm64ec.wcp GE-proton-11.0-3-arm64ec.wcp GE-proton-11.0-5-arm64ec.wcp \
+                   GE-proton-11.0-6-arm64ec.wcp proton-10.0-4-arm64ec.wcp proton-11.0-1-arm64ec.wcp \
+                   proton-11.0-2-arm64ec.wcp proton-11.0-2-x86_64.wcp; do
+            curl -fsSL --retry 3 -o "assets/$f" "$SRC/$f"
+          done
+          ls -l assets
+
+      - name: Check they are the verified files
+        working-directory: assets
+        run: |
+          sha256sum -c <<'EOF'
+          50344ec9fa1f37ae22f5b1a5d509cb50cac818fe15f0ecc4fd187e8f97969110  GE-proton-10.0-34-arm64ec.wcp
+          8c9967ae9a9231be9bfe83a9981fc1585a8099b7eb99a9ceb55a5b51288cb959  GE-proton-11.0-3-arm64ec.wcp
+          eacabf82b775e787c11ba3f84b48ebeff8bd81478d5f72a76068ccb61d70dfc0  GE-proton-11.0-5-arm64ec.wcp
+          f7c4c5f70387c79eeea480b2ca71334d310aef9f613bfacd84c340f9b605e3c6  GE-proton-11.0-6-arm64ec.wcp
+          d5e73c25eef5112393e307c3658c926377f94db8b3aa6a17ae8d6690fcbfa722  proton-10.0-4-arm64ec.wcp
+          5da1585178f5f6ffe2a3f7eb660c774aa65b9922cd77e67b077ce666e52cff69  proton-11.0-1-arm64ec.wcp
+          aec661db98e4b056388cd64ab7682fb68cc22d5fc7f7933b0f801edae2b0af4b  proton-11.0-2-arm64ec.wcp
+          d584a9f4ea54460048989eff46d90e1c62b47b584074a028c0ca206f9c2e4595  proton-11.0-2-x86_64.wcp
+          EOF
+
+      - name: Create the release
+        run: |
+          gh release create "$TAG" -R "${{ github.repository }}" --latest --target main \
+            --title "Bionic layers v7 — Wine XP desktop" \
+            --notes-file v7_body.md assets/*.wcp
