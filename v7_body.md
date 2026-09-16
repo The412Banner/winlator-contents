@@ -39,6 +39,23 @@ These are the same files as on the proton-wine release [`build-ge-proton-11.0-7-
 - arm64ec sha256: `3c4d2c1f1473570b84f186c17fc1fc8cfb47b9d285ba5b004ee981e09f1b008c`
 - x86_64 sha256: `2bb5c22ebf0ccfa2b054bad62023ad96273fadcb430f0ea059d641254054ab06`
 
+## ➕ Added 2026-09-16: GE-Proton 11.0-7.1, new Valve base (arm64ec + x86_64)
+
+Two files, each installing into its own slot:
+- `GE-proton-11.0-7.1-arm64ec.wcp` installs as `11.0-7.1-arm64ec-1`.
+- `GE-proton-11.0-7.1-x86_64.wcp` (box64) installs as `11.0-7.1-x86_64-1`.
+
+It carries the same v7 stack as GE-Proton 11.0-7 (Wine XP desktop, XInput fix, `RtlIsEcCode`, EA fixes, DirectAudio 1.3.2, font-handle cap, Android fixes, GE-Proton11-7 game fixes), moved onto Valve Wine **[`46b29104`](https://github.com/ValveSoftware/wine/commit/46b29104e3741fe23bf5e2547196a253aab88c89)**. That is the Wine GE-Proton11-7 itself is built on: 313 commits newer than the base of v7 Proton 11.0-2, and close to Proton Experimental.
+- **Porting:** two Android patches were re-ported onto Valve's rewritten code (the XInput fix and a winepulse guard). The x86_64 build adds a loader fix for starting 64-bit programs.
+- **GE fixes:** Return to Krondor's text fix is included here, because this base has the Wine change it works around. NASCAR 25's fix is not.
+- **Also new in the base:** Valve's thread-suspend rework and the arm64ec hand-off to FEX, .NET AnyCPU programs running as x64 under FEX, X11 keyboard and fullscreen focus changes, and `igd10iumd64.dll`.
+
+> ✅ **Device-tested.** Both builds reach the desktop, boot a game and install the Visual C++ All-In-One runtime pack (Adreno 750). For **x86_64** use **box64 0.4.5 Hybrid (Bionic)**; for **arm64ec** pick a FEXCore version you have installed, since a new container can default to one that isn't.
+
+These are the same files as on the proton-wine release [`build-ge-proton-11.0-7-test-20260916`](https://github.com/The412Banner/proton-wine/releases/tag/build-ge-proton-11.0-7-test-20260916), which has the full details and source links.
+- arm64ec sha256: `acb6dc12060c0ae79747d8bd375dd4dc271cc6e3494a73663c2da063b41445a7`
+- x86_64 sha256: `0f130ca05808d31f59d94232e6ff353f7f3807f1b90694f0991bd9a15b3c7ee7`
+
 ## Layers
 
 <details>

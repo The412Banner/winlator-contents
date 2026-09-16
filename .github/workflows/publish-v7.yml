@@ -1,8 +1,8 @@
-name: Add GE-Proton 11.0-7 x86_64 to the v7 layer delivery release
+name: Add GE-Proton 11.0-7.1 (arm64ec + x86_64) to the v7 layer delivery release
 
-# One-off, server-side: copies GE-Proton 11.0-7 x86_64 from the proton-wine GE-Proton 11.0-7 release into the
-# catalog's v7 delivery release, only if the file is byte-identical to the one verified before.
-# Nothing already on the release is replaced.
+# One-off, server-side: copies GE-Proton 11.0-7.1 (both arches) from the proton-wine GE-Proton 11.0-7
+# release into the catalog's v7 delivery release, only if each file is byte-identical to the one
+# verified before. Nothing already on the release is replaced.
 on:
   push:
     branches: [publish/v7-xp]
@@ -17,31 +17,33 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       TAG: bionic-layers-20260911-xp
       SRC: https://github.com/The412Banner/proton-wine/releases/download/build-ge-proton-11.0-7-test-20260916
-      FILE: GE-proton-11.0-7-x86_64.wcp
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download GE-Proton 11.0-7 x86_64 from the proton-wine release
+      - name: Download GE-Proton 11.0-7.1 from the proton-wine release
         run: |
           set -e
           mkdir -p assets
-          curl -fsSL --retry 3 -o "assets/$FILE" "$SRC/$FILE"
+          for f in GE-proton-11.0-7.1-arm64ec.wcp GE-proton-11.0-7.1-x86_64.wcp; do
+            curl -fsSL --retry 3 -o "assets/$f" "$SRC/$f"
+          done
           ls -l assets
 
-      - name: Check it is the verified file
+      - name: Check they are the verified files
         working-directory: assets
         run: |
           sha256sum -c <<'EOF2'
-          2bb5c22ebf0ccfa2b054bad62023ad96273fadcb430f0ea059d641254054ab06  GE-proton-11.0-7-x86_64.wcp
+          acb6dc12060c0ae79747d8bd375dd4dc271cc6e3494a73663c2da063b41445a7  GE-proton-11.0-7.1-arm64ec.wcp
+          0f130ca05808d31f59d94232e6ff353f7f3807f1b90694f0991bd9a15b3c7ee7  GE-proton-11.0-7.1-x86_64.wcp
           EOF2
 
-      - name: Attach it to the release and update the notes
+      - name: Attach them to the release and update the notes
         run: |
           set -e
-          if gh release view "$TAG" -R "${{ github.repository }}" --json assets --jq '.assets[].name' | grep -qx "$FILE"; then
-            echo "$FILE is already on $TAG, leaving it as is"
-          else
-            gh release upload "$TAG" -R "${{ github.repository }}" "assets/$FILE"
-          fi
+          have=$(gh release view "$TAG" -R "${{ github.repository }}" --json assets --jq '.assets[].name')
+          for f in assets/*.wcp; do
+            n=$(basename "$f")
+            if echo "$have" | grep -qx "$n"; then echo "$n is already on $TAG, leaving it as is"; else gh release upload "$TAG" -R "${{ github.repository }}" "$f"; fi
+          done
           gh release edit "$TAG" -R "${{ github.repository }}" --notes-file v7_body.md
           gh release view "$TAG" -R "${{ github.repository }}" --json assets --jq '.assets[] | "\(.name) \(.size)"'
