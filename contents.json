@@ -1010,6 +1010,13 @@
   },
   {
     "type": "Proton",
+    "verName": "GE-Proton-11.0-7-arm64ec (v7)",
+    "verCode": "7",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260911-xp/GE-proton-11.0-7-arm64ec.wcp",
+    "versionName": "11.0-7-arm64ec"
+  },
+  {
+    "type": "Proton",
     "verName": "GE-Proton-10.0-34-arm64ec (v7)",
     "verCode": "7",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20260911-xp/GE-proton-10.0-34-arm64ec.wcp",

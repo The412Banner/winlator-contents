@@ -8,6 +8,16 @@
 
 ## Session — 2026-09-16
 
+### [proton] — Add GE-Proton 11.0-7 (v7) to the catalog
+
+#### What changed
+- `contents.json`: added one `Proton` row directly after `GE-Proton-11.0-6-arm64ec (v7)`, in the same shape as the other v7 rows:
+    - verName `GE-Proton-11.0-7-arm64ec (v7)`, verCode "7", versionName `11.0-7-arm64ec`
+    - remoteUrl → `bionic-layers-20260911-xp/GE-proton-11.0-7-arm64ec.wcp`
+- Proton rows 11 → 12; total 177 → 178. No existing row changed.
+- Delivery copy attached to this repo's `bionic-layers-20260911-xp` release first, server-side: branch `publish/v7-xp` commit `c6f8cb3`, run 35082633277. It downloads the file from proton-wine pre-release `build-ge-proton-11.0-7-test-20260916` and passes `sha256sum -c` (`3c4d2c1f1473570b84f186c17fc1fc8cfb47b9d285ba5b004ee981e09f1b008c`, 94,590,448 B). The 8 existing assets are untouched. A short "Added 2026-09-16: GE-Proton 11.0-7" section was added to the release notes. URL verified **200**.
+- Layer = our v7 GE-Proton 11.0-6 + GE-Proton11-7 game fixes (Black Desert focus-loss fullscreen, Max Payne CPU detection; AI LIMIT / NASCAR 25 x86_64-only). Built from proton-wine `proton_11.7-GE` `07471201`. Not yet booted on a device.
+
 ### [dxvk] — Add DXVK 3.1.1 stable entries (vanilla + gplasync + binsem, std + arm64ec)
 
 #### What changed
