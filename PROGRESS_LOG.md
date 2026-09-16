@@ -6,6 +6,23 @@
 
 ---
 
+## Session — 2026-09-16
+
+### [dxvk] — Add DXVK 3.1.1 stable entries (vanilla + gplasync + binsem, std + arm64ec)
+
+#### What changed
+- `contents.json` — added 6 new `DXVK` entries, each inserted directly after the same family's `3.1` entry. `verCode` "0" like every other DXVK entry:
+    - `dxvk-3.1.1`                           → `Dxvk/dxvk-3.1.1.wcp` (vanilla std)
+    - `dxvk-arm64ec-3.1.1`                   → `Dxvk-arm64ec/dxvk-arm64ec-3.1.1.wcp` (vanilla arm64ec)
+    - `dxvk-gplasync-3.1.1-1`                → `Dxvk-gplasync/dxvk-gplasync-3.1.1-1.wcp` (gplasync std)
+    - `dxvk-gplasync-arm64ec-3.1.1-1`        → `Dxvk-gplasync-arm64ec/dxvk-gplasync-arm64ec-3.1.1-1.wcp` (gplasync arm64ec)
+    - `dxvk-binsem-gplasync-3.1.1-1`         → `Dxvk-binsem-gplasync/dxvk-binsem-gplasync-3.1.1-1.wcp` (binsem std)
+    - `dxvk-binsem-gplasync-arm64ec-3.1.1-1` → `Dxvk-binsem-gplasync-arm64ec/dxvk-binsem-gplasync-arm64ec-3.1.1-1.wcp` (binsem arm64ec)
+- DXVK entries 60 → 66; total 171 → 177. No existing entry changed.
+- Binaries were already published on the dedicated Nightlies stable releases (plus the combined `dxvk-3.1.1` release), built from the upstream `v3.1.1` tag (`b1a1c99ab52b`), not master. The vanilla pair is upstream's own release. All 6 URLs verified **200** before this commit.
+
+---
+
 ## Session — 2026-08-29
 
 ### [dxvk] — Add DXVK 3.1 stable entries (vanilla + gplasync, std + arm64ec)
