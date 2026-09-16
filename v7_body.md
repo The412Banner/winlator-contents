@@ -18,6 +18,20 @@ Consolidated **arm64ec (bionic)** build of all **seven** Proton / GE-Proton laye
 
 **Scope of the changes versus v6:** PE-side `explorer.exe`, `uxtheme.dll`, `comctl32` (themed tab labels) and `write.exe`, the new `winexp.msstyles` (installed to `C:\windows\resources\themes\winexp`), the unix-side `win32u.so` (frame painting), and the `versionCode` stamp. No `ntdll`, FEX, DXVK, audio or input changes.
 
+## ➕ Added 2026-09-16: GE-Proton 11.0-7
+
+`GE-proton-11.0-7-arm64ec.wcp` installs as `11.0-7-arm64ec-7`, a new slot next to GE-Proton 11.0-6. It is our v7 **GE-Proton 11.0-6** layer with GloriousEggroll's **[GE-Proton11-7](https://github.com/GloriousEggroll/proton-ge-custom/releases/tag/GE-Proton11-7)** game fixes:
+
+- 🎮 **Black Desert Online** stays fullscreen when the game loses focus.
+- 🎮 **Max Payne:** fixes the new-game crash caused by the game's CPU detection in `rlmfc.dll`.
+- The **AI LIMIT** DX12 and **NASCAR 25** fixes are included, but both are x86_64-only code, so they do nothing in an arm64ec layer.
+
+Everything else (Wine XP desktop, XInput fix, `RtlIsEcCode`, EA fixes, DirectAudio 1.3.2, font-handle cap, Android fixes) is identical to v7 GE-Proton 11.0-6. A file-by-file comparison of the two layers found real code changes in only four files: `win32u.so`, both `ntdll.dll` and `profile.json`.
+
+This is the same file as on the proton-wine test pre-release [`build-ge-proton-11.0-7-test-20260916`](https://github.com/The412Banner/proton-wine/releases/tag/build-ge-proton-11.0-7-test-20260916) (sha256 `3c4d2c1f1473570b84f186c17fc1fc8cfb47b9d285ba5b004ee981e09f1b008c`), which has the full details and source links.
+
+> ⚠️ **Not yet booted on a device.** It is binary-verified only: every v7 feature check and all 13 GE patch checks passed in the build.
+
 ## Layers
 
 <details>
@@ -209,4 +223,3 @@ Containers already on a `<version>-6` layer are offered this as an **in-place up
 **Built from:** `proton_11.6-GE` `0b60d0d3` · `proton_11.5-GE` `b821bc10` · `proton_11.3-GE` `da092720` · `proton_11.0` `91af073d` · `proton_11.0-2` `31254bce` · `proton_10.34-GE` `3417bb5c` · `proton_10.0` `1e9d197c` (CI runs 34629988483 · 34630031659 · 34630044726 · 34630056346 · 34630060475 · 34630668116 · 34630678482, all green). Each is its v6 parent commit plus the Wine XP desktop series (25 commits; the two Wine 10 layers add one port commit) and the versionCode stamp.
 
 **In-app catalog:** the app installs these layers from the delivery copies on [`winlator-contents` `bionic-layers-20260911-xp`](https://github.com/The412Banner/winlator-contents/releases/tag/bionic-layers-20260911-xp) — the same eight files.
-
