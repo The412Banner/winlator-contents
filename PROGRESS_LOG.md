@@ -8,6 +8,22 @@
 
 ## Session — 2026-09-16
 
+### [proton] — Add GE-Proton 11.0-7 x86_64 and GE-Proton 11.0-7.1 (arm64ec + x86_64), all as (v7)
+
+#### What changed
+- `contents.json`: added three `Proton` rows directly after `GE-Proton-11.0-7-arm64ec (v7)`, in the same shape as the other v7 rows:
+    - `GE-Proton-11.0-7-x86_64 (v7)`: verCode "7", versionName `11.0-7-x86_64`, → `GE-proton-11.0-7-x86_64.wcp`
+    - `GE-Proton-11.0-7.1-arm64ec (v7)`: verCode "1", versionName `11.0-7.1-arm64ec`, → `GE-proton-11.0-7.1-arm64ec.wcp`
+    - `GE-Proton-11.0-7.1-x86_64 (v7)`: verCode "1", versionName `11.0-7.1-x86_64`, → `GE-proton-11.0-7.1-x86_64.wcp`
+    - The 11.0-7.1 builds are stamped versionCode 1 inside the wcp, so their verCode is "1" to match. They install as `11.0-7.1-<arch>-1`.
+- Proton rows 12 → 15; total 178 → 181. No existing row changed.
+- Delivery copies attached server-side to this repo's `bionic-layers-20260911-xp` release before the rows went in:
+    - x86_64 11.0-7: `publish/v7-xp` commit `52076bb`, run 35089505954.
+    - 11.0-7.1 pair: commit `bb58e17`, run 35089624478.
+    - Each file was downloaded from the proton-wine Latest release `build-ge-proton-11.0-7-test-20260916` and passed `sha256sum -c`. Checksums: 11.0-7 x86_64 `2bb5c22e…`, 11.0-7.1 arm64ec `acb6dc12…`, 11.0-7.1 x86_64 `0f130ca0…`.
+    - The release now has 12 assets; the originals are untouched. Its notes gained 11.0-7 x86_64 and 11.0-7.1 sections. All URLs verified **200**.
+- Device-tested by the user: all four GE-Proton 11.0-7 / 11.0-7.1 builds reach the desktop, boot a game and install the Visual C++ All-In-One pack. For x86_64, box64 0.4.5 Hybrid (Bionic) is recommended; 32-bit programs crashed under 0.4.1.
+
 ### [proton] — Add GE-Proton 11.0-7 (v7) to the catalog
 
 #### What changed
