@@ -18,19 +18,26 @@ Consolidated **arm64ec (bionic)** build of all **seven** Proton / GE-Proton laye
 
 **Scope of the changes versus v6:** PE-side `explorer.exe`, `uxtheme.dll`, `comctl32` (themed tab labels) and `write.exe`, the new `winexp.msstyles` (installed to `C:\windows\resources\themes\winexp`), the unix-side `win32u.so` (frame painting), and the `versionCode` stamp. No `ntdll`, FEX, DXVK, audio or input changes.
 
-## ➕ Added 2026-09-16: GE-Proton 11.0-7
+## ➕ Added 2026-09-16: GE-Proton 11.0-7 (arm64ec + x86_64)
 
-`GE-proton-11.0-7-arm64ec.wcp` installs as `11.0-7-arm64ec-7`, a new slot next to GE-Proton 11.0-6. It is our v7 **GE-Proton 11.0-6** layer with GloriousEggroll's **[GE-Proton11-7](https://github.com/GloriousEggroll/proton-ge-custom/releases/tag/GE-Proton11-7)** game fixes:
+Two files, each installing into a new slot next to GE-Proton 11.0-6:
+- `GE-proton-11.0-7-arm64ec.wcp` installs as `11.0-7-arm64ec-7`.
+- `GE-proton-11.0-7-x86_64.wcp` (box64) installs as `11.0-7-x86_64-7`.
+
+It is our v7 **GE-Proton 11.0-6** layer with GloriousEggroll's **[GE-Proton11-7](https://github.com/GloriousEggroll/proton-ge-custom/releases/tag/GE-Proton11-7)** game fixes:
 
 - 🎮 **Black Desert Online** stays fullscreen when the game loses focus.
 - 🎮 **Max Payne:** fixes the new-game crash caused by the game's CPU detection in `rlmfc.dll`.
-- The **AI LIMIT** DX12 and **NASCAR 25** fixes are included, but both are x86_64-only code, so they do nothing in an arm64ec layer.
+- **AI LIMIT** DX12 fix: active in the x86_64 build. It is x86_64-only code, so it does nothing on arm64ec.
+- **NASCAR 25** fix: compiled in, but it does nothing on either build.
 
-Everything else (Wine XP desktop, XInput fix, `RtlIsEcCode`, EA fixes, DirectAudio 1.3.2, font-handle cap, Android fixes) is identical to v7 GE-Proton 11.0-6. A file-by-file comparison of the two layers found real code changes in only four files: `win32u.so`, both `ntdll.dll` and `profile.json`.
+Everything else (Wine XP desktop, XInput fix, `RtlIsEcCode`, EA fixes, DirectAudio 1.3.2, font-handle cap, Android fixes) is identical to v7 GE-Proton 11.0-6. A file-by-file comparison of the arm64ec layers found real code changes in only four files: `win32u.so`, both `ntdll.dll` and `profile.json`.
 
-This is the same file as on the proton-wine test pre-release [`build-ge-proton-11.0-7-test-20260916`](https://github.com/The412Banner/proton-wine/releases/tag/build-ge-proton-11.0-7-test-20260916) (sha256 `3c4d2c1f1473570b84f186c17fc1fc8cfb47b9d285ba5b004ee981e09f1b008c`), which has the full details and source links.
+> ✅ **Device-tested.** Both builds reach the desktop, boot a game and install the Visual C++ All-In-One runtime pack (Adreno 750). For the **x86_64** build, use **box64 0.4.5 Hybrid (Bionic)**, from the Contents screen's Nightlies source as `Box64-0.4.5-Hybrid-…-Bionic`. It gives the best controller support and compatibility, and 32-bit programs crashed under box64 0.4.1.
 
-> ⚠️ **Not yet booted on a device.** It is binary-verified only: every v7 feature check and all 13 GE patch checks passed in the build.
+These are the same files as on the proton-wine release [`build-ge-proton-11.0-7-test-20260916`](https://github.com/The412Banner/proton-wine/releases/tag/build-ge-proton-11.0-7-test-20260916), which has the full details and source links.
+- arm64ec sha256: `3c4d2c1f1473570b84f186c17fc1fc8cfb47b9d285ba5b004ee981e09f1b008c`
+- x86_64 sha256: `2bb5c22ebf0ccfa2b054bad62023ad96273fadcb430f0ea059d641254054ab06`
 
 ## Layers
 

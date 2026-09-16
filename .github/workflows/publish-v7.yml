@@ -1,6 +1,6 @@
-name: Add GE-Proton 11.0-7 to the v7 layer delivery release
+name: Add GE-Proton 11.0-7 x86_64 to the v7 layer delivery release
 
-# One-off, server-side: copies GE-Proton 11.0-7 from the proton-wine test pre-release into the
+# One-off, server-side: copies GE-Proton 11.0-7 x86_64 from the proton-wine GE-Proton 11.0-7 release into the
 # catalog's v7 delivery release, only if the file is byte-identical to the one verified before.
 # Nothing already on the release is replaced.
 on:
@@ -17,11 +17,11 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       TAG: bionic-layers-20260911-xp
       SRC: https://github.com/The412Banner/proton-wine/releases/download/build-ge-proton-11.0-7-test-20260916
-      FILE: GE-proton-11.0-7-arm64ec.wcp
+      FILE: GE-proton-11.0-7-x86_64.wcp
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download GE-Proton 11.0-7 from the proton-wine release
+      - name: Download GE-Proton 11.0-7 x86_64 from the proton-wine release
         run: |
           set -e
           mkdir -p assets
@@ -32,7 +32,7 @@ jobs:
         working-directory: assets
         run: |
           sha256sum -c <<'EOF2'
-          3c4d2c1f1473570b84f186c17fc1fc8cfb47b9d285ba5b004ee981e09f1b008c  GE-proton-11.0-7-arm64ec.wcp
+          2bb5c22ebf0ccfa2b054bad62023ad96273fadcb430f0ea059d641254054ab06  GE-proton-11.0-7-x86_64.wcp
           EOF2
 
       - name: Attach it to the release and update the notes
