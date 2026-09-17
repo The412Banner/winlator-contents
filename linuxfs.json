@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "category": "linux-runtime",
+  "release": "linuxfs-r1",
+  "name": "Linux runtime (gamescope + native ARM Steam)",
+  "version": "r1",
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r1/linuxfs.tar.zst",
+  "sha256": "7002a594d5c2298070d8e3028377a719ef635bf1277caf9d25f4489e8d40a38b",
+  "size": 789000670,
+  "file_size": 789000670,
+  "file_checksum": "B0AB998A5EFA221BA0027343D29ED5D9",
+  "note": "Arch Linux ARM aarch64 rootfs with gamescope 3.16, Xwayland, Mesa 26.2 (Turnip with the KGSL backend, Zink), GTK 2, PulseAudio and Bannerlator's session scripts. Installed by the app into files/linuxfs; a gamescope session refuses to start without it. Contains no Valve software - the native arm64 Steam client is fetched from Valve at first use. Built from tools/linuxfs in the Bannerlator repo; ported from WinNative's gamescope runtime (GPL-3.0)."
+}
