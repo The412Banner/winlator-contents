@@ -1,0 +1,56 @@
+# Puts a built rootfs onto its release without it ever passing through a phone.
+#
+# build-linuxfs.yml (in the Bannerlator repo) leaves linuxfs.tar.zst as a run artifact. Downloading
+# that to a device and uploading it back costs 1.5 GB of someone's connection for a file GitHub
+# already has, so this runs the copy on a runner instead: artifact -> release asset, ~790 MB, both
+# ends inside GitHub.
+#
+#   run_id        the build-linuxfs run that produced it
+#   artifact      that run's artifact name (the workflow labels it linuxfs-<label>)
+#   release_tag   the release here to attach it to (linuxfs-r6, ...)
+#   expected_sha256  refuse to publish anything else
+name: Attach a linuxfs rootfs to a release
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'build-linuxfs run id in The412Banner/Bannerlator'
+        required: true
+      artifact:
+        description: 'Artifact name in that run (e.g. linuxfs-r1)'
+        required: true
+      release_tag:
+        description: 'Release tag here (e.g. linuxfs-r6)'
+        required: true
+      expected_sha256:
+        description: 'sha256 of linuxfs.tar.zst'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - name: Fetch, verify and attach
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN: ${{ inputs.run_id }}
+          ART: ${{ inputs.artifact }}
+          TAG: ${{ inputs.release_tag }}
+          SHA: ${{ inputs.expected_sha256 }}
+        run: |
+          set -euo pipefail
+          gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json tagName >/dev/null
+          gh run download "$RUN" -R The412Banner/Bannerlator -n "$ART" -D fs
+          TAR=$(find fs -name 'linuxfs.tar.zst' | head -1)
+          [ -n "$TAR" ] || { echo "no linuxfs.tar.zst in artifact $ART of run $RUN"; exit 1; }
+          echo "$SHA  $TAR" | sha256sum -c -
+          zstd -t "$TAR"
+          ls -l "$TAR"
+          gh release upload "$TAG" "$TAR" --clobber -R "$GITHUB_REPOSITORY"
+          gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets \
+            --jq '.assets[] | "\(.name) \(.size) \(.state)"'
