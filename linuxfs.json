@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "category": "linux-runtime",
-  "release": "linuxfs-r5",
+  "release": "linuxfs-r6",
   "name": "Linux runtime (gamescope + native ARM Steam)",
-  "version": "r5",
-  "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r5/linuxfs.tar.zst",
-  "sha256": "475e1a534d4f8d8f7fbef144aecaefcac9ba5f7f927743cdfcc8cc06a139a22d",
-  "size": 789094265,
-  "file_size": 789094265,
-  "file_checksum": "C3FB83BCCB36D2CFCDFC88AFCC732DED",
-  "note": "Arch Linux ARM aarch64 rootfs with gamescope 3.16, Xwayland, Mesa 26.2 (Turnip with the KGSL backend, Zink), GTK 2, PulseAudio and Bannerlator's session scripts. Installed by the app into files/linuxfs; a gamescope session refuses to start without it. r5 replaces r4, whose proot starts a session and then aborts on the first icon a GTK client loads; r5 carries the build that holds. The runtime brings proot with it at opt/android-host, so it installs and runs without root and an app update cannot replace it, and every installed title is set to the ARM64 Proton automatically - listed as Bannerlator Proton (ARM64) so it is not mistaken for Valve's own ARM64 Protons, which need user namespaces Android does not give. Contains no Valve software - the native arm64 Steam client is fetched from Valve at first use. Built from tools/linuxfs in the Bannerlator repo; ported from WinNative's gamescope runtime (GPL-3.0)."
+  "version": "r6",
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r6/linuxfs.tar.zst",
+  "sha256": "b3b6e4f2e1cad1cca517c1fac631066f9a6b7da0dafbc7594a770f2f8957245d",
+  "size": 789141582,
+  "file_size": 789141582,
+  "file_checksum": "C8AE3948426FEF88DFDA6E4797F8F5F8",
+  "note": "Arch Linux ARM aarch64 rootfs with gamescope 3.16, Xwayland, Mesa 26.2 (Turnip with the KGSL backend, Zink), GTK 2, PulseAudio and Bannerlator's session scripts. Installed by the app into files/linuxfs; a gamescope session refuses to start without it. r6 fixes the registrar that sets installed Windows titles to the ARM64 Proton: it raised a NameError one line before it wrote anything, so on a fresh install no title was ever set and each one had to have its compatibility tool chosen by hand. Everything else carries over from r5 unchanged, including the same proot at opt/android-host, so the runtime installs and runs without root and an app update cannot replace it; the tool is listed as Bannerlator Proton (ARM64) so it is not mistaken for Valve's own ARM64 Protons, which need user namespaces Android does not give. Contains no Valve software - the native arm64 Steam client is fetched from Valve at first use. Built from tools/linuxfs in the Bannerlator repo; ported from WinNative's gamescope runtime (GPL-3.0)."
 }
