@@ -1,0 +1,58 @@
+name: Copy the versionCode 8 layers into the catalog delivery release
+
+# Server-side: pulls each layer from the proton-wine v8 release on the runner and attaches it to
+# the catalog's delivery release, only if the file is byte-identical to the one verified on device.
+# Nothing already attached is replaced. No upload happens from a developer machine.
+on:
+  push:
+    branches: [publish/v8-wayland]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: bionic-layers-20260917-wayland-v8
+      SRC: https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20260917-wayland-v8
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the 12 layers from proton-wine
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          while read -r sha name; do
+            [ -z "$name" ] && continue
+            echo "== $name"
+            curl -fsSL --retry 5 --retry-delay 5 -o "assets/$name" "$SRC/$name"
+          done < sha256sums.txt
+          ls -l assets
+
+      - name: Check every file is the one verified on device
+        working-directory: assets
+        run: sha256sum -c ../sha256sums.txt
+
+      - name: Attach to the delivery release
+        run: |
+          set -euo pipefail
+          have=$(gh release view "$TAG" -R "${{ github.repository }}" --json assets --jq '.assets[].name')
+          for f in assets/*.wcp; do
+            n=$(basename "$f")
+            if echo "$have" | grep -qx "$n"; then
+              echo "$n already attached, leaving it"; continue
+            fi
+            for attempt in 1 2 3 4 5; do
+              if gh release upload "$TAG" -R "${{ github.repository }}" --clobber "$f"; then
+                echo "   uploaded $n (attempt $attempt)"; break
+              fi
+              [ "$attempt" = 5 ] && { echo "FATAL: $n failed after 5 attempts"; exit 1; }
+              echo "   retrying $n in $((attempt * 20))s"; sleep $((attempt * 20))
+            done
+          done
+          gh release edit "$TAG" -R "${{ github.repository }}" --notes-file v8_body.md \
+            --title "Bionic layers v8 — Wayland + HDR10"
+          gh release view "$TAG" -R "${{ github.repository }}" --json assets \
+            --jq '"assets=\(.assets|length)", (.assets[] | "\(.name)  \(.size)")'
