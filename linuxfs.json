@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "category": "linux-runtime",
-  "release": "linuxfs-r8",
+  "release": "linuxfs-r9",
   "name": "Linux runtime (gamescope + native ARM Steam)",
-  "version": "r8",
-  "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r8/linuxfs.tar.zst",
-  "sha256": "54715c0d2721193048ebdaf7b2dda8d82b32a93ad6518bfef25f315a71ca907f",
-  "size": 790887984,
-  "file_size": 790887984,
-  "note": "Arch Linux ARM aarch64 rootfs with gamescope 3.16, Xwayland, Mesa 26.2 (Turnip with the KGSL backend, Zink), GTK 2, PulseAudio and Bannerlator's session scripts. Installed by the app into files/linuxfs; a gamescope session refuses to start without it. r8 adds the libraries Proton's own GStreamer plugins link against - libnettle.so.8, libtheoradec.so.1 and libvpx.so.9 - which no current Arch package provides (nettle 4.0 ships .so.9, libtheora 1.2.0 ships .so.2, libvpx 1.17 ships .so.12), so the HLS, theora and vpx plugins failed to load and video through Proton's media stack had no decoder. Carried over from r7: games are told the panel's real refresh rate instead of gamescope's 60 Hz default. From r6: installed Windows titles are set to the ARM64 Proton automatically. From r5: the same proot at opt/android-host, so the runtime installs and runs without root and an app update cannot replace it; the tool is listed as Bannerlator Proton (ARM64) so it is not mistaken for Valve's own ARM64 Protons, which need user namespaces Android does not give. Contains no Valve software - the native arm64 Steam client is fetched from Valve at first use. Built from tools/linuxfs in the Bannerlator repo; ported from WinNative's gamescope runtime (GPL-3.0)."
+  "version": "r9",
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r9/linuxfs.tar.zst",
+  "sha256": "d3240c1531531615b0dd06b6ad56e92db9015a8641eb18c3a613835ae45992e7",
+  "size": 790907606,
+  "file_size": 790907606,
+  "note": "Arch Linux ARM aarch64 rootfs with gamescope 3.16, Xwayland, Mesa 26.2 (Turnip with the KGSL backend, Zink), GTK 2, PulseAudio and Bannerlator's session scripts. Installed by the app into files/linuxfs; a gamescope session refuses to start without it. r9 makes a first run reach a game unaided: it creates the ~/.steam/sdkarm64 helper path the arm64 client launches every game through (missing before, so launches died before Proton was invoked), names the ARM64 Proton up front so the client offers and fetches it, and registers that tool in-session when it lands instead of needing a restart. The session also prints a milestone per stage. From r8: the libraries Proton's GStreamer plugins need. From r7: games are told the panel's real refresh rate. From r6: installed Windows titles are set to the ARM64 Proton automatically. From r5: the same proot at opt/android-host, so the runtime installs and runs without root and an app update cannot replace it; the tool is listed as Bannerlator Proton (ARM64) so it is not mistaken for Valve's own ARM64 Protons, which need user namespaces Android does not give. Contains no Valve software - the native arm64 Steam client is fetched from Valve at first use. Built from tools/linuxfs in the Bannerlator repo; ported from WinNative's gamescope runtime (GPL-3.0)."
 }
