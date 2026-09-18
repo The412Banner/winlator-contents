@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "category": "linux-runtime",
-  "release": "linuxfs-r2",
+  "release": "linuxfs-r3",
   "name": "Linux runtime (gamescope + native ARM Steam)",
-  "version": "r2",
-  "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r2/linuxfs.tar.zst",
-  "sha256": "5d32a17622b3d4110b767ef0d49745e48bddbbbc0e0f6e006b5add3dd9cf470a",
-  "size": 788990267,
-  "file_size": 788990267,
-  "file_checksum": "6288395B1E545F9B6B5BEBC611C9D2EA",
-  "note": "Arch Linux ARM aarch64 rootfs with gamescope 3.16, Xwayland, Mesa 26.2 (Turnip with the KGSL backend, Zink), GTK 2, PulseAudio and Bannerlator's session scripts. Installed by the app into files/linuxfs; a gamescope session refuses to start without it. r2 is the first runtime that launches Windows games: it re-registers the ARM64 Proton the Steam client already downloads, without the runtime dependency that made Steam drop the launch. Contains no Valve software - the native arm64 Steam client is fetched from Valve at first use. Built from tools/linuxfs in the Bannerlator repo; ported from WinNative's gamescope runtime (GPL-3.0)."
+  "version": "r3",
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r3/linuxfs.tar.zst",
+  "sha256": "38f116b417892003ae7bc342d276852a5c12b9adc2a9aaba0269c9d085bc7dee",
+  "size": 788991458,
+  "file_size": 788991458,
+  "file_checksum": "A7C8CD22BDA91D64F8EB036972F2B78E",
+  "note": "Arch Linux ARM aarch64 rootfs with gamescope 3.16, Xwayland, Mesa 26.2 (Turnip with the KGSL backend, Zink), GTK 2, PulseAudio and Bannerlator's session scripts. Installed by the app into files/linuxfs; a gamescope session refuses to start without it. r3 sets every installed title to the ARM64 Proton the Steam client already downloads, so Windows games launch without picking a compatibility tool per game. Contains no Valve software - the native arm64 Steam client is fetched from Valve at first use. Built from tools/linuxfs in the Bannerlator repo; ported from WinNative's gamescope runtime (GPL-3.0)."
 }
