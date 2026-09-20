@@ -59,7 +59,9 @@ jobs:
                 -DDISTRIBUTOR=SteamDeck -DENABLE_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr
               cmake --build build -j"$(nproc)"
               DESTDIR="$PWD/AppDir" cmake --install build
-              APPRUN_BIN=dolphin-emu; DESKTOP=src/Data/dolphin-emu.desktop; ICON=src/Data/dolphin-emu.png
+              # The install already placed the entry and icon; point at those copies.
+              APPRUN_BIN=dolphin-emu; DESKTOP=AppDir/usr/share/applications/dolphin-emu.desktop
+              ICON=AppDir/usr/share/icons/hicolor/256x256/apps/dolphin-emu.png
               ;;
             pcsx2|cemu)
               # Newer libraries than the runner image has (Qt 6.10 for PCSX2, wxWidgets 3.3 for
@@ -75,8 +77,9 @@ jobs:
           # The desktop entry and icon appimagetool insists on, placed where linuxdeploy looks for
           # them. The icon takes the name the entry's Icon= line asks for, or the two never meet.
           ICONNAME=$(sed -n 's/^Icon=//p' "$DESKTOP" | head -1); ICONNAME=${ICONNAME:-$APPRUN_BIN}
-          install -Dm644 "$DESKTOP" "AppDir/usr/share/applications/$(basename "$DESKTOP")"
-          install -Dm644 "$ICON" "AppDir/usr/share/icons/hicolor/256x256/apps/$ICONNAME.png"
+          D="AppDir/usr/share/applications/$(basename "$DESKTOP")"; I="AppDir/usr/share/icons/hicolor/256x256/apps/$ICONNAME.png"
+          [ "$DESKTOP" -ef "$D" ] || install -Dm644 "$DESKTOP" "$D"
+          [ "$ICON" -ef "$I" ] || install -Dm644 "$ICON" "$I"
           BIN=$(find AppDir/usr/bin AppDir/usr/local/bin -maxdepth 1 -type f -name "$APPRUN_BIN" 2>/dev/null | head -1)
           [ -n "$BIN" ] || { echo "no $APPRUN_BIN in AppDir"; find AppDir -maxdepth 3 -type d; exit 3; }
           echo "apprun=$BIN" >> "$GITHUB_OUTPUT"
