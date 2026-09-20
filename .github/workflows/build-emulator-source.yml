@@ -21,7 +21,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-24.04-arm
-    timeout-minutes: 180
+    timeout-minutes: 340
     steps:
       - name: Toolchain
         run: |
@@ -58,22 +58,14 @@ jobs:
               DESTDIR="$PWD/AppDir" cmake --install build
               APPRUN_BIN=dolphin-emu; DESKTOP=src/Data/dolphin-emu.desktop; ICON=src/Data/dolphin-emu.png
               ;;
-            pcsx2)
-              git clone --depth 1 https://github.com/PCSX2/pcsx2.git src
-              git -C src submodule update --init --recursive --depth 1
-              cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DPACKAGE_MODE=ON \
-                -DUSE_LINKED_FFMPEG=ON -DDISABLE_ADVANCE_SIMD=ON -DCMAKE_INSTALL_PREFIX=/usr
-              cmake --build build -j"$(nproc)"
-              DESTDIR="$PWD/AppDir" cmake --install build || true
-              APPRUN_BIN=pcsx2-qt; DESKTOP=src/.github/workflows/scripts/linux/pcsx2-qt.desktop; ICON=src/bin/resources/icons/AppIconLarge.png
-              ;;
-            cemu)
-              git clone --depth 1 https://github.com/cemu-project/Cemu.git src
-              cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DENABLE_VCPKG=OFF
-              cmake --build build -j"$(nproc)"
-              mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
-              install -m755 build/bin/Cemu_release AppDir/usr/bin/cemu
-              APPRUN_BIN=cemu; DESKTOP=src/dist/linux/info.cemu.Cemu.desktop; ICON=src/src/resource/logo_icon.png
+            pcsx2|cemu)
+              # Newer libraries than the runner image has (Qt 6.10 for PCSX2, wxWidgets 3.3 for
+              # Cemu): built in an Arch Linux ARM container, the rootfs's own distribution.
+              docker run --rm -v "$PWD:/work" -w /work menci/archlinuxarm:base-devel \
+                bash desktop/build-emulator-arch.sh "$T"
+              sudo chown -R "$(id -u):$(id -g)" .
+              echo "packaged=yes" >> "$GITHUB_OUTPUT"
+              exit 0
               ;;
             *) echo "unknown target"; exit 2 ;;
           esac
@@ -88,6 +80,7 @@ jobs:
           echo "desktop=AppDir/usr/share/applications/$(basename "$DESKTOP")" >> "$GITHUB_OUTPUT"
 
       - name: Package AppImage
+        if: steps.build.outputs.packaged != 'yes'
         run: |
           set -euo pipefail
           export OUTPUT='${{ inputs.target }}.AppImage' QMAKE=/usr/lib/qt6/bin/qmake6 EXTRA_QT_PLUGINS=svg
