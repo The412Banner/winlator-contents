@@ -1,0 +1,41 @@
+name: Mirror ARM64 AppImages (SteamDeck)
+
+# Tier-2 emulators: upstream's own aarch64 Linux builds, copied to our release so the catalog can
+# point at a URL that does not move and a checksum that was taken here. Nothing is modified.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Release tag to publish to'
+        required: true
+        default: 'steamdeck-desktop-r1'
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Fetch and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          mkdir -p out && cd out
+          # id  upstream url
+          while read -r id url; do
+            [ -n "$id" ] || continue
+            ext=${url##*.}
+            curl -fsSL --retry 5 --retry-delay 10 -o "$id.$ext" "$url"
+            sha256sum "$id.$ext" | awk '{print $1}' > "$id.sha256"
+            echo "  $id $(stat -c %s "$id.$ext") $(cat "$id.sha256") $id.$ext"
+          done <<'LIST'
+          rpcs3 https://github.com/RPCS3/rpcs3-binaries-linux-arm64/releases/download/build-9e86f165d1711b9429d48b0487e7bc5ba0cc9c6c/rpcs3-v0.0.42-20024-9e86f165_linux_aarch64.AppImage
+          duckstation https://github.com/stenzek/duckstation/releases/download/latest/DuckStation-arm64.AppImage
+          melonds https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-appimage-aarch64.zip
+          LIST
+          gh release upload '${{ inputs.release }}' ./* --clobber
