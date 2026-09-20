@@ -77,6 +77,19 @@
       "icon": "pcsx2",
       "category": "Game",
       "notes": "built from source for ARM64; no upstream ARM64 build exists"
+    },
+    {
+      "id": "dolphin",
+      "name": "Dolphin (GameCube / Wii)",
+      "tier": 3,
+      "version": "master-20260920",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/dolphin.AppImage",
+      "sha256": "0df02c52e89e3740858c14397b11a321a3728c818cd2755505642e1cf006da85",
+      "size": 85973512,
+      "icon": "dolphin-emu",
+      "category": "Game",
+      "notes": "built from source for ARM64; no upstream ARM64 build exists"
     }
   ]
 }
