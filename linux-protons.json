@@ -1,6 +1,6 @@
 {
-  "_comment": "Proton builds the Linux runtime's Steam client can run a Windows game with. Tarball rows are downloaded by the app and unpacked by the session; depot rows are fetched by the Steam client itself. Only native ARM64 builds are listed - an x86_64 Proton cannot start here.",
-  "version": 2,
+  "_comment": "Proton builds the Linux runtime's Steam client can run a Windows game with. Only builds the user actually chooses are listed. Valve's own ARM64 depots are not: the session already asks the client to fetch one whenever it is missing, so a row for them would duplicate automatic behaviour and put two entries nobody should pick next to two they should. Only native ARM64 builds - an x86_64 Proton cannot start here.",
+  "version": 3,
   "protons": [
     {
       "name": "GE-Proton11-7",
@@ -23,22 +23,6 @@
       "size": 339912088,
       "wine": 11,
       "notes": "CachyOS's build, heavily patched for performance. Runs, but reached less of GTA V Enhanced than GE-Proton."
-    },
-    {
-      "name": "proton-experimental-arm64",
-      "display": "Proton Experimental (ARM64) - engine only",
-      "kind": "depot",
-      "appid": "4427310",
-      "wine": 11,
-      "notes": "Not one to pick in Steam's list - chosen directly it cannot start a game here, because its own manifest asks for a container Android does not provide. This is the depot that Bannerlator Proton (ARM64) runs, so it needs to be present. The Steam client normally fetches it on its own."
-    },
-    {
-      "name": "proton-11-arm64",
-      "display": "Proton 11.0 (ARM64) - engine only",
-      "kind": "depot",
-      "appid": "4628740",
-      "wine": 11,
-      "notes": "Not one to pick in Steam's list, for the same reason as Proton Experimental (ARM64). Listed so the depot can be fetched if it is missing; Bannerlator Proton (ARM64) uses whichever of the two is on disk."
     }
   ]
 }
