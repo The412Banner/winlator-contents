@@ -64,6 +64,19 @@
       "icon": "rpcs3",
       "category": "Game",
       "notes": "upstream ARM64 build; expect only light titles on a phone"
+    },
+    {
+      "id": "pcsx2",
+      "name": "PCSX2 (PS2)",
+      "tier": 3,
+      "version": "master-20260920",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/pcsx2.AppImage",
+      "sha256": "17ec5b9212ce59b28f8b05151844a736869428a957182301a819950bdea29433",
+      "size": 106551816,
+      "icon": "pcsx2",
+      "category": "Game",
+      "notes": "built from source for ARM64; no upstream ARM64 build exists"
     }
   ]
 }
