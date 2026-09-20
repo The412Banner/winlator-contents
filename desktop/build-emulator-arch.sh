@@ -8,6 +8,8 @@ set -euo pipefail
 T=${1:?target: pcsx2 | cemu}
 J=$(nproc)
 
+# pacman 7's download sandbox (Landlock + the alpm user) cannot be set up inside a container.
+sed -i 's/^\[options\]/[options]\nDisableSandbox/' /etc/pacman.conf
 pacman-key --init >/dev/null 2>&1 || true
 pacman-key --populate archlinuxarm >/dev/null 2>&1 || true
 pacman -Syu --noconfirm --needed >/dev/null
