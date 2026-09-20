@@ -94,7 +94,10 @@ curl -fsSL -o /usr/local/bin/linuxdeploy-plugin-gtk.sh \
 chmod +x /usr/local/bin/linuxdeploy-plugin-gtk.sh
 export APPIMAGE_EXTRACT_AND_RUN=1 NO_STRIP=1 OUTPUT="$T.AppImage" LD_LIBRARY_PATH=/opt/deps/lib:/opt/deps/lib64
 export QMAKE=/usr/bin/qmake6
-export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so"
+# Qt's platform plugins by the names this Qt ships (6.10 merged the two wayland ones).
+EXTRA_PLATFORM_PLUGINS=$(ls /usr/lib/qt6/plugins/platforms/ | grep -E '^libqwayland.*\.so$|^libqxcb\.so$' | paste -sd';')
+export EXTRA_PLATFORM_PLUGINS
+echo "== platform plugins: $EXTRA_PLATFORM_PLUGINS"
 export EXTRA_QT_PLUGINS="svg;wayland-shell-integration;wayland-decoration-client;wayland-graphics-integration-client"
 PLUGIN=qt; [ "$T" = cemu ] && PLUGIN=gtk
 linuxdeploy --appdir AppDir -e "$BIN" -d "AppDir/usr/share/applications/$(basename "$DESKTOP")" \
