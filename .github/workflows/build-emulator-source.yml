@@ -53,7 +53,7 @@ jobs:
               git clone --depth 1 https://github.com/dolphin-emu/dolphin.git src
               git -C src submodule update --init --recursive --depth 1
               cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DLINUX_LOCAL_DEV=false \
-                -DDISTRIBUTOR=SteamDeck -DENABLE_TESTS=OFF
+                -DDISTRIBUTOR=SteamDeck -DENABLE_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr
               cmake --build build -j"$(nproc)"
               DESTDIR="$PWD/AppDir" cmake --install build
               APPRUN_BIN=dolphin-emu; DESKTOP=src/Data/dolphin-emu.desktop; ICON=src/Data/dolphin-emu.png
@@ -62,7 +62,7 @@ jobs:
               git clone --depth 1 https://github.com/PCSX2/pcsx2.git src
               git -C src submodule update --init --recursive --depth 1
               cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DPACKAGE_MODE=ON \
-                -DUSE_LINKED_FFMPEG=ON -DDISABLE_ADVANCE_SIMD=ON
+                -DUSE_LINKED_FFMPEG=ON -DDISABLE_ADVANCE_SIMD=ON -DCMAKE_INSTALL_PREFIX=/usr
               cmake --build build -j"$(nproc)"
               DESTDIR="$PWD/AppDir" cmake --install build || true
               APPRUN_BIN=pcsx2-qt; DESKTOP=src/.github/workflows/scripts/linux/pcsx2-qt.desktop; ICON=src/bin/resources/icons/AppIconLarge.png
@@ -77,15 +77,22 @@ jobs:
               ;;
             *) echo "unknown target"; exit 2 ;;
           esac
-          echo "apprun=$APPRUN_BIN" >> "$GITHUB_OUTPUT"
+          # The desktop entry and icon appimagetool insists on, placed where linuxdeploy looks for
+          # them. The icon takes the name the entry's Icon= line asks for, or the two never meet.
+          ICONNAME=$(sed -n 's/^Icon=//p' "$DESKTOP" | head -1); ICONNAME=${ICONNAME:-$APPRUN_BIN}
+          install -Dm644 "$DESKTOP" "AppDir/usr/share/applications/$(basename "$DESKTOP")"
+          install -Dm644 "$ICON" "AppDir/usr/share/icons/hicolor/256x256/apps/$ICONNAME.png"
+          BIN=$(find AppDir/usr/bin AppDir/usr/local/bin -maxdepth 1 -type f -name "$APPRUN_BIN" 2>/dev/null | head -1)
+          [ -n "$BIN" ] || { echo "no $APPRUN_BIN in AppDir"; find AppDir -maxdepth 3 -type d; exit 3; }
+          echo "apprun=$BIN" >> "$GITHUB_OUTPUT"
+          echo "desktop=AppDir/usr/share/applications/$(basename "$DESKTOP")" >> "$GITHUB_OUTPUT"
 
       - name: Package AppImage
         run: |
           set -euo pipefail
           export OUTPUT='${{ inputs.target }}.AppImage' QMAKE=/usr/lib/qt6/bin/qmake6 EXTRA_QT_PLUGINS=svg
-          linuxdeploy --appdir AppDir --plugin qt --output appimage \
-            $( [ -f "$PWD"/AppDir/usr/share/applications/*.desktop ] || echo "" ) || \
-          linuxdeploy --appdir AppDir --output appimage
+          linuxdeploy --appdir AppDir -e '${{ steps.build.outputs.apprun }}' \
+            -d '${{ steps.build.outputs.desktop }}' --plugin qt --output appimage
           ls -l *.AppImage
           sha256sum '${{ inputs.target }}.AppImage' | awk '{print $1}' > '${{ inputs.target }}.sha256'
 
