@@ -1,0 +1,98 @@
+name: Build emulator from source (SteamDeck, tier 3)
+
+# The emulators that ship no ARM64 Linux binary — PCSX2, Dolphin, Cemu — built on GitHub's ARM
+# runner and published as AppImages to the desktop release. Each is a large build; one at a time.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'dolphin | pcsx2 | cemu'
+        required: true
+        default: 'dolphin'
+      release:
+        description: 'Release tag to publish to'
+        required: true
+        default: 'steamdeck-desktop-r1'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 180
+    steps:
+      - name: Toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends git cmake ninja-build build-essential \
+            pkg-config python3 curl file desktop-file-utils libfuse2 \
+            qt6-base-dev qt6-base-private-dev qt6-svg-dev qt6-tools-dev \
+            libgl1-mesa-dev libvulkan-dev libsdl2-dev libx11-dev libxext-dev libwayland-dev \
+            libudev-dev libevdev-dev libasound2-dev libpulse-dev libcurl4-openssl-dev \
+            zlib1g-dev libzstd-dev liblz4-dev libbz2-dev libpng-dev libhidapi-dev \
+            libbluetooth-dev libusb-1.0-0-dev libsystemd-dev gettext
+
+      - name: Fetch linuxdeploy (AppImage packager, aarch64)
+        run: |
+          set -euo pipefail
+          for tool in linuxdeploy linuxdeploy-plugin-qt; do
+            curl -fsSL -o "/usr/local/bin/$tool" \
+              "https://github.com/linuxdeploy/$tool/releases/download/continuous/$tool-aarch64.AppImage"
+            chmod +x "/usr/local/bin/$tool"
+          done
+
+      - name: Build ${{ inputs.target }}
+        id: build
+        run: |
+          set -euo pipefail
+          T='${{ inputs.target }}'
+          case "$T" in
+            dolphin)
+              git clone --depth 1 https://github.com/dolphin-emu/dolphin.git src
+              git -C src submodule update --init --recursive --depth 1
+              cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DLINUX_LOCAL_DEV=false \
+                -DDISTRIBUTOR=SteamDeck -DENABLE_TESTS=OFF
+              cmake --build build -j"$(nproc)"
+              DESTDIR="$PWD/AppDir" cmake --install build
+              APPRUN_BIN=dolphin-emu; DESKTOP=src/Data/dolphin-emu.desktop; ICON=src/Data/dolphin-emu.png
+              ;;
+            pcsx2)
+              git clone --depth 1 https://github.com/PCSX2/pcsx2.git src
+              git -C src submodule update --init --recursive --depth 1
+              cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DPACKAGE_MODE=ON \
+                -DUSE_LINKED_FFMPEG=ON -DDISABLE_ADVANCE_SIMD=ON
+              cmake --build build -j"$(nproc)"
+              DESTDIR="$PWD/AppDir" cmake --install build || true
+              APPRUN_BIN=pcsx2-qt; DESKTOP=src/.github/workflows/scripts/linux/pcsx2-qt.desktop; ICON=src/bin/resources/icons/AppIconLarge.png
+              ;;
+            cemu)
+              git clone --depth 1 https://github.com/cemu-project/Cemu.git src
+              cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DENABLE_VCPKG=OFF
+              cmake --build build -j"$(nproc)"
+              mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
+              install -m755 build/bin/Cemu_release AppDir/usr/bin/cemu
+              APPRUN_BIN=cemu; DESKTOP=src/dist/linux/info.cemu.Cemu.desktop; ICON=src/src/resource/logo_icon.png
+              ;;
+            *) echo "unknown target"; exit 2 ;;
+          esac
+          echo "apprun=$APPRUN_BIN" >> "$GITHUB_OUTPUT"
+
+      - name: Package AppImage
+        run: |
+          set -euo pipefail
+          export OUTPUT='${{ inputs.target }}.AppImage' QMAKE=/usr/lib/qt6/bin/qmake6 EXTRA_QT_PLUGINS=svg
+          linuxdeploy --appdir AppDir --plugin qt --output appimage \
+            $( [ -f "$PWD"/AppDir/usr/share/applications/*.desktop ] || echo "" ) || \
+          linuxdeploy --appdir AppDir --output appimage
+          ls -l *.AppImage
+          sha256sum '${{ inputs.target }}.AppImage' | awk '{print $1}' > '${{ inputs.target }}.sha256'
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release upload '${{ inputs.release }}' '${{ inputs.target }}.AppImage' '${{ inputs.target }}.sha256' --clobber
+          echo "published ${{ inputs.target }} $(stat -c %s '${{ inputs.target }}.AppImage') $(cat '${{ inputs.target }}.sha256')"
