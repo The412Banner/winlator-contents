@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "category": "steamdeck-desktop",
+  "release": "steamdeck-desktop-r1",
+  "note": "Hosted packages the SteamDeck app installs into its Linux runtime on request. A tar package extracts over the r9 rootfs; an appimage lands in /opt/appimages with a .desktop entry and runs extracted (proot has no FUSE). Tier 1 is packaged natively for aarch64 by Arch Linux ARM; tier 2 is upstream's own ARM64 build, mirrored here unmodified with the checksum taken at mirror time; tier 3 is built from source by us.",
+  "packages": [
+    {
+      "id": "desktop",
+      "name": "Desktop (LXQt on labwc)",
+      "tier": 1,
+      "version": "r1",
+      "kind": "tar",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/desktop.tar.zst",
+      "sha256": "c2bb860b3b1688287451e2495be5db313ec07f8c8af501dfac2768a9f417bc86",
+      "size": 426049032,
+      "notes": "panel, file manager, terminal, Firefox, mpv; Steam as a window or Big Picture from an icon"
+    },
+    {
+      "id": "emulators",
+      "name": "Emulators (PPSSPP, RetroArch + cores)",
+      "tier": 1,
+      "version": "r1",
+      "kind": "tar",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/emulators.tar.zst",
+      "sha256": "a1f4806a9663d28f424b4cab1277e0ede80a92e69de5bc063cdc8b45af220164",
+      "size": 727860354,
+      "notes": "PSP; GameCube/Wii (Dolphin), PS1, PS2 (Play!), Dreamcast, DS, N64, GBA, SNES, Genesis, MAME, ScummVM cores; DOSBox, Mednafen"
+    },
+    {
+      "id": "duckstation",
+      "name": "DuckStation (PS1)",
+      "tier": 2,
+      "version": "latest-20260920",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/duckstation.AppImage",
+      "sha256": "d67758c25fe3772558662e39bb508620c997cc6cd3d66ecca835e754923f158a",
+      "size": 85995776,
+      "icon": "duckstation",
+      "category": "Game",
+      "notes": "standalone, upstream ARM64 build"
+    },
+    {
+      "id": "melonds",
+      "name": "melonDS 1.1 (DS)",
+      "tier": 2,
+      "version": "1.1",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/melonds.zip",
+      "sha256": "c537ae018d6dcedfe9da0317a1d5c0163e69201e23abfa163fa2a63e437ace09",
+      "size": 33391635,
+      "icon": "melonDS",
+      "category": "Game",
+      "notes": "standalone, upstream ARM64 build"
+    },
+    {
+      "id": "rpcs3",
+      "name": "RPCS3 (PS3)",
+      "tier": 2,
+      "version": "0.0.42-20024",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/rpcs3.AppImage",
+      "sha256": "bce484ff7071badb209cfb8b061c486294e60ef776121173e129770d76efb8a5",
+      "size": 80330873,
+      "icon": "rpcs3",
+      "category": "Game",
+      "notes": "upstream ARM64 build; expect only light titles on a phone"
+    }
+  ]
+}
