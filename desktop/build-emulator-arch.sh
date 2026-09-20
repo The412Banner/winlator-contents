@@ -89,9 +89,6 @@ for tool in linuxdeploy linuxdeploy-plugin-qt; do
     "https://github.com/linuxdeploy/$tool/releases/download/continuous/$tool-aarch64.AppImage"
   chmod +x "/usr/local/bin/$tool"
 done
-curl -fsSL -o /usr/local/bin/linuxdeploy-plugin-gtk.sh \
-  https://raw.githubusercontent.com/linuxdeploy/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh
-chmod +x /usr/local/bin/linuxdeploy-plugin-gtk.sh
 export APPIMAGE_EXTRACT_AND_RUN=1 NO_STRIP=1 OUTPUT="$T.AppImage" LD_LIBRARY_PATH=/opt/deps/lib:/opt/deps/lib64
 export QMAKE=/usr/bin/qmake6
 # Qt's platform plugins by the names this Qt ships (6.10 merged the two wayland ones).
@@ -99,8 +96,19 @@ EXTRA_PLATFORM_PLUGINS=$(ls /usr/lib/qt6/plugins/platforms/ | grep -E '^libqwayl
 export EXTRA_PLATFORM_PLUGINS
 echo "== platform plugins: $EXTRA_PLATFORM_PLUGINS"
 export EXTRA_QT_PLUGINS="svg;wayland-shell-integration;wayland-decoration-client;wayland-graphics-integration-client"
-PLUGIN=qt; [ "$T" = cemu ] && PLUGIN=gtk
-linuxdeploy --appdir AppDir -e "$BIN" -d "AppDir/usr/share/applications/$(basename "$DESKTOP")" \
-  --plugin "$PLUGIN" --output appimage
+# Cemu is GTK (wxWidgets): linuxdeploy's gtk plugin looks for GTK's runtime data at Debian
+# paths, finds nothing on Arch and copies '' - and the desktop this runs on installs gtk3
+# anyway, so only the binary's own dependencies need bundling.
+if [ "$T" = cemu ]; then
+  # gdk-pixbuf's loaders and the schemas GTK reads at startup, which a bare deploy leaves out.
+  for d in /usr/lib/gdk-pixbuf-2.0 /usr/share/glib-2.0/schemas; do
+    [ -d "$d" ] && mkdir -p "AppDir$d" && cp -a "$d/." "AppDir$d/"
+  done
+  linuxdeploy --appdir AppDir -e "$BIN" -d "AppDir/usr/share/applications/$(basename "$DESKTOP")" \
+    --output appimage
+else
+  linuxdeploy --appdir AppDir -e "$BIN" -d "AppDir/usr/share/applications/$(basename "$DESKTOP")" \
+    --plugin qt --output appimage
+fi
 ls -l ./*.AppImage
 sha256sum "$T.AppImage" | awk '{print $1}' > "$T.sha256"
