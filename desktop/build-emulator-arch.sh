@@ -13,7 +13,7 @@ sed -i 's/^\[options\]/[options]\nDisableSandbox/' /etc/pacman.conf
 pacman-key --init >/dev/null 2>&1 || true
 pacman-key --populate archlinuxarm >/dev/null 2>&1 || true
 pacman -Syu --noconfirm --needed >/dev/null
-COMMON="git cmake ninja clang lld extra-cmake-modules pkgconf python file patchelf desktop-file-utils squashfs-tools
+COMMON="git cmake ninja clang llvm lld extra-cmake-modules pkgconf python file patchelf desktop-file-utils squashfs-tools
   qt6-base qt6-svg qt6-tools qt6-wayland vulkan-headers vulkan-icd-loader libx11 libxrandr libxext libxi libxcb
   wayland wayland-protocols libdecor alsa-lib libpulse libevdev curl zlib zstd lz4 bzip2 xz libpng
   libjpeg-turbo libwebp freetype2 fontconfig dbus hidapi libusb bluez-libs sdl3 shaderc ffmpeg libpcap libaio
