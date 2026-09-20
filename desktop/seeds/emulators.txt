@@ -1,0 +1,46 @@
+# Tier 1: every emulator Arch Linux ARM packages natively for aarch64. PPSSPP standalone;
+# RetroArch with its cores — Dolphin covers GameCube and Wii, Play! is the PS2 core, DuckStation
+# and Beetle the PS1, Flycast the Dreamcast, melonDS/DeSmuME the DS, Mupen64Plus-Next/ParaLLEl the
+# N64 — plus the classic standalones.
+ppsspp
+retroarch
+retroarch-assets-xmb
+retroarch-assets-ozone
+libretro-core-info
+libretro-shaders-slang
+libretro-overlays
+libretro-dolphin
+libretro-duckstation
+libretro-play
+libretro-flycast
+libretro-melonds
+libretro-desmume
+libretro-mupen64plus-next
+libretro-parallel-n64
+libretro-mgba
+libretro-snes9x
+libretro-bsnes
+libretro-bsnes-hd
+libretro-genesis-plus-gx
+libretro-picodrive
+libretro-beetle-psx
+libretro-beetle-psx-hw
+libretro-beetle-pce
+libretro-beetle-pce-fast
+libretro-beetle-supergrafx
+libretro-kronos
+libretro-yabause
+libretro-mame
+libretro-scummvm
+libretro-pcsx-rearmed
+libretro-mesen
+libretro-mesen-s
+libretro-gambatte
+libretro-sameboy
+libretro-nestopia
+libretro-blastem
+libretro-mednafen-psx-hw
+scummvm
+dosbox
+mednafen
+snes9x

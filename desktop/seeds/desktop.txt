@@ -1,0 +1,23 @@
+# The desktop: labwc nested as a client of the app's compositor, LXQt's panel and file manager
+# on it, and the everyday apps a desktop is for. One package name per line; the closure over
+# Arch Linux ARM's databases is taken at build time, minus everything the runtime already has.
+labwc
+lxqt-panel
+lxqt-config
+lxqt-runner
+lxqt-session
+lxqt-wayland-session
+lxqt-themes
+lxqt-qtplugin
+pcmanfm-qt
+qterminal
+featherpad
+lximage-qt
+breeze-icons
+papirus-icon-theme
+swaybg
+wlr-randr
+xdg-utils
+xdg-desktop-portal-wlr
+firefox
+mpv

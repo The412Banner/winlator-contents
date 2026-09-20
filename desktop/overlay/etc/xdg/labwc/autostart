@@ -1,0 +1,7 @@
+# What the desktop is made of, started once labwc is up.
+swaybg -m fill -i /usr/share/backgrounds/steamdeck.png &
+# The desktop icons (pcmanfm-qt manages the desktop surface) and the panel with the app menu.
+pcmanfm-qt --desktop --profile lxqt &
+lxqt-panel &
+# The portal so Firefox and Qt apps can open file pickers and screenshots.
+/usr/lib/xdg-desktop-portal-wlr >/dev/null 2>&1 &

@@ -1,0 +1,55 @@
+name: Build desktop packages (SteamDeck)
+
+# The hosted packages the SteamDeck app installs into its Linux runtime on request: the LXQt/labwc
+# desktop and the tier-1 emulator set, each the closure of a seed list over Arch Linux ARM minus
+# what the runtime image already carries. Published to one release the app's desktop.json points at.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Release tag to publish to (created if missing)'
+        required: true
+        default: 'steamdeck-desktop-r1'
+      packages:
+        description: 'Space-separated package names (seed files under desktop/seeds/)'
+        required: true
+        default: 'desktop emulators'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq && sudo apt-get install -y -qq zstd >/dev/null
+          mkdir -p out
+          for name in ${{ inputs.packages }}; do
+            desktop/build-pkg.sh "$name" "desktop/seeds/$name.txt" desktop/base-packages.txt out
+          done
+          ls -l out
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG='${{ inputs.release }}'
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --prerelease --title "SteamDeck desktop packages ($TAG)" \
+              --notes "Hosted packages for the SteamDeck app's Linux runtime. Each extracts over the r9 rootfs; see desktop.json for the catalog."
+          fi
+          gh release upload "$TAG" out/* --clobber
+          echo "published:"; for f in out/*.tar.zst; do n=$(basename "$f" .tar.zst); echo "  $n $(stat -c %s "$f") $(cat out/$n.sha256)"; done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-packages
+          path: out/*.packages.txt

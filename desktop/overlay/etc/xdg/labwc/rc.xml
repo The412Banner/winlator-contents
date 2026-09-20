@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- labwc for a handheld: a plain theme, large enough to hit with a finger, and the keybinds a
+     desktop expects. Copied to ~/.config/labwc on first run, where the user may change it. -->
+<labwc_config>
+  <core><gap>0</gap><reuseOutputMode>yes</reuseOutputMode></core>
+  <theme>
+    <name>Clearlooks</name>
+    <cornerRadius>6</cornerRadius>
+    <font place="ActiveWindow"><name>DejaVu Sans</name><size>11</size></font>
+  </theme>
+  <placement><policy>center</policy></placement>
+  <windowSwitcher show="yes" preview="yes"/>
+  <keyboard>
+    <keybind key="A-Tab"><action name="NextWindow"/></keybind>
+    <keybind key="A-F4"><action name="Close"/></keybind>
+    <keybind key="W-Return"><action name="Execute"><command>qterminal</command></action></keybind>
+    <keybind key="W-e"><action name="Execute"><command>pcmanfm-qt</command></action></keybind>
+    <keybind key="W-d"><action name="ToggleMaximize"/></keybind>
+  </keyboard>
+  <mouse><doubleClickTime>500</doubleClickTime></mouse>
+</labwc_config>

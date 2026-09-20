@@ -1,0 +1,13 @@
+#!/bin/bash
+# Starts the same Steam client the Steam session uses, from the desktop: as a window, or as Big
+# Picture. Same install, same login, same library.
+set -u
+steam_root=${XDG_DATA_HOME:-$HOME/.local/share}/Steam
+[ -x "$steam_root/steamrtarm64/steam" ] || { echo "Steam is not installed yet: start a Steam session once." >&2; exit 1; }
+export STEAM_RUNTIME=1
+export LD_LIBRARY_PATH=$steam_root/steamrtarm64:$steam_root/steamrtarm64/panorama${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+export SDL_VIDEO_X11_DGAMOUSE=0
+mode=${1:-desktop}
+if [ "$mode" = bigpicture ]; then set -- -gamepadui; else set --; fi
+exec "$steam_root/steamrtarm64/steam" "$@" -clientbeta publicbeta -no-cef-sandbox -cef-force-gpu \
+  -cef-ozone-platform=x11 -cef-use-gl=angle -cef-use-angle=vulkan

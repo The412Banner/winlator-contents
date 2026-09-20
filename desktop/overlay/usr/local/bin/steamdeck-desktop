@@ -1,0 +1,19 @@
+#!/bin/bash
+# The desktop session: labwc nested as a client of the app's compositor, with LXQt's panel and
+# file manager started from its autostart, and Xwayland for the X11 programs (the Steam client,
+# most emulators). Run by bannerlator-session in place of gamescope for mode "lxqt".
+set -u
+export XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=LXQt XDG_SESSION_DESKTOP=lxqt
+export QT_QPA_PLATFORM=wayland GDK_BACKEND=wayland,x11 SDL_VIDEODRIVER=wayland,x11
+export QT_QPA_PLATFORMTHEME=lxqt
+# wlroots draws with Vulkan straight on Turnip; BL_WLR_RENDERER=gles2 falls back to GL via Zink.
+export WLR_RENDERER=${BL_WLR_RENDERER:-vulkan}
+export WLR_BACKENDS=wayland
+# labwc names its own socket wayland-1 and leaves ours as the parent it draws into.
+mkdir -p "$HOME/.config/labwc" "$HOME/.config/lxqt"
+[ -f "$HOME/.config/labwc/rc.xml" ] || cp /etc/xdg/labwc/rc.xml "$HOME/.config/labwc/rc.xml"
+[ -f "$HOME/.config/labwc/autostart" ] || cp /etc/xdg/labwc/autostart "$HOME/.config/labwc/autostart"
+[ -f "$HOME/.config/lxqt/panel.conf" ] || cp /etc/xdg/lxqt/panel.conf "$HOME/.config/lxqt/panel.conf"
+[ -f "$HOME/.config/lxqt/lxqt.conf" ] || cp /etc/xdg/lxqt/lxqt.conf "$HOME/.config/lxqt/lxqt.conf"
+echo "== steamdeck-desktop: labwc ($WLR_RENDERER) on $WAYLAND_DISPLAY"
+exec labwc -C "$HOME/.config/labwc"
