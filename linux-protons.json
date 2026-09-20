@@ -1,6 +1,6 @@
 {
   "_comment": "Proton builds the Linux runtime's Steam client can run a Windows game with. Tarball rows are downloaded by the app and unpacked by the session; depot rows are fetched by the Steam client itself. Only native ARM64 builds are listed - an x86_64 Proton cannot start here.",
-  "version": 1,
+  "version": 2,
   "protons": [
     {
       "name": "GE-Proton11-7",
@@ -26,19 +26,19 @@
     },
     {
       "name": "proton-experimental-arm64",
-      "display": "Proton Experimental (ARM64)",
+      "display": "Proton Experimental (ARM64) - engine only",
       "kind": "depot",
       "appid": "4427310",
       "wine": 11,
-      "notes": "Valve's own ARM64 build, and what Bannerlator Proton (ARM64) runs. The Steam client downloads it; it is normally already here."
+      "notes": "Not one to pick in Steam's list - chosen directly it cannot start a game here, because its own manifest asks for a container Android does not provide. This is the depot that Bannerlator Proton (ARM64) runs, so it needs to be present. The Steam client normally fetches it on its own."
     },
     {
       "name": "proton-11-arm64",
-      "display": "Proton 11.0 (ARM64)",
+      "display": "Proton 11.0 (ARM64) - engine only",
       "kind": "depot",
       "appid": "4628740",
       "wine": 11,
-      "notes": "Valve's stable ARM64 build. Fetched by the Steam client."
+      "notes": "Not one to pick in Steam's list, for the same reason as Proton Experimental (ARM64). Listed so the depot can be fetched if it is missing; Bannerlator Proton (ARM64) uses whichever of the two is on disk."
     }
   ]
 }
