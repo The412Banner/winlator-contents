@@ -90,6 +90,19 @@
       "icon": "dolphin-emu",
       "category": "Game",
       "notes": "built from source for ARM64; no upstream ARM64 build exists"
+    },
+    {
+      "id": "cemu",
+      "name": "Cemu (Wii U)",
+      "tier": 3,
+      "version": "main-20260920",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/cemu.AppImage",
+      "sha256": "6cf189a61ef3b1b58c1091889eb8f5b82a7fd0dcdc2c447e5fca0dbc15360e9d",
+      "size": 64944648,
+      "icon": "info.cemu.Cemu",
+      "category": "Game",
+      "notes": "built from source for ARM64; no upstream ARM64 build exists"
     }
   ]
 }
