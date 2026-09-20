@@ -80,7 +80,8 @@ jobs:
           D="AppDir/usr/share/applications/$(basename "$DESKTOP")"; I="AppDir/usr/share/icons/hicolor/256x256/apps/$ICONNAME.png"
           [ "$DESKTOP" -ef "$D" ] || install -Dm644 "$DESKTOP" "$D"
           [ "$ICON" -ef "$I" ] || install -Dm644 "$ICON" "$I"
-          BIN=$(find AppDir/usr/bin AppDir/usr/local/bin -maxdepth 1 -type f -name "$APPRUN_BIN" 2>/dev/null | head -1)
+          # -print -quit, not a pipe into head: under pipefail a closed pipe would end the step.
+          BIN=$(find AppDir/usr -maxdepth 3 -type f -name "$APPRUN_BIN" -print -quit)
           [ -n "$BIN" ] || { echo "no $APPRUN_BIN in AppDir"; find AppDir -maxdepth 3 -type d; exit 3; }
           echo "apprun=$BIN" >> "$GITHUB_OUTPUT"
           echo "desktop=AppDir/usr/share/applications/$(basename "$DESKTOP")" >> "$GITHUB_OUTPUT"
