@@ -15,12 +15,12 @@ pacman-key --populate archlinuxarm >/dev/null 2>&1 || true
 pacman -Syu --noconfirm --needed >/dev/null
 COMMON="git cmake ninja clang lld extra-cmake-modules pkgconf python file patchelf desktop-file-utils squashfs-tools
   qt6-base qt6-svg qt6-tools qt6-wayland vulkan-headers vulkan-icd-loader libx11 libxrandr libxext libxi libxcb
-  wayland wayland-protocols libdecor alsa-lib libpulse libevdev libudev0-shim curl zlib zstd lz4 bzip2 xz libpng
+  wayland wayland-protocols libdecor alsa-lib libpulse libevdev curl zlib zstd lz4 bzip2 xz libpng
   libjpeg-turbo libwebp freetype2 fontconfig dbus hidapi libusb bluez-libs sdl3 shaderc ffmpeg libpcap libaio
   libzip fmt glm glslang pugixml rapidjson boost zarchive gtk3 libsecret libgcrypt freeglut wxwidgets-common
   kddockwidgets directx-headers libbacktrace"
 # shellcheck disable=SC2086
-pacman -S --noconfirm --needed $COMMON 2>&1 | tail -3
+pacman -S --noconfirm --needed $COMMON 2>&1 | grep -vE "is up to date|^\s*$" | tail -20
 git config --global --add safe.directory '*'
 mkdir -p /opt/deps
 export CMAKE_PREFIX_PATH=/opt/deps:/usr
