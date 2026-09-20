@@ -1,0 +1,44 @@
+{
+  "_comment": "Proton builds the Linux runtime's Steam client can run a Windows game with. Tarball rows are downloaded by the app and unpacked by the session; depot rows are fetched by the Steam client itself. Only native ARM64 builds are listed - an x86_64 Proton cannot start here.",
+  "version": 1,
+  "protons": [
+    {
+      "name": "GE-Proton11-7",
+      "display": "GE-Proton 11-7",
+      "kind": "tarball",
+      "dir": "GE-Proton11-7-aarch64",
+      "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton11-7/GE-Proton11-7-aarch64.tar.gz",
+      "sha512": "741cf70256f13b20d44952b590defd68b115814097f911c9ec053a64d33795267e2a982a5ce939407e8b649613eb3943bb2e2ebf4794d302ff96b83b61457cdd",
+      "size": 645786140,
+      "wine": 11,
+      "notes": "GloriousEggroll's build, with its own game patches. Got GTA V Enhanced further than any other build tested."
+    },
+    {
+      "name": "proton-cachyos-11.0-20260703",
+      "display": "Proton CachyOS 11.0 (2026-07-03)",
+      "kind": "tarball",
+      "dir": "proton-cachyos-11.0-20260703-slr-arm64",
+      "url": "https://github.com/CachyOS/proton-cachyos/releases/download/cachyos-11.0-20260703-slr/proton-cachyos-11.0-20260703-slr-arm64.tar.xz",
+      "sha512": "54514fc117f2f74cfbc8e9a321a0432513fd44d875ce1c0c48c72af0518d683f3d16ff755d213c0fb42d6e8a1db2a290e9ab883e3505baccc4f43e5e9e692a09",
+      "size": 339912088,
+      "wine": 11,
+      "notes": "CachyOS's build, heavily patched for performance. Runs, but reached less of GTA V Enhanced than GE-Proton."
+    },
+    {
+      "name": "proton-experimental-arm64",
+      "display": "Proton Experimental (ARM64)",
+      "kind": "depot",
+      "appid": "4427310",
+      "wine": 11,
+      "notes": "Valve's own ARM64 build, and what Bannerlator Proton (ARM64) runs. The Steam client downloads it; it is normally already here."
+    },
+    {
+      "name": "proton-11-arm64",
+      "display": "Proton 11.0 (ARM64)",
+      "kind": "depot",
+      "appid": "4628740",
+      "wine": 11,
+      "notes": "Valve's stable ARM64 build. Fetched by the Steam client."
+    }
+  ]
+}
