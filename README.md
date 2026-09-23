@@ -73,18 +73,20 @@ Do these together so users are actually offered the update:
 
 Only bump `version` when the **binary actually changes** — it's a build identity, not an edit counter. Fork‑specific entries (e.g. `bannerlator-gamenative`, `wmali-gamenative`) reflect what *those* projects ship and move independently of the canonical upstream entry.
 
-## SteamDeck (the Linux Steam client app)
+## DroidDeck (the Linux Steam client app)
 
 Valve's own Linux Steam client on an Android phone, no root. The app's releases are published
-here for anyone to download; its source is in the private `SteamDeck` repo.
+here for anyone to download; its source is in the private `DroidDeck` repo. **DroidDeck was called
+SteamDeck until 0.1.6.**
 
-- **Latest: [SteamDeck 0.1.5](https://github.com/The412Banner/winlator-contents/releases/tag/SteamDeck-0.1.5)** —
-  a new front end, settings in place, themes in the icon's colours, the client's frames back on a
-  flagship. Install `SteamDeck-0.1.5.apk` over any earlier build (same test key).
+- **Latest: [DroidDeck 0.1.6](https://github.com/The412Banner/winlator-contents/releases/tag/DroidDeck-0.1.6)** —
+  the new name; a fresh install sets itself up (runtime on the loading screen, Proton Experimental
+  (ARM64) offered right after sign-in); drivers on full pages with downloads; made for a controller.
+  Install `DroidDeck-0.1.6.apk`. It has a new app ID, so it installs **beside** SteamDeck, not over it.
 - **Linux runtime** — the app fetches it from [`linuxfs.json`](./linuxfs.json) (currently
-  `linuxfs-r9`, ~790 MB) on first press of *Install Linux runtime*.
+  `linuxfs-r9`, ~790 MB) the first time you press *Play*.
 - **Desktop packages** — LXQt, Firefox and the emulators, from [`desktop.json`](./desktop.json).
-- Earlier: [0.1.4](https://github.com/The412Banner/winlator-contents/releases/tag/SteamDeck-0.1.4).
+- Earlier, as SteamDeck: [0.1.4](https://github.com/The412Banner/winlator-contents/releases/tag/SteamDeck-0.1.4).
 
 ## Community
 
