@@ -86,7 +86,6 @@ SteamDeck until 0.1.6.**
 - **Linux runtime** — the app fetches it from [`linuxfs.json`](./linuxfs.json) (currently
   `linuxfs-r9`, ~790 MB) the first time you press *Play*.
 - **Desktop packages** — LXQt, Firefox and the emulators, from [`desktop.json`](./desktop.json).
-- Earlier, as SteamDeck: [0.1.4](https://github.com/The412Banner/winlator-contents/releases/tag/SteamDeck-0.1.4).
 
 ## Community
 
