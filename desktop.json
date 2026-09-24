@@ -76,7 +76,14 @@
       "size": 57281032,
       "icon": "pcsx2",
       "category": "Game",
-      "notes": "PCSX2 with ARM64 recompilers (github.com/ARMSX2/ARMSX2, GPL-3.0); upstream Linux arm64 4K-pages nightly, mirrored unmodified. Much faster than PCSX2 here, which interprets the PS2's CPUs on ARM64"
+      "notes": "PCSX2 with ARM64 recompilers (github.com/ARMSX2/ARMSX2, GPL-3.0); upstream Linux arm64 4K-pages nightly, mirrored unmodified. Much faster than PCSX2 here, which interprets the PS2's CPUs on ARM64",
+      "pages": {
+        "16384": {
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/armsx2-16k.AppImage",
+          "sha256": "74783f471b95f72132a81e0e573235e8882e57e6653fb94cef04672f68851033",
+          "size": 57264648
+        }
+      }
     },
     {
       "id": "dolphin",
