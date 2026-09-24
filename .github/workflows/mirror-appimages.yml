@@ -26,7 +26,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out && cd out
-          # id  upstream url
+          # id  upstream url. Only what is being added: every file listed is re-fetched and replaces
+          # the release copy, and a moving upstream link (DuckStation's "latest") would no longer
+          # match its checksum in desktop.json. Mirrored before: rpcs3 (build 9e86f165), duckstation
+          # (latest @ 2026-09-20), melonds (1.1).
           while read -r id url; do
             [ -n "$id" ] || continue
             ext=${url##*.}
@@ -34,8 +37,6 @@ jobs:
             sha256sum "$id.$ext" | awk '{print $1}' > "$id.sha256"
             echo "  $id $(stat -c %s "$id.$ext") $(cat "$id.sha256") $id.$ext"
           done <<'LIST'
-          rpcs3 https://github.com/RPCS3/rpcs3-binaries-linux-arm64/releases/download/build-9e86f165d1711b9429d48b0487e7bc5ba0cc9c6c/rpcs3-v0.0.42-20024-9e86f165_linux_aarch64.AppImage
-          duckstation https://github.com/stenzek/duckstation/releases/download/latest/DuckStation-arm64.AppImage
-          melonds https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-appimage-aarch64.zip
+          armsx2 https://github.com/ARMSX2/ARMSX2/releases/download/nightly-20260923/ARMSX2-nightly-20260923-92aa2174da-Linux-arm64-4K-pages.AppImage
           LIST
           gh release upload '${{ inputs.release }}' ./* --clobber
