@@ -79,6 +79,19 @@
       "notes": "built from source for ARM64; no upstream ARM64 build exists"
     },
     {
+      "id": "armsx2",
+      "name": "ARMSX2 (PS2, fast on ARM64)",
+      "tier": 2,
+      "version": "nightly-20260923-92aa2174da",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/armsx2.AppImage",
+      "sha256": "629ebcef049ebe03c0ddefd4e0667dd38e6e242fe9aa275f6cb4d19f6facf64e",
+      "size": 57281032,
+      "icon": "pcsx2",
+      "category": "Game",
+      "notes": "PCSX2 with ARM64 recompilers (github.com/ARMSX2/ARMSX2, GPL-3.0); upstream Linux arm64 4K-pages nightly, mirrored unmodified. Much faster than PCSX2 here, which interprets the PS2's CPUs on ARM64"
+    },
+    {
       "id": "dolphin",
       "name": "Dolphin (GameCube / Wii)",
       "tier": 3,
