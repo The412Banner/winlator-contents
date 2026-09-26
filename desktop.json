@@ -110,6 +110,39 @@
       "icon": "info.cemu.Cemu",
       "category": "Game",
       "notes": "built from source for ARM64; no upstream ARM64 build exists"
+    },
+    {
+      "id": "shadps4",
+      "name": "shadPS4 (PS4, experimental)",
+      "tier": 2,
+      "version": "arm64-be6bc2e-p1",
+      "kind": "appimage",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/shadps4.AppImage",
+      "sha256": "b2c2b0d3c0f5236fc558e8da890d5a9ec3c9b43d2edd4470f7e08db23b6c1940",
+      "size": 39315976,
+      "icon": "shadps4",
+      "category": "Game",
+      "notes": "shadPS4's ARM64 build with FEXCore running the PS4's x86-64 code (github.com/zenithblue-oss/shadps4-arm64, GPL-2.0, from the Bachata S4 project), built by DroidDeck's tools/shadps4 with SDL controllers and PulseAudio. Early: many games boot, few are playable",
+      "frontend": {
+        "system": "PS4",
+        "folders": [
+          "ps4"
+        ],
+        "gameFile": "eboot.bin",
+        "skipSuffixes": [
+          "-UPDATE",
+          "-PATCH"
+        ],
+        "titleSfo": "sce_sys/param.sfo",
+        "art": "sce_sys/icon0.png",
+        "args": [
+          "-f",
+          "true",
+          "-g",
+          "{game}"
+        ],
+        "iconUrl": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/shadps4.png"
+      }
     }
   ]
 }
