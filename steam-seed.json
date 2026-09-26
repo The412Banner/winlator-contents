@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "category": "steam-seed",
+  "note": "Placed by DroidDeck over its Linux runtime before the Steam client's first start. Not a user-installable package; kept out of desktop.json so it never shows in the package list.",
+  "packages": [
+    {
+      "id": "proton-arm64",
+      "name": "Proton Experimental (ARM64)",
+      "version": "25502785",
+      "kind": "tar",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/steam-proton-arm64-25502785/proton-experimental-arm64-25502785.tar.zst",
+      "sha256": "d6c480a90d981801be0906a3f3418eb9bd9461c30e411140951cb0daf9d2a189",
+      "size": 398113534,
+      "notes": "Valve's Proton Experimental (ARM64), depot 4427311 manifest 6971993485335684515, with appmanifest_4427310.acf (LastOwner 0). The client adopts it at first sign-in and updates it itself."
+    }
+  ]
+}
