@@ -27,7 +27,9 @@ seeds=(gamescope mesa vulkan-freedreno xorg-xwayland xorg-xhost xorg-xrandr vulk
   fontconfig freetype2 bash coreutils grep sed gawk which findutils glib2 libglvnd libxcomposite
   libxdamage libxrandr wayland wayland-protocols libxcb libxshmfence xkeyboard-config xorg-xkbcomp
   python libxtst libxi ttf-dejavu openal libvdpau lsof zstd tar xz gzip file libevdev libinput
-  gstreamer gst-plugins-base gst-plugins-base-libs gst-plugins-good gnutls libpng libjpeg-turbo)
+  gstreamer gst-plugins-base gst-plugins-base-libs gst-plugins-good gnutls libpng libjpeg-turbo
+  gtk3)
+# gtk3: Steam's web helper (CEF) links libgtk-3.so.0; in r9 it arrived as a dependency of pcmanfm.
 
 # Packages the base image carries that no session uses; their files go, by the package database's
 # own file lists, so nothing half-removed is left behind.
@@ -176,7 +178,8 @@ mkdir -p rootfs/usr/share/vulkan/icd.d
 printf '{\n    "ICD": {\n        "api_version": "1.4.0",\n        "library_path": "/usr/lib/libvulkan_freedreno.so"\n    },\n    "file_format_version": "1.0.0"\n}\n' \
   > rootfs/usr/share/vulkan/icd.d/freedreno_icd.json
 rm -f rootfs/usr/share/vulkan/icd.d/nvidia_icd.json
-cp turnip/meta.json rootfs/usr/share/vulkan/icd.d/freedreno_icd.meta.json 2>/dev/null || true
+# Only manifests may live in icd.d: the app takes any .json there as the driver to load.
+cp turnip/meta.json rootfs/usr/share/vulkan/freedreno-driver-meta.json 2>/dev/null || true
 
 # --- the runtime's own proot, and what Xwayland and Steam expect of a system -------------------
 mkdir -p rootfs/opt/android-host
