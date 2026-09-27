@@ -184,6 +184,11 @@ cp -a "$here"/prebuilt/proot/proot "$here"/prebuilt/proot/loader "$here"/prebuil
       "$here"/prebuilt/proot/README.md rootfs/opt/android-host/
 chmod 755 rootfs/opt/android-host/proot rootfs/opt/android-host/loader
 mkdir -p rootfs/dev rootfs/proc rootfs/sys rootfs/tmp rootfs/root rootfs/run/user rootfs/usr/local/lib rootfs/usr/local/bin
+# The session script the app looks for before it calls the runtime installed (LinuxRuntime
+# .isInstalled); the app refreshes it, and every other script and preload, at each session start
+# (SessionFiles.stage), so this copy only has to exist. From DroidDeck's tools/linuxfs/overlay.
+cp -a "$here"/overlay/. rootfs/
+chmod 755 rootfs/usr/local/bin/bannerlator-session
 chmod 1777 rootfs/tmp
 printf '/usr/local/lib\n/usr/lib\n/usr/lib32\n' > rootfs/etc/ld.so.conf
 rm -f rootfs/etc/ld.so.cache rootfs/etc/machine-id rootfs/etc/resolv.conf
@@ -203,7 +208,7 @@ proot -q "$(command -v qemu-aarch64-static)" -r rootfs -w / -b /dev -b /proc /bi
 ' || echo "post-install hooks under qemu: best effort"
 echo "final: $(du -sm rootfs | cut -f1) MB"
 for f in usr/bin/gamescope usr/bin/Xwayland usr/lib/libvulkan_freedreno.so usr/lib/libgtk-x11-2.0.so.0 \
-         usr/bin/pulseaudio usr/bin/python3 opt/android-host/proot usr/lib/libnettle.so.8; do
+         usr/bin/pulseaudio usr/bin/python3 opt/android-host/proot usr/lib/libnettle.so.8 usr/local/bin/bannerlator-session; do
   [ -e "rootfs/$f" ] || { echo "MISSING from rootfs: $f" >&2; exit 1; }
 done
 mkdir -p "$(dirname "$out")"
