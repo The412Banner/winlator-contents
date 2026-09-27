@@ -116,8 +116,8 @@ for p in "${drop_pkgs[@]}"; do
     [ -f "$d/files" ] || continue
     # `files` lists paths relative to /, directories with a trailing slash; files first, then
     # any directory the package owned that is now empty.
-    grep -v '^%' "$d/files" | grep -v '/$' | sed 's#^#rootfs/#' | xargs -r rm -f --
-    grep -v '^%' "$d/files" | grep '/$' | sort -r | sed 's#^#rootfs/#' | xargs -r rmdir --ignore-fail-on-non-empty -- 2>/dev/null || true
+    grep -vE '^%|^\s*$' "$d/files" | grep -v '/$' | sed 's#^#rootfs/#' | xargs -r -d '\n' rm -f --
+    grep -vE '^%|^\s*$' "$d/files" | grep '/$' | sort -r | sed 's#^#rootfs/#' | xargs -r -d '\n' rmdir --ignore-fail-on-non-empty -- 2>/dev/null || true
     rm -rf "$d"
     echo "  dropped $(basename "$d")"
   done
