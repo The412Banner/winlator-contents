@@ -1,0 +1,64 @@
+name: Build linuxfs (DroidDeck base runtime)
+
+# The trimmed base runtime (linuxfs/build-base.sh) as a run artifact, and optionally attached to
+# a release tag of this repo. The catalog (linuxfs.json on main) is never touched here.
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: "Label for the artifact and tar name (e.g. r10)"
+        required: true
+        default: "r10"
+      turnip_url:
+        description: "URL of the -Linux Turnip zip to ship as the default driver"
+        required: true
+        default: "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r10-test/Turnip-test-61f259049c-regular-Linux.zip"
+      release:
+        description: "Release tag to attach linuxfs.tar.zst to (empty = artifact only)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  linuxfs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends curl tar zstd binutils xz-utils unzip python3 proot qemu-user-static
+      - name: Build the rootfs
+        env:
+          TURNIP_URL: ${{ inputs.turnip_url }}
+        run: |
+          mkdir -p out
+          linuxfs/build-base.sh "${RUNNER_TEMP}/linuxfs-work" "${GITHUB_WORKSPACE}/out/linuxfs.tar.zst"
+      - name: Report
+        run: |
+          set -e
+          ls -l out/linuxfs.tar.zst
+          sha256sum out/linuxfs.tar.zst | cut -d' ' -f1 > out/linuxfs.sha256
+          {
+            echo "### linuxfs ${{ inputs.label }}"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| size | $(stat -c %s out/linuxfs.tar.zst) bytes |"
+            echo "| sha256 | \`$(cat out/linuxfs.sha256)\` |"
+            echo "| turnip | ${{ inputs.turnip_url }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linuxfs-${{ inputs.label }}
+          path: |
+            out/linuxfs.tar.zst
+            out/linuxfs.sha256
+      - name: Attach to release
+        if: inputs.release != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload '${{ inputs.release }}' out/linuxfs.tar.zst out/linuxfs.sha256 --clobber
