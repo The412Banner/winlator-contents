@@ -66,6 +66,11 @@ case "$T" in
     git -C src fetch -q --depth 1 origin "${CEMU_REF:-main}" && git -C src checkout -q --detach FETCH_HEAD
     git -C src log -1 --format='Cemu %H %cs %s'
     git -C src submodule update -q --init --recursive --depth 1
+    # Our patches on top (desktop/patches/cemu/*.patch); any that does not apply fails the build.
+    for p in "$(dirname "$0")"/patches/cemu/*.patch; do
+      [ -e "$p" ] || continue
+      echo "applying $(basename "$p")"; git -C src apply --whitespace=nowarn "$(readlink -f "$p")"
+    done
     cmake -S src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DENABLE_VCPKG=OFF -DENABLE_WAYLAND=ON \
       -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DwxWidgets_CONFIG_EXECUTABLE=/opt/deps/bin/wx-config
     cmake --build build -j"$J"
