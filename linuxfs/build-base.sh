@@ -107,6 +107,9 @@ while read -r entry; do
   tar -xf "pkgs/$file" -C rootfs --no-same-owner --no-same-permissions \
     --exclude=.PKGINFO --exclude=.MTREE --exclude=.INSTALL --exclude=.BUILDINFO --exclude=.CHANGELOG
 done < pkglist.txt
+# Everything is read and written as one unprivileged user, here and on the device: a package's
+# setuid helper (dbus-daemon-launch-helper, mode 4750) must not stay unreadable to that user.
+chmod -R u+rwX rootfs
 echo "with the closure: $(du -sm rootfs | cut -f1) MB"
 
 # --- trim ------------------------------------------------------------------------------------
