@@ -69,6 +69,7 @@ for repo in ("core", "extra", "alarm"):
                 line = line.rstrip("\n")
                 if line.startswith("%") and line.endswith("%"): key = line.strip("%"); fields[key] = []
                 elif key and line: fields[key].append(line)
+        if not fields.get("NAME") or not fields.get("FILENAME"): continue
         n = fields["NAME"][0]
         rec = {"repo": repo, "file": fields["FILENAME"][0],
                "depends": [strip(x) for x in fields.get("DEPENDS", [])],
