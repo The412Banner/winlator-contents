@@ -1,14 +1,13 @@
-Rumble (SDL_INIT_HAPTIC) is optional: a controller that offers no force feedback - DroidDeck's
-virtual pad - must not stop Cemu from starting. Gamepads alone are enough; rumble is only lost.
-
+diff --git a/src/input/api/SDL/SDLControllerProvider.cpp b/src/input/api/SDL/SDLControllerProvider.cpp
+index 3aa146a..4ba2367 100644
 --- a/src/input/api/SDL/SDLControllerProvider.cpp
 +++ b/src/input/api/SDL/SDLControllerProvider.cpp
-@@ -127,9 +127,15 @@
+@@ -127,9 +127,15 @@ void SDLControllerProvider::InitSDL()
  	SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI_STEAM, "1");
  	SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI_LUNA, "1");
  
--	if (!SDL_InitSubSystem(SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC))
-+	if (!SDL_InitSubSystem(SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC))
++	// Rumble (haptic) is optional: a controller with no force feedback must not stop Cemu.
+ 	if (!SDL_InitSubSystem(SDL_INIT_GAMEPAD | SDL_INIT_HAPTIC))
  	{
 -		throw std::runtime_error(fmt::format("couldn't initialize SDL: {}", SDL_GetError()));
 +		const std::string firstError = SDL_GetError();
@@ -19,4 +18,4 @@ virtual pad - must not stop Cemu from starting. Gamepads alone are enough; rumbl
 +		cemuLog_log(LogType::Force, "SDL: gamepads without rumble (haptic init failed: {})", firstError);
  	}
  
- 	m_running = true;
+ 	SDL_SetGamepadEventsEnabled(true);
