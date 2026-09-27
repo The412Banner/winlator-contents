@@ -102,14 +102,14 @@
       "id": "cemu",
       "name": "Cemu (Wii U)",
       "tier": 3,
-      "version": "main-20260920",
+      "version": "main-20260924",
       "kind": "appimage",
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/steamdeck-desktop-r1/cemu.AppImage",
-      "sha256": "6cf189a61ef3b1b58c1091889eb8f5b82a7fd0dcdc2c447e5fca0dbc15360e9d",
-      "size": 64944648,
+      "sha256": "9628000a90a91784d223fc57fad64f2662da3028b941d13221a3ff969c3590a4",
+      "size": 64170504,
       "icon": "info.cemu.Cemu",
       "category": "Game",
-      "notes": "built from source for ARM64; no upstream ARM64 build exists"
+      "notes": "built from source for ARM64 (Cemu c717fca); no upstream ARM64 build exists. Rumble is optional, so a controller without force feedback no longer stops it at startup."
     }
   ]
 }
