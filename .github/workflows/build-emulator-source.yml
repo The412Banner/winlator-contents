@@ -11,9 +11,13 @@ on:
         required: true
         default: 'dolphin'
       release:
-        description: 'Release tag to publish to'
+        description: 'Release tag to publish to (none = keep the AppImage as a run artifact only)'
         required: true
         default: 'steamdeck-desktop-r1'
+      cemu_ref:
+        description: 'Cemu commit or branch to build (cemu only; empty = main)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -66,7 +70,7 @@ jobs:
             pcsx2|cemu)
               # Newer libraries than the runner image has (Qt 6.10 for PCSX2, wxWidgets 3.3 for
               # Cemu): built in an Arch Linux ARM container, the rootfs's own distribution.
-              docker run --rm -v "$PWD:/work" -w /work menci/archlinuxarm:base-devel \
+              docker run --rm -v "$PWD:/work" -w /work -e CEMU_REF='${{ inputs.cemu_ref }}' menci/archlinuxarm:base-devel \
                 bash desktop/build-emulator-arch.sh "$T"
               sudo chown -R "$(id -u):$(id -g)" .
               echo "packaged=yes" >> "$GITHUB_OUTPUT"
@@ -96,7 +100,15 @@ jobs:
           ls -l *.AppImage
           sha256sum '${{ inputs.target }}.AppImage' | awk '{print $1}' > '${{ inputs.target }}.sha256'
 
+      - uses: actions/upload-artifact@v4
+        if: inputs.release == 'none'
+        with:
+          name: ${{ inputs.target }}-appimage
+          path: |
+            ${{ inputs.target }}.AppImage
+            ${{ inputs.target }}.sha256
       - name: Publish
+        if: inputs.release != 'none'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
