@@ -38,7 +38,7 @@ drop_pkgs=(linux-aarch64 linux-firmware linux-firmware-whence linux-firmware-amd
   linux-firmware-nvidia linux-firmware-other linux-firmware-radeon linux-firmware-realtek
   linux-firmware-marvell linux-firmware-nxp linux-firmware-qcom linux-firmware-qlogic linux-firmware-liquidio
   linux-firmware-mellanox linux-api-headers binutils vim vim-runtime gettext gnupg gpgme openssh
-  iptables iproute2 dhcpcd kbd e2fsprogs cryptsetup device-mapper tpm2-tss mkinitcpio kmod
+  iptables iproute2 dhcpcd kbd cryptsetup device-mapper tpm2-tss mkinitcpio kmod
   man-db man-pages texinfo groff nano ex-vi-compat gpm)
 
 mkdir -p "$work/db" "$work/pkgs" "$work/rootfs"
@@ -128,7 +128,11 @@ for p in "${drop_pkgs[@]}"; do
     echo "  dropped $(basename "$d")"
   done
 done
+# e2fsprogs stays: its libcom_err is what krb5 links, and Xwayland and curl reach krb5 via libtirpc.
 rm -rf rootfs/boot rootfs/usr/lib/modules rootfs/usr/lib/firmware
+# GIO's libproxy module links libpxbackend, which no seed brings; every GLib program would print
+# "Failed to load module" for it.
+rm -f rootfs/usr/lib/gio/modules/libgiolibproxy.so
 # Files no session reads.
 rm -rf rootfs/usr/share/{doc,man,info,gtk-doc,gir-1.0,vala,i18n,zoneinfo-leaps,help}
 rm -rf rootfs/usr/include rootfs/usr/lib/pkgconfig rootfs/usr/share/pkgconfig rootfs/usr/lib/cmake
@@ -214,6 +218,35 @@ for f in usr/bin/gamescope usr/bin/Xwayland usr/lib/libvulkan_freedreno.so usr/l
          usr/bin/pulseaudio usr/bin/python3 opt/android-host/proot usr/lib/libnettle.so.8 usr/local/bin/bannerlator-session; do
   [ -e "rootfs/$f" ] || { echo "MISSING from rootfs: $f" >&2; exit 1; }
 done
+# Every program and library must resolve all of its DT_NEEDED libraries inside the rootfs. A
+# dropped package can take a library something else still links (e2fsprogs' libcom_err is needed
+# by krb5, which Xwayland reaches through libtirpc) and the failure only shows on a device as a
+# session that never starts. The rootfs's own loader resolves each file, under qemu.
+proot -q "$(command -v qemu-aarch64-static)" -r rootfs -w / -b /dev -b /proc /bin/bash -c '
+  lp=/usr/lib:/usr/local/lib
+  for d in /usr/lib/gamescope /usr/lib/pulseaudio /usr/lib/gstreamer-1.0 /usr/lib/gio/modules /usr/lib/alsa-lib /usr/lib/dri /usr/lib/gdk-pixbuf-2.0/2.10.0/loaders; do
+    [ -d "$d" ] && lp=$lp:$d
+  done
+  n=0; bad=0
+  for f in /usr/bin/* /usr/local/bin/* /usr/lib/*.so* /usr/local/lib/*.so* /usr/lib/gamescope/* /usr/lib/pulseaudio/*.so* \
+           /usr/lib/gstreamer-1.0/*.so /usr/lib/gio/modules/*.so /usr/lib/alsa-lib/*.so /usr/lib/dri/*.so; do
+    [ -f "$f" ] || continue
+    head -c 4 "$f" 2>/dev/null | grep -q ELF || continue
+    n=$((n+1))
+    r=$(/usr/lib/ld-linux-aarch64.so.1 --library-path "$lp" --list "$f" 2>&1 | grep -oE "[^ ]+: cannot open shared object|error while loading shared libraries: [^:]+" | head -3 | tr "\n" " ")
+    [ -n "$r" ] && { echo "UNRESOLVED ${f}: $r"; bad=$((bad+1)); }
+  done
+  echo "library audit: $n files, $bad with unresolved libraries (leftovers of dropped packages are expected)"
+  # The session cannot start without these; anything else unresolved is dead weight, not a fault.
+  fail=0
+  for f in /usr/bin/Xwayland /usr/bin/xkbcomp /usr/bin/gamescope /usr/bin/curl /usr/bin/python3 /usr/bin/pulseaudio /usr/bin/unzip \
+           /usr/bin/bash /usr/bin/tar /usr/bin/zstd /usr/bin/sha256sum /usr/bin/find /usr/bin/gawk /usr/lib/libvulkan_freedreno.so \
+           /usr/lib/libcurl.so.4 /usr/lib/libgtk-3.so.0 /usr/lib/libgtk-x11-2.0.so.0 /usr/lib/libnettle.so.8 /usr/lib/libpulse.so.0; do
+    [ -f "$f" ] || { echo "REQUIRED FILE MISSING: $f"; fail=1; continue; }
+    /usr/lib/ld-linux-aarch64.so.1 --library-path "$lp" --list "$f" 2>&1 | grep -qE "cannot open shared object|error while loading" && { echo "REQUIRED FILE CANNOT LOAD: $f"; fail=1; }
+  done
+  [ "$fail" = 0 ]
+' || { echo "a program the session needs cannot load" >&2; exit 1; }
 mkdir -p "$(dirname "$out")"
 tar -C rootfs --zstd -cf "$out" .
 ls -l "$out"
