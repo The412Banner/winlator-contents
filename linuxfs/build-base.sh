@@ -41,7 +41,7 @@ drop_pkgs=(linux-aarch64 linux-firmware linux-firmware-whence linux-firmware-amd
   linux-firmware-nvidia linux-firmware-other linux-firmware-radeon linux-firmware-realtek
   linux-firmware-marvell linux-firmware-nxp linux-firmware-qcom linux-firmware-qlogic linux-firmware-liquidio
   linux-firmware-mellanox linux-api-headers binutils vim vim-runtime gettext gnupg gpgme openssh
-  iptables iproute2 dhcpcd kbd cryptsetup device-mapper tpm2-tss mkinitcpio kmod
+  iptables iproute2 dhcpcd kbd cryptsetup device-mapper tpm2-tss mkinitcpio
   man-db man-pages texinfo groff nano ex-vi-compat gpm)
 
 mkdir -p "$work/db" "$work/pkgs" "$work/rootfs"
@@ -132,6 +132,8 @@ for p in "${drop_pkgs[@]}"; do
   done
 done
 # e2fsprogs stays: its libcom_err is what krb5 links, and Xwayland and curl reach krb5 via libtirpc.
+# kmod stays: Steam's hardware survey runs lspci, which links libkmod; without it every session log
+# carries "lspci: error while loading shared libraries".
 rm -rf rootfs/boot rootfs/usr/lib/modules rootfs/usr/lib/firmware
 # GIO's libproxy module links libpxbackend, which no seed brings; every GLib program would print
 # "Failed to load module" for it.
