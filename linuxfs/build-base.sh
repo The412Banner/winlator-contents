@@ -28,11 +28,13 @@ seeds=(gamescope mesa vulkan-freedreno xorg-xwayland xorg-xhost xorg-xrandr vulk
   libxdamage libxrandr wayland wayland-protocols libxcb libxshmfence xkeyboard-config xorg-xkbcomp
   python libxtst libxi ttf-dejavu openal libvdpau lsof zstd tar xz gzip file libevdev libinput
   gstreamer gst-plugins-base gst-plugins-base-libs gst-plugins-good gnutls libpng libjpeg-turbo
-  gtk3 libibus libva)
+  gtk3 libibus libva pipewire)
 # gtk3: Steam's web helper (CEF) links libgtk-3.so.0; in r9 it arrived as a dependency of pcmanfm.
 # libibus: steamwebhelper links libibus-1.0.so.5 outright (r9 had it through ibus).
 # libva: steamui.so loads Steam's own libavcodec.so.62, which links libva.so.2; without it the
 # client dies with "Fatal error: Failed to load steamui.so" after its first self-update.
+# pipewire: gamescope links libpipewire, which reads /usr/share/pipewire/client.conf from the
+# pipewire package at start; with only the library present every session logs "can't load config".
 
 # Packages the base image carries that no session uses; their files go, by the package database's
 # own file lists, so nothing half-removed is left behind.
