@@ -57,8 +57,9 @@ jobs:
           path: |
             out/linuxfs.tar.zst
             out/linuxfs.sha256
+            out/linuxfs-packages.txt
       - name: Attach to release
         if: inputs.release != ''
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload '${{ inputs.release }}' out/linuxfs.tar.zst out/linuxfs.sha256 --clobber
+        run: gh release upload '${{ inputs.release }}' out/linuxfs.tar.zst out/linuxfs.sha256 out/linuxfs-packages.txt --clobber

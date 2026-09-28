@@ -45,8 +45,8 @@ drop_pkgs=(linux-aarch64 linux-firmware linux-firmware-whence linux-firmware-amd
   linux-firmware-broadcom linux-firmware-cirrus linux-firmware-intel linux-firmware-mediatek
   linux-firmware-nvidia linux-firmware-other linux-firmware-radeon linux-firmware-realtek
   linux-firmware-marvell linux-firmware-nxp linux-firmware-qcom linux-firmware-qlogic linux-firmware-liquidio
-  linux-firmware-mellanox linux-api-headers binutils vim vim-runtime gettext gnupg gpgme openssh
-  iptables iproute2 dhcpcd kbd cryptsetup device-mapper tpm2-tss mkinitcpio
+  linux-firmware-mellanox linux-api-headers binutils vim vim-runtime gettext   openssh
+  iptables iproute2 dhcpcd kbd cryptsetup device-mapper  mkinitcpio
   man-db man-pages texinfo groff nano ex-vi-compat gpm)
 
 mkdir -p "$work/db" "$work/pkgs" "$work/rootfs"
@@ -99,6 +99,11 @@ if missing: sys.exit("unresolved: " + " ".join(missing))
 for n in sorted(seen): print(pkgs[n]["repo"] + "/" + pkgs[n]["file"])
 PY
 echo "$(wc -l < pkglist.txt) packages in the closure"
+# Every package this runtime holds, for building the packages that extract over it: the base
+# image's survivors plus the seed closure. Kept in the rootfs and published beside the tarball.
+{ ls rootfs/var/lib/pacman/local | sed -E 's/-[^-]+-[^-]+$//' | grep -v ALPM_DB_VERSION
+  sed -E 's#^[a-z]+/##; s/-[^-]+-[^-]+-(aarch64|any)\.pkg\.tar\.[a-z]+$//' pkglist.txt; } | sort -u > runtime-packages.txt
+echo "$(wc -l < runtime-packages.txt) packages in the runtime"
 while read -r entry; do
   file=${entry#*/}
   if ! tar -tf "pkgs/$file" >/dev/null 2>&1; then
@@ -139,6 +144,10 @@ done
 # e2fsprogs stays: its libcom_err is what krb5 links, and Xwayland and curl reach krb5 via libtirpc.
 # kmod stays: Steam's hardware survey runs lspci, which links libkmod; without it every session log
 # carries "lspci: error while loading shared libraries".
+# gnupg, gpgme and tpm2-tss stay: the Desktop package (desktop/build-pkg.sh) was built assuming the
+# base image's package list (desktop/base-packages.txt) and its closure reaches these three through
+# libsecret and the portal. When the Desktop package is next rebuilt against this runtime's own list
+# (etc/droiddeck-runtime-packages) they can go.
 rm -rf rootfs/boot rootfs/usr/lib/modules rootfs/usr/lib/firmware
 # GIO's libproxy module links libpxbackend, which no seed brings; every GLib program would print
 # "Failed to load module" for it.
@@ -261,7 +270,9 @@ proot -q "$(command -v qemu-aarch64-static)" -r rootfs -w / -b /dev -b /proc /bi
   python3 -c "import gi; gi.require_version(\"Gio\", \"2.0\"); from gi.repository import Gio, GLib" 2>/dev/null || { echo "REQUIRED: python gi.repository Gio/GLib (python-gobject)"; fail=1; }
   [ "$fail" = 0 ]
 ' || { echo "a program the session needs cannot load" >&2; exit 1; }
+install -m 644 runtime-packages.txt rootfs/etc/droiddeck-runtime-packages
 mkdir -p "$(dirname "$out")"
+cp runtime-packages.txt "$(dirname "$out")/linuxfs-packages.txt"
 tar -C rootfs --zstd -cf "$out" .
 ls -l "$out"
 sha256sum "$out"
