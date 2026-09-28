@@ -3,10 +3,10 @@
   "category": "linux-runtime",
   "release": "linuxfs-r10-test",
   "name": "Linux runtime (gamescope + native ARM Steam)",
-  "version": "r10-test6",
+  "version": "r10-test8",
   "url": "https://github.com/The412Banner/winlator-contents/releases/download/linuxfs-r10-test/linuxfs.tar.zst",
-  "sha256": "1b7e230efdba010a7f9c3a5d304baec2ace9f17bdca35f6c34993d1e75620f02",
-  "size": 599215407,
-  "file_size": 599215407,
+  "sha256": "9fd95f8ec69cafa465df215ced9cea27f0a20bfbd3103afa69ec8afe7380f458",
+  "size": 605348116,
+  "file_size": 605348116,
   "note": "TEST r10: the base runtime trimmed to what a Steam session needs - the arm64 Steam client under gamescope and Proton's games. No kernel, firmware or boot files, no docs, headers, non-English locales or the base image's server tools; the Desktop package brings the desktop. Default Vulkan driver: Banners-Turnip Linux build 61f25904 with the kgsl_syncobj_merge fix. Built by linuxfs/build-base.sh."
 }
