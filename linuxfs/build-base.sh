@@ -99,11 +99,6 @@ if missing: sys.exit("unresolved: " + " ".join(missing))
 for n in sorted(seen): print(pkgs[n]["repo"] + "/" + pkgs[n]["file"])
 PY
 echo "$(wc -l < pkglist.txt) packages in the closure"
-# Every package this runtime holds, for building the packages that extract over it: the base
-# image's survivors plus the seed closure. Kept in the rootfs and published beside the tarball.
-{ ls rootfs/var/lib/pacman/local | sed -E 's/-[^-]+-[^-]+$//' | grep -v ALPM_DB_VERSION
-  sed -E 's#^[a-z]+/##; s/-[^-]+-[^-]+-(aarch64|any)\.pkg\.tar\.[a-z]+$//' pkglist.txt; } | sort -u > runtime-packages.txt
-echo "$(wc -l < runtime-packages.txt) packages in the runtime"
 while read -r entry; do
   file=${entry#*/}
   if ! tar -tf "pkgs/$file" >/dev/null 2>&1; then
@@ -270,6 +265,11 @@ proot -q "$(command -v qemu-aarch64-static)" -r rootfs -w / -b /dev -b /proc /bi
   python3 -c "import gi; gi.require_version(\"Gio\", \"2.0\"); from gi.repository import Gio, GLib" 2>/dev/null || { echo "REQUIRED: python gi.repository Gio/GLib (python-gobject)"; fail=1; }
   [ "$fail" = 0 ]
 ' || { echo "a program the session needs cannot load" >&2; exit 1; }
+# Every package this runtime holds, for building the packages that extract over it: the base
+# image's survivors plus the seed closure. Kept in the rootfs and published beside the tarball.
+{ ls rootfs/var/lib/pacman/local | sed -E 's/-[^-]+-[^-]+$//' | grep -v ALPM_DB_VERSION
+  sed -E 's#^[a-z]+/##; s/-[^-]+-[^-]+-(aarch64|any)\.pkg\.tar\.[a-z]+$//' pkglist.txt; } | sort -u > runtime-packages.txt
+echo "$(wc -l < runtime-packages.txt) packages in the runtime"
 install -m 644 runtime-packages.txt rootfs/etc/droiddeck-runtime-packages
 mkdir -p "$(dirname "$out")"
 cp runtime-packages.txt "$(dirname "$out")/linuxfs-packages.txt"
