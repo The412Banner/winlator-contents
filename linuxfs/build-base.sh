@@ -28,8 +28,11 @@ seeds=(gamescope mesa vulkan-freedreno xorg-xwayland xorg-xhost xorg-xrandr vulk
   libxdamage libxrandr wayland wayland-protocols libxcb libxshmfence xkeyboard-config xorg-xkbcomp
   python libxtst libxi ttf-dejavu openal libvdpau lsof zstd tar xz gzip file libevdev libinput
   gstreamer gst-plugins-base gst-plugins-base-libs gst-plugins-good gnutls libpng libjpeg-turbo
-  gtk3)
+  gtk3 libibus libva)
 # gtk3: Steam's web helper (CEF) links libgtk-3.so.0; in r9 it arrived as a dependency of pcmanfm.
+# libibus: steamwebhelper links libibus-1.0.so.5 outright (r9 had it through ibus).
+# libva: steamui.so loads Steam's own libavcodec.so.62, which links libva.so.2; without it the
+# client dies with "Fatal error: Failed to load steamui.so" after its first self-update.
 
 # Packages the base image carries that no session uses; their files go, by the package database's
 # own file lists, so nothing half-removed is left behind.
@@ -241,7 +244,8 @@ proot -q "$(command -v qemu-aarch64-static)" -r rootfs -w / -b /dev -b /proc /bi
   fail=0
   for f in /usr/bin/Xwayland /usr/bin/xkbcomp /usr/bin/gamescope /usr/bin/curl /usr/bin/python3 /usr/bin/pulseaudio /usr/bin/unzip \
            /usr/bin/bash /usr/bin/tar /usr/bin/zstd /usr/bin/sha256sum /usr/bin/find /usr/bin/gawk /usr/lib/libvulkan_freedreno.so \
-           /usr/lib/libcurl.so.4 /usr/lib/libgtk-3.so.0 /usr/lib/libgtk-x11-2.0.so.0 /usr/lib/libnettle.so.8 /usr/lib/libpulse.so.0; do
+           /usr/lib/libcurl.so.4 /usr/lib/libgtk-3.so.0 /usr/lib/libgtk-x11-2.0.so.0 /usr/lib/libnettle.so.8 /usr/lib/libpulse.so.0 \
+           /usr/lib/libibus-1.0.so.5 /usr/lib/libva.so.2 /usr/lib/libva-drm.so.2 /usr/lib/libva-x11.so.2; do
     [ -f "$f" ] || { echo "REQUIRED FILE MISSING: $f"; fail=1; continue; }
     /usr/lib/ld-linux-aarch64.so.1 --library-path "$lp" --list "$f" 2>&1 | grep -qE "cannot open shared object|error while loading" && { echo "REQUIRED FILE CANNOT LOAD: $f"; fail=1; }
   done
