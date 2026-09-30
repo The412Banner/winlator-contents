@@ -4,4 +4,6 @@ New in v9: **touch on Wayland**, **opt-in ntsync** (`WINENTSYNC=1`; off by defau
 
 They install into a new `<version>-arm64ec-9` slot beside the older ones, so nothing is overwritten and a container on an older build of the same layer is offered **Update layer → v9** with a revert snapshot.
 
-See the build release for the full per-layer notes.
+**Credits:** userspace ntsync by [Joshua Tam (@joshuatam)](https://github.com/joshuatam) / [GameNative](https://github.com/GameNative) — [`ntsync-android` @ `7ce6435`](https://github.com/GameNative/ntsync-android/commit/7ce6435e5979b1cb5341aa4b299f31e8937fe121), Wine integration after [`962a379`](https://github.com/GameNative/proton-wine/commit/962a379708a762df79b1aac99f2e0e01a3a53809) · [`d67ac1e`](https://github.com/GameNative/proton-wine/commit/d67ac1e0d83c9c6bb6a43bb4dc8459bc45d6b937) · [`0971187`](https://github.com/GameNative/proton-wine/commit/0971187883d7488b1686770015f6e6fd6bf342da). Steam bridge modelled on GameNative's lsteamclient integration by Joshua Tam, [`dafe413`](https://github.com/GameNative/proton-wine/commit/dafe413ae06a11ce0cebea2bc1681b16dbc34c84) (its `owned_dlcs` override ported). Crypto fixes by [bl4ckh4ck5 (@hackoclipse)](https://github.com/hackoclipse) — [`b4fc579`](https://github.com/hackoclipse/proton-wine/commit/b4fc579416adb0a8d343496caf0885e34ed8d8cd) · [`a0d20d6`](https://github.com/hackoclipse/proton-wine/commit/a0d20d6c2c60bbcaac7a64e374ffe148297ab6f5).
+
+See the build release for the full per-layer notes and credits.
