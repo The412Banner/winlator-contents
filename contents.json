@@ -138,6 +138,12 @@
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Hybrid/Box64-0.4.4-Hybrid-Bionic.wcp"
   },
   {
+    "type": "Box64",
+    "verName": "Box64-0.4.5-415416f2b-Bionic",
+    "verCode": "0",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/Box64-Bionic/Box64-0.4.5-415416f2b-Bionic.wcp"
+  },
+  {
     "type": "WOWBox64",
     "verName": "Wowbox64-0.3.4",
     "verCode": "0",
