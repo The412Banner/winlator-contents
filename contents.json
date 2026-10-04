@@ -967,23 +967,23 @@
   },
   {
     "type": "Proton",
-    "verName": "Proton-11.0-1-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/proton-11.0-1-arm64ec.wcp",
+    "verName": "Proton-11.0-1-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/proton-11.0-1-arm64ec.wcp",
     "versionName": "11.0-1-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "Proton-11.0-2-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/proton-11.0-2-arm64ec.wcp",
+    "verName": "Proton-11.0-2-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/proton-11.0-2-arm64ec.wcp",
     "versionName": "11.0-2-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "Proton-11.0-2-x86_64 (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/proton-11.0-2-x86_64.wcp",
+    "verName": "Proton-11.0-2-x86_64 (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/proton-11.0-2-x86_64.wcp",
     "versionName": "11.0-2-x86_64"
   },
   {
@@ -995,51 +995,51 @@
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-3-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/GE-proton-11.0-3-arm64ec.wcp",
+    "verName": "GE-Proton-11.0-3-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/GE-proton-11.0-3-arm64ec.wcp",
     "versionName": "11.0-3-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-5-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/GE-proton-11.0-5-arm64ec.wcp",
+    "verName": "GE-Proton-11.0-5-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/GE-proton-11.0-5-arm64ec.wcp",
     "versionName": "11.0-5-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-6-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/GE-proton-11.0-6-arm64ec.wcp",
+    "verName": "GE-Proton-11.0-6-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/GE-proton-11.0-6-arm64ec.wcp",
     "versionName": "11.0-6-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-7-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/GE-proton-11.0-7-arm64ec.wcp",
+    "verName": "GE-Proton-11.0-7-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/GE-proton-11.0-7-arm64ec.wcp",
     "versionName": "11.0-7-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-7-x86_64 (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/GE-proton-11.0-7-x86_64.wcp",
+    "verName": "GE-Proton-11.0-7-x86_64 (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/GE-proton-11.0-7-x86_64.wcp",
     "versionName": "11.0-7-x86_64"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-7.1-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/GE-proton-11.0-7.1-arm64ec.wcp",
+    "verName": "GE-Proton-11.0-7.1-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/GE-proton-11.0-7.1-arm64ec.wcp",
     "versionName": "11.0-7.1-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-7.1-x86_64 (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/GE-proton-11.0-7.1-x86_64.wcp",
+    "verName": "GE-Proton-11.0-7.1-x86_64 (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/GE-proton-11.0-7.1-x86_64.wcp",
     "versionName": "11.0-7.1-x86_64"
   },
   {
@@ -1051,16 +1051,16 @@
   },
   {
     "type": "Proton",
-    "verName": "Proton-CachyOS-11.0-20260703-arm64ec (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/proton-cachyos-11.0-20260703-arm64ec.wcp",
+    "verName": "Proton-CachyOS-11.0-20260703-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/proton-cachyos-11.0-20260703-arm64ec.wcp",
     "versionName": "11.0-20260703-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "Proton-CachyOS-11.0-20260703-x86_64 (v12)",
-    "verCode": "12",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261003-v12/proton-cachyos-11.0-20260703-x86_64.wcp",
+    "verName": "Proton-CachyOS-11.0-20260703-x86_64 (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/proton-cachyos-11.0-20260703-x86_64.wcp",
     "versionName": "11.0-20260703-x86_64"
   },
   {
