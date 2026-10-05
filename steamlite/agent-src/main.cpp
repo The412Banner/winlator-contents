@@ -4,6 +4,7 @@
 #include "clean_shutdown.h"
 #include "agent_channel.h"   // optional BL_AGENT_PORT event channel (no-op when unset)
 #include "agent_friends.h"   // friends/chat relay over that channel (BL_AGENT_FRIENDS=1, agent p3)
+#include "steam_input.h"     // Steam Input activation for the launched app (WN_STEAM_INPUT=1, agent p7)
 
 #include <stdio.h>
 #include <stdint.h>
@@ -1427,6 +1428,7 @@ static int agent_main(int argc, char** argv) {
     open_log();
     // Optional app event channel: pure no-op unless BL_AGENT_PORT is set + connects.
     ac::init_from_env(log_line);
+    si::init_from_env(log_line);
     wn_launcher_set_exit_hook(ac::emit_shutdown);
     wn_launcher_set_log_sink(clean_shutdown_log_sink);
     log_line("[wn-launcher] Steam Launcher in-process Steam launcher starting (pid=%lu tid=%lu)",
@@ -1810,6 +1812,7 @@ static int agent_main(int argc, char** argv) {
                 while (bGetCallback(pipe, cbBuf)) { af::on_callback(cbBuf); freeLastCallback(pipe); }
             }
             af::tick();
+            si::tick();
             if ((tick % 20) == 0) {
                 bool on = bLoggedOn ? bLoggedOn(pipe, hUser) : false;
                 log_line("[wn-launcher] M1: resident tick=%d BLoggedOn=%d", tick, on ? 1 : 0);
@@ -1990,6 +1993,13 @@ static int agent_main(int argc, char** argv) {
 
     bool launchedViaApp = false;
     bool launchedViaFallback = false;
+    // Steam Input (agent p7): with the per-game toggle on, configure the client's controller layer for
+    // this app BEFORE LaunchApp so the game's steam_api sees an active layout from its first
+    // ISteamInput::Init. Inert without WN_STEAM_INPUT=1; never blocks the launch.
+    if (loggedOn && engine && appId != 0 && si::enabled()) {
+        si::activate(engine, hUser, pipe, appId);
+    }
+
     // True once any LaunchApp attempt was ACCEPTED by the client (EAppUpdateError=0/committed).
     // When accepted, Steam owns the launch and it will be VAC-secure; a CreateProcess fallback then
     // starts an INSECURE duplicate that overrides it ("insecure mode"). So an accepted launch must
@@ -2403,11 +2413,13 @@ static int agent_main(int argc, char** argv) {
                 }
             }
             af::tick();
+            si::tick();
             if (bGetCallback && freeLastCallback) {
                 char cb[64];
                 while (bGetCallback(pipe, cb)) {
                     int cbid = *(int*) (cb + 4);
                     af::on_callback(cb);   // persona / chat callbacks (no-op when the relay is off)
+                    si::on_callback(cb);   // Steam Input device (re)connects → re-activate (no-op when off)
                     if (cbid == kCbUserAchievementStored) {
                         // UserAchievementStored_t (pack 8): uint64 m_nGameID@0,
                         // bool m_bGroupAchievement@8, char m_rgchAchievementName[128]@9.
