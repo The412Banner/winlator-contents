@@ -1064,6 +1064,13 @@
     "versionName": "11.0-20260703-x86_64"
   },
   {
+    "type": "Proton",
+    "verName": "Proton-CachyOS-11.0-20261005-arm64ec (v13)",
+    "verCode": "13",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261004-v13/proton-cachyos-11.0-20261005-arm64ec.wcp",
+    "versionName": "11.0-20261005-arm64ec"
+  },
+  {
     "type": "FEXCore",
     "verName": "FEXCore-2608-stable",
     "verCode": "0",
