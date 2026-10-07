@@ -1150,18 +1150,6 @@
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2610-PPA-unix.wcp"
   },
   {
-    "type": "FEXCore",
-    "verName": "FEXCore-2610-PPA-rebuild",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2610-PPA-rebuild.wcp"
-  },
-  {
-    "type": "FEXCore",
-    "verName": "FEXCore-2610-PPA-rebuild-unix",
-    "verCode": "0",
-    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/FexCore/FEXCore-2610-PPA-rebuild-unix.wcp"
-  },
-  {
     "type": "D7VK",
     "verName": "v2.1-bc3b29b9e-nightly",
     "verCode": "0",
