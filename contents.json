@@ -229,6 +229,12 @@
   },
   {
     "type": "DXVK",
+    "verName": "dxvk-sarek-v1.13.0-d3d10fix",
+    "verCode": "1",
+    "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/DXVK-SAREK/dxvk-sarek-v1.13.0-d3d10fix.wcp"
+  },
+  {
+    "type": "DXVK",
     "verName": "dxvk-sarek-v1.13.0",
     "verCode": "0",
     "remoteUrl": "https://github.com/The412Banner/Nightlies/releases/download/DXVK-SAREK/dxvk-sarek-v1.13.0.wcp"
