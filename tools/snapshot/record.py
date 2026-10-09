@@ -254,22 +254,60 @@ def wait_wine(env, timeout):
         time.sleep(3)
 
 
-def extract_installer(installer, dest):
+NESTED_SUFFIXES = (".7z", ".zip", ".cab", ".exe", ".msi", ".rar", ".xz", ".gz", ".tar")
+
+
+def open_nested(dest, depth=0):
+    """Archives inside an extraction (K-Lite carries its filters as 7-Zip payloads) are opened in
+    place, one folder per archive, two levels deep."""
+    if depth > 1 or not shutil.which("7z"):
+        return 0
+    opened = 0
+    for path in sorted(p for p in dest.rglob("*") if p.is_file() and p.suffix.lower() in NESTED_SUFFIXES):
+        if path.name.endswith(".nested") or path.stat().st_size < 1024:
+            continue
+        probe = run(["7z", "l", "-ba", str(path)], timeout=300)
+        if probe.returncode != 0 or not probe.stdout.strip():
+            continue
+        folder = path.with_name(path.name + ".nested")
+        folder.mkdir(exist_ok=True)
+        run(["7z", "x", "-y", "-bd", "-bso0", "-bsp0", "-o" + str(folder), str(path)], timeout=1800)
+        if any(folder.rglob("*")):
+            opened += 1 + open_nested(folder, depth + 1)
+        else:
+            shutil.rmtree(folder, ignore_errors=True)
+    return opened
+
+
+def extract_installer(installer, dest, notes):
     """Opens the installer with innoextract or 7-Zip; returns {sha256: relative path} of what came out."""
     found = {}
     tried = []
     if shutil.which("innoextract"):
         tried.append("innoextract")
+        listing = run(["innoextract", "-l", str(installer)], timeout=600)
+        said = (listing.stderr + listing.stdout).strip().splitlines()
+        warnings = [line for line in said if "warning" in line.lower() or "error" in line.lower()]
+        print("   innoextract: %d listed, %s" % (sum(1 for line in said if line.startswith(" - ")), "; ".join(warnings[:3]) or "no warnings"), flush=True)
+        if warnings:
+            notes.append("innoextract: " + "; ".join(warnings[:3]))
         result = run(["innoextract", "-q", "-m", "-d", str(dest), str(installer)], timeout=1800)
         if result.returncode != 0 or not any(dest.rglob("*")):
+            notes.append("innoextract extracted nothing (exit %s)" % result.returncode)
             shutil.rmtree(dest, ignore_errors=True)
             dest.mkdir(parents=True, exist_ok=True)
     if not any(dest.rglob("*")) and shutil.which("7z"):
         tried.append("7z")
-        run(["7z", "x", "-y", "-bd", "-bso0", "-bsp0", "-o" + str(dest), str(installer)], timeout=1800)
+        result = run(["7z", "x", "-y", "-bd", "-bso0", "-bsp0", "-o" + str(dest), str(installer)], timeout=1800)
+        if not any(dest.rglob("*")):
+            notes.append("7-Zip extracted nothing (exit %s)" % result.returncode)
+    top = sum(1 for p in dest.rglob("*") if p.is_file())
+    nested = open_nested(dest)
     for path in dest.rglob("*"):
         if path.is_file():
             found.setdefault(sha256_of(path), path.relative_to(dest).as_posix())
+    print("   extraction: %d files at the top, %d nested archives opened, %d files in all" % (top, nested, len(found)), flush=True)
+    notes.append("extraction: %d files, %d nested archives opened (%s)" % (len(found), nested, ", ".join(tried) or "no extractor"))
     return found, tried
 
 
@@ -340,7 +378,7 @@ def main():
     print("== opening the installer to find the placed files inside it", flush=True)
     extract_dir = Path(args.extract) if args.extract else work / "x"
     extract_dir.mkdir(parents=True, exist_ok=True)
-    inside, tried = extract_installer(installer, extract_dir)
+    inside, tried = extract_installer(installer, extract_dir, notes)
 
     files, inline_total, missing = [], 0, 0
     for rel in sorted(placed):
