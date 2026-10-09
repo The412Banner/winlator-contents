@@ -8,6 +8,11 @@ name: Record component snapshots
 # Output per component: <name>.snapshot.json + <name>.summary.md on one release.
 
 on:
+  # Runs on pushes to the recorder's own branch too, since GitHub only lets a workflow be
+  # dispatched once it exists on the default branch; the push run takes the defaults below.
+  push:
+    branches: [feat/component-snapshots]
+    paths: ['tools/snapshot/**', '.github/workflows/component-snapshots.yml']
   workflow_dispatch:
     inputs:
       components:
@@ -55,10 +60,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p installers out
-          for name in ${{ inputs.components }}; do
+          for name in ${{ inputs.components || 'K-Lite' }}; do
             asset=$(python3 -c "import json,sys; print(json.load(open('tools/snapshot/recipes.json'))['$name']['installer'])")
             echo "::group::$name ($asset)"
-            gh release download "${{ inputs.installers_release }}" -p "$asset" -D installers --clobber
+            gh release download "${{ inputs.installers_release || 'system-libraries-v1' }}" -p "$asset" -D installers --clobber
             python3 tools/snapshot/record.py --component "$name" --installer "installers/$asset" --out out
             echo "::endgroup::"
           done
@@ -70,7 +75,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          tag='${{ inputs.release }}'
+          tag='${{ inputs.release || 'component-snapshots-v1' }}'
           if ! gh release view "$tag" >/dev/null 2>&1; then
             gh release create "$tag" --title "Component snapshots" --notes "What each Windows component's installer leaves behind in a Wine prefix, recorded by tools/snapshot/record.py: the registry values it writes and the files it places, mapped back into the vendor's own installer. Read by the apps' Windows components page; one <name>.snapshot.json and <name>.summary.md per component." --latest=false
           fi
