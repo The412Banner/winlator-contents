@@ -1,0 +1,83 @@
+name: Record component snapshots
+
+# Runs a Windows component's installer once, unattended, in a fresh Wine prefix on an x86 runner
+# and records what it left behind: the registry values it wrote (the point: self-registering
+# DLLs decide their own entries at run time) and the files it placed, each mapped back to where
+# the same bytes sit inside the vendor's installer (innoextract / 7-Zip), so a device can pull them
+# from that installer rather than from a copy hosted here. Recipes: tools/snapshot/recipes.json.
+# Output per component: <name>.snapshot.json + <name>.summary.md on one release.
+
+on:
+  workflow_dispatch:
+    inputs:
+      components:
+        description: 'Space-separated component names (keys of tools/snapshot/recipes.json)'
+        required: true
+        default: 'K-Lite'
+      release:
+        description: 'Release tag to publish to (created if missing)'
+        required: true
+        default: 'component-snapshots-v1'
+      installers_release:
+        description: 'Release the installers are downloaded from'
+        required: true
+        default: 'system-libraries-v1'
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Wine and the extractors
+        run: |
+          set -euo pipefail
+          sudo dpkg --add-architecture i386
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends wine wine64 wine32:i386 xvfb p7zip-full \
+            cmake build-essential libboost-iostreams-dev libboost-filesystem-dev libboost-date-time-dev \
+            libboost-system-dev libboost-program-options-dev liblzma-dev >/dev/null
+          wine --version
+          # innoextract from its main branch: the 1.9 release does not read Inno Setup 6.4 (K-Lite).
+          git clone -q --depth 1 https://github.com/dscharrer/innoextract.git /tmp/innoextract
+          cmake -S /tmp/innoextract -B /tmp/innoextract/build -DCMAKE_BUILD_TYPE=Release -DUSE_LZMA=ON >/dev/null
+          cmake --build /tmp/innoextract/build -j"$(nproc)" >/dev/null
+          sudo install -m755 /tmp/innoextract/build/innoextract /usr/local/bin/innoextract
+          innoextract --version | head -1
+
+      - name: Record
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p installers out
+          for name in ${{ inputs.components }}; do
+            asset=$(python3 -c "import json,sys; print(json.load(open('tools/snapshot/recipes.json'))['$name']['installer'])")
+            echo "::group::$name ($asset)"
+            gh release download "${{ inputs.installers_release }}" -p "$asset" -D installers --clobber
+            python3 tools/snapshot/record.py --component "$name" --installer "installers/$asset" --out out
+            echo "::endgroup::"
+          done
+          ls -l out
+          for f in out/*.summary.md; do echo "----- $f"; cat "$f"; done >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag='${{ inputs.release }}'
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --title "Component snapshots" --notes "What each Windows component's installer leaves behind in a Wine prefix, recorded by tools/snapshot/record.py: the registry values it writes and the files it places, mapped back into the vendor's own installer. Read by the apps' Windows components page; one <name>.snapshot.json and <name>.summary.md per component." --latest=false
+          fi
+          gh release upload "$tag" out/*.snapshot.json out/*.summary.md --clobber
+
+      - name: Keep the recordings as an artifact too
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots
+          path: out/

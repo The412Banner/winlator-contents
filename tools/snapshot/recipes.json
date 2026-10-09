@@ -1,0 +1,41 @@
+{
+  "_": "How each installer is run silently in a fresh Wine prefix to record what it leaves behind (tools/snapshot/record.py). 'installer' names the asset on the system-libraries-v1 release; 'args' are the installer's own unattended switches; 'arch' is the Wine prefix (win64 unless the installer refuses one); 'timeout' seconds before the run is killed; 'dll_overrides' Wine overrides for the run itself (never recorded).",
+  "K-Lite": {
+    "installer": "K-Lite.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 900,
+    "notes": "Inno Setup 6.4. The pack registers its DirectShow filters (LAV, ffdshow, madVR...) with regsvr32 during setup; those CLSID / filter entries are the point of the recording."
+  },
+  "lavfilters741": {
+    "installer": "lavfilters741.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 600
+  },
+  "lavfilters702": {
+    "installer": "lavfilters702.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 600
+  },
+  "ffdshow": {
+    "installer": "ffdshow.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 600
+  },
+  "dirac": {
+    "installer": "dirac.exe",
+    "args": ["/S"],
+    "arch": "win64",
+    "timeout": 300
+  },
+  "quicktime72": {
+    "installer": "quicktime72.exe",
+    "args": ["/qn", "ALLUSERS=1", "DESKTOP_SHORTCUTS=0", "QTTaskRunFlags=0", "QTINFO.BISQTPRO=1", "SCHEDULE_ASUW=0", "REBOOT_REQUIRED=No"],
+    "arch": "win64",
+    "timeout": 900,
+    "dll_overrides": "winemenubuilder.exe=d"
+  }
+}

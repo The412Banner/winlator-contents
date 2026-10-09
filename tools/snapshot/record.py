@@ -1,0 +1,408 @@
+#!/usr/bin/env python3
+"""Records what a Windows installer leaves behind in a Wine prefix, without keeping the installer's files.
+
+record.py --component NAME --installer FILE --out DIR [--recipes recipes.json] [--extract DIR]
+
+A fresh 64-bit prefix is made, its files and registry noted, the installer run unattended (the
+switches in recipes.json), and the prefix noted again. The difference is the recording:
+
+  <out>/<component>.snapshot.json
+      "files":    every file the installer placed under drive_c, with size and sha256, and where
+                  the same bytes sit inside the installer when an extractor (innoextract, 7-Zip)
+                  can reach them ("source"), so a device pulls them from the vendor's own
+                  installer instead of a copy we host. A file the installer generated (no
+                  matching bytes inside it) is carried inline when small ("data", base64), else
+                  listed as "missing" for the recipe to deal with.
+      "registry": every value the installer added or changed, in the shape droiddeck-wincomponents
+                  writes into a prefix (hive, key, name, type, data), the user's folder rewritten
+                  to Proton's steamuser and Wine's own bookkeeping left out.
+  <out>/<component>.summary.md   a readable account of the run.
+
+The point of the recording is the registry: a self-registering DLL (a DirectShow filter) decides
+its own CLSID and filter entries at run time, so nothing but running it tells us what they are.
+"""
+import argparse
+import base64
+import hashlib
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+INLINE_FILE_LIMIT = 256 * 1024
+INLINE_TOTAL_LIMIT = 2 * 1024 * 1024
+
+# Folders whose contents are the installer's own litter, not the product.
+SKIP_DIRS = ("windows/temp", "windows/installer", "users/*/temp", "users/*/appdata/local/temp",
+             "users/*/appdata/local/microsoft/windows/inetcache", "programdata/microsoft/windows/start menu",
+             "users/*/appdata/roaming/microsoft/windows/start menu", "users/*/desktop", "users/*/start menu",
+             "windows/logs", "windows/prefetch")
+SKIP_FILE_SUFFIXES = (".log", ".lnk", ".url", ".tmp")
+
+# Registry keys Wine or the prefix maintain by themselves between two snapshots.
+SKIP_KEY_PREFIXES = (
+    "software\\wine\\", "software\\microsoft\\windows\\currentversion\\explorer\\",
+    "software\\microsoft\\windows nt\\currentversion\\profilelist", "system\\currentcontrolset\\control\\session manager\\environment\\",
+    "software\\microsoft\\windows\\currentversion\\installer\\userdata", "software\\microsoft\\cryptography\\",
+    "software\\microsoft\\windows\\currentversion\\shell extensions\\cached", "software\\classes\\local settings\\",
+    "software\\microsoft\\windows\\currentversion\\explorer", "software\\microsoft\\rpc\\",
+    "software\\microsoft\\windows nt\\currentversion\\fonts", "software\\microsoft\\windows nt\\currentversion\\winlogon",
+    "control panel\\", "environment", "volatile environment", "software\\microsoft\\windows\\currentversion\\uninstall\\{",
+)
+SKIP_VALUE_NAMES = {"installdate", "installtime", "lastwritetime", "installsource", "sourcelist", "lastusedsource",
+                    "estimatedsize", "modified", "installlocation"}
+
+
+def sha256_of(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as source:
+        for chunk in iter(lambda: source.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def run(cmd, env=None, timeout=None, check=False):
+    return subprocess.run(cmd, env=env, timeout=timeout, check=check, capture_output=True, text=True, errors="replace")
+
+
+# ---------------------------------------------------------------- files
+
+SKIP_DIR_PATTERNS = [re.compile("^" + re.escape(p).replace("\\*", "[^/]+") + "(/|$)") for p in SKIP_DIRS]
+
+
+def skipped_path(rel):
+    lower = rel.lower()
+    return lower.endswith(SKIP_FILE_SUFFIXES) or any(pattern.match(lower) for pattern in SKIP_DIR_PATTERNS)
+
+
+def snapshot_files(drive_c):
+    found = {}
+    for root, dirs, files in os.walk(drive_c):
+        for name in files:
+            path = Path(root) / name
+            if path.is_symlink():
+                continue
+            rel = path.relative_to(drive_c).as_posix()
+            if skipped_path(rel):
+                continue
+            try:
+                found[rel] = (path.stat().st_size, sha256_of(path))
+            except OSError:
+                continue
+    return found
+
+
+# ---------------------------------------------------------------- registry
+
+def unescape(text):
+    out, i = [], 0
+    while i < len(text):
+        ch = text[i]
+        if ch == "\\" and i + 1 < len(text):
+            nxt = text[i + 1]
+            if nxt == "x" and i + 5 < len(text):
+                try:
+                    out.append(chr(int(text[i + 2:i + 6], 16)))
+                    i += 6
+                    continue
+                except ValueError:
+                    pass
+            out.append({"n": "\n", "r": "\r", "0": "\0", "t": "\t"}.get(nxt, nxt))
+            i += 2
+        else:
+            out.append(ch)
+            i += 1
+    return "".join(out)
+
+
+def parse_reg(path):
+    """A Wine registry file as {key: {name: raw}}; name "" is the default value; a key with no
+    values is {}. Multi-line hex values are joined."""
+    keys = {}
+    current = None
+    pending = None
+    try:
+        lines = Path(path).read_text("utf-8", errors="replace").split("\n")
+    except FileNotFoundError:
+        return keys
+    for raw_line in lines:
+        line = raw_line.rstrip("\r")
+        if pending is not None:
+            pending += line.strip()
+            if pending.endswith("\\"):
+                pending = pending[:-1]
+                continue
+            name, raw = pending_name, pending
+            keys[current][name] = raw
+            pending = None
+            continue
+        if not line or line.startswith(";") or line.startswith("#"):
+            continue
+        if line.startswith("["):
+            end = line.rfind("]")
+            key = line[1:end].replace("\\\\", "\\")
+            current = key
+            keys.setdefault(current, {})
+            continue
+        if current is None:
+            continue
+        if line.startswith("@="):
+            name, raw = "", line[2:]
+        elif line.startswith('"'):
+            end = 1
+            while end < len(line):
+                if line[end] == "\\":
+                    end += 2
+                    continue
+                if line[end] == '"':
+                    break
+                end += 1
+            name = unescape(line[1:end])
+            raw = line[end + 2:] if line[end + 1:end + 2] == "=" else ""
+        else:
+            continue
+        if raw.endswith("\\"):
+            pending, pending_name = raw[:-1], name
+            continue
+        keys[current][name] = raw
+    return keys
+
+
+def decode(raw):
+    """A Wine registry value as (type, data) in droiddeck-wincomponents' vocabulary, or None."""
+    if raw.startswith('"') and raw.endswith('"'):
+        return "sz", unescape(raw[1:-1])
+    if raw.startswith("dword:"):
+        try:
+            return "dword", int(raw[6:], 16)
+        except ValueError:
+            return None
+    if raw.startswith("str(2):") or raw.startswith("str(7):"):
+        text = unescape(raw[7:].strip('"'))
+        return ("expand_sz", text) if raw.startswith("str(2)") else ("multi_sz", [s for s in text.split("\0") if s])
+    match = re.match(r"hex(\((\d+)\))?:(.*)$", raw)
+    if match:
+        kind = int(match.group(2) or 3)
+        data = bytes.fromhex(match.group(3).replace(",", "").replace("\\", ""))
+        if kind in (2, 7, 1):
+            text = data.decode("utf-16-le", errors="replace")
+            if kind == 7:
+                return "multi_sz", [s for s in text.split("\0") if s]
+            return ("expand_sz" if kind == 2 else "sz"), text.rstrip("\0")
+        if kind == 4 and len(data) == 4:
+            return "dword", int.from_bytes(data, "little")
+        return "binary", data.hex()
+    return None
+
+
+def skipped_key(key):
+    lower = key.lower()
+    return any(lower.startswith(prefix) or lower == prefix.rstrip("\\") for prefix in SKIP_KEY_PREFIXES) or "\\volatile" in lower
+
+
+def diff_registry(before, after, hive, home_user):
+    """The values in [after] that [before] lacks or has differently, as registry.json entries."""
+    entries = []
+    home_pattern = re.compile(re.escape("C:\\users\\" + home_user), re.IGNORECASE) if home_user else None
+    for key, values in after.items():
+        if skipped_key(key):
+            continue
+        old = before.get(key)
+        if old is None and not values:
+            entries.append({"hive": hive, "key": key, "type": "key"})
+            continue
+        for name, raw in values.items():
+            if name.lower() in SKIP_VALUE_NAMES:
+                continue
+            if old is not None and old.get(name) == raw:
+                continue
+            decoded = decode(raw)
+            if decoded is None:
+                continue
+            kind, data = decoded
+            if isinstance(data, str):
+                if "Z:\\" in data or "z:\\" in data:
+                    continue
+                if home_pattern:
+                    data = home_pattern.sub("C:\\\\users\\\\steamuser", data)
+            elif isinstance(data, list) and home_pattern:
+                data = [home_pattern.sub("C:\\\\users\\\\steamuser", item) for item in data]
+            entries.append({"hive": hive, "key": key, "name": name, "type": kind, "data": data})
+    return entries
+
+
+# ---------------------------------------------------------------- the run
+
+def wine_env(prefix, arch, overrides):
+    env = dict(os.environ)
+    env.update({"WINEPREFIX": str(prefix), "WINEARCH": arch, "WINEDEBUG": "-all",
+                "WINEDLLOVERRIDES": "winemenubuilder.exe=d" + (";" + overrides if overrides else "")})
+    env.pop("DISPLAY", None)
+    return env
+
+
+def wait_wine(env, timeout):
+    try:
+        subprocess.run(["wineserver", "-w"], env=env, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        subprocess.run(["wineserver", "-k"], env=env)
+        time.sleep(3)
+
+
+def extract_installer(installer, dest):
+    """Opens the installer with innoextract or 7-Zip; returns {sha256: relative path} of what came out."""
+    found = {}
+    tried = []
+    if shutil.which("innoextract"):
+        tried.append("innoextract")
+        result = run(["innoextract", "-q", "-m", "-d", str(dest), str(installer)], timeout=1800)
+        if result.returncode != 0 or not any(dest.rglob("*")):
+            shutil.rmtree(dest, ignore_errors=True)
+            dest.mkdir(parents=True, exist_ok=True)
+    if not any(dest.rglob("*")) and shutil.which("7z"):
+        tried.append("7z")
+        run(["7z", "x", "-y", "-bd", "-bso0", "-bsp0", "-o" + str(dest), str(installer)], timeout=1800)
+    for path in dest.rglob("*"):
+        if path.is_file():
+            found.setdefault(sha256_of(path), path.relative_to(dest).as_posix())
+    return found, tried
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--component", required=True)
+    parser.add_argument("--installer", required=True)
+    parser.add_argument("--out", required=True)
+    parser.add_argument("--recipes", default=str(Path(__file__).with_name("recipes.json")))
+    parser.add_argument("--extract", help="where the installer's own extraction goes (default: a temp dir)")
+    args = parser.parse_args()
+
+    recipes = json.loads(Path(args.recipes).read_text("utf-8"))
+    recipe = recipes.get(args.component)
+    if not recipe:
+        print("no recipe for %s" % args.component, file=sys.stderr)
+        return 2
+    installer = Path(args.installer).resolve()
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    arch = recipe.get("arch", "win64")
+    timeout = int(recipe.get("timeout", 600))
+    notes = []
+
+    work = Path(tempfile.mkdtemp(prefix="snapshot-"))
+    prefix = work / "pfx"
+    env = wine_env(prefix, arch, recipe.get("dll_overrides", ""))
+    print("== making a fresh %s prefix" % arch, flush=True)
+    result = run(["wineboot", "-u"], env=env, timeout=600)
+    wait_wine(env, 300)
+    if result.returncode != 0:
+        print(result.stderr[-800:], file=sys.stderr)
+        return 1
+    wine_version = run(["wine", "--version"], env=env).stdout.strip()
+    drive_c = prefix / "drive_c"
+    home_user = next((p.name for p in (drive_c / "users").iterdir() if p.is_dir() and p.name.lower() not in ("public", "default")), "")
+
+    print("== noting the prefix before", flush=True)
+    files_before = snapshot_files(drive_c)
+    reg_before = {"HKLM": parse_reg(prefix / "system.reg"), "HKCU": parse_reg(prefix / "user.reg")}
+
+    print("== running %s %s" % (installer.name, " ".join(recipe.get("args", []))), flush=True)
+    started = time.time()
+    cmd = ["xvfb-run", "-a", "-s", "-screen 0 1280x800x24", "wine", str(installer)] + recipe.get("args", [])
+    try:
+        result = run(cmd, env=env, timeout=timeout)
+        status = result.returncode
+        if result.stderr.strip():
+            notes.append("installer stderr: " + result.stderr.strip()[-500:])
+    except subprocess.TimeoutExpired:
+        status = "timeout"
+        notes.append("the installer was still running after %d s and was killed" % timeout)
+    wait_wine(env, 180)
+    subprocess.run(["wineserver", "-k"], env=env)
+    time.sleep(2)
+    elapsed = int(time.time() - started)
+    print("== installer exit %s after %d s" % (status, elapsed), flush=True)
+
+    print("== noting the prefix after", flush=True)
+    files_after = snapshot_files(drive_c)
+    reg_after = {"HKLM": parse_reg(prefix / "system.reg"), "HKCU": parse_reg(prefix / "user.reg")}
+
+    placed = {rel: info for rel, info in files_after.items() if files_before.get(rel) != info}
+    removed = sorted(rel for rel in files_before if rel not in files_after)
+    registry = diff_registry(reg_before["HKLM"], reg_after["HKLM"], "HKLM", home_user) + \
+        diff_registry(reg_before["HKCU"], reg_after["HKCU"], "HKCU", home_user)
+
+    print("== opening the installer to find the placed files inside it", flush=True)
+    extract_dir = Path(args.extract) if args.extract else work / "x"
+    extract_dir.mkdir(parents=True, exist_ok=True)
+    inside, tried = extract_installer(installer, extract_dir)
+
+    files, inline_total, missing = [], 0, 0
+    for rel in sorted(placed):
+        size, digest = placed[rel]
+        entry = {"path": rel, "size": size, "sha256": digest}
+        if digest in inside:
+            entry["source"] = inside[digest]
+        elif size <= INLINE_FILE_LIMIT and inline_total + size <= INLINE_TOTAL_LIMIT:
+            entry["data"] = base64.b64encode((drive_c / rel).read_bytes()).decode("ascii")
+            inline_total += size
+        else:
+            entry["missing"] = True
+            missing += 1
+        files.append(entry)
+
+    snapshot = {
+        "schema": 1,
+        "component": args.component,
+        "recorded": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "wine": wine_version, "arch": arch,
+        "installer": {"name": installer.name, "size": installer.stat().st_size, "sha256": sha256_of(installer),
+                      "args": recipe.get("args", []), "exit": status, "seconds": elapsed, "extractors": tried},
+        "stats": {"files": len(files), "from_installer": sum(1 for f in files if "source" in f),
+                  "inline": sum(1 for f in files if "data" in f), "missing": missing,
+                  "removed": len(removed), "registry": len(registry)},
+        "files": files, "removed": removed, "registry": registry, "notes": notes,
+    }
+    (out / ("%s.snapshot.json" % args.component)).write_text(json.dumps(snapshot, indent=1), "utf-8")
+
+    by_hive = {}
+    for value in registry:
+        by_hive.setdefault(value["hive"], set()).add(value["key"].split("\\")[0] + "\\" + value["key"].split("\\")[1] if "\\" in value["key"] else value["key"])
+    summary = ["# %s" % args.component, "",
+               "Recorded %s on %s (%s prefix). Installer `%s`, exit %s after %d s." % (
+                   snapshot["recorded"], wine_version, arch, installer.name, status, elapsed), "",
+               "| | |", "|---|---|",
+               "| files placed | %d |" % len(files),
+               "| of which found inside the installer | %d |" % snapshot["stats"]["from_installer"],
+               "| carried inline (generated, small) | %d |" % snapshot["stats"]["inline"],
+               "| missing (generated, large) | %d |" % missing,
+               "| files removed | %d |" % len(removed),
+               "| registry values | %d |" % len(registry), "",
+               "## Where the files went", ""]
+    folders = {}
+    for entry in files:
+        top = "/".join(entry["path"].split("/")[:3])
+        folders[top] = folders.get(top, 0) + 1
+    summary += ["- `%s` · %d" % (top, n) for top, n in sorted(folders.items(), key=lambda item: -item[1])[:25]]
+    summary += ["", "## Registry keys touched (top two levels)", ""]
+    for hive, keys in sorted(by_hive.items()):
+        for key in sorted(keys)[:40]:
+            summary.append("- %s\\%s" % (hive, key))
+    if missing:
+        summary += ["", "## Missing (not inside the installer, too large to carry)", ""]
+        summary += ["- `%s` (%d bytes)" % (f["path"], f["size"]) for f in files if f.get("missing")][:50]
+    if notes:
+        summary += ["", "## Notes", ""] + ["- " + n for n in notes]
+    (out / ("%s.summary.md" % args.component)).write_text("\n".join(summary) + "\n", "utf-8")
+    print("\n".join(summary[:12]), flush=True)
+    shutil.rmtree(work, ignore_errors=True)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
