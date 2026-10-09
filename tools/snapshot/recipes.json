@@ -5,7 +5,9 @@
     "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
     "arch": "win64",
     "timeout": 900,
-    "notes": "Inno Setup 6.4. The pack registers its DirectShow filters (LAV, ffdshow, madVR...) with regsvr32 during setup; those CLSID / filter entries are the point of the recording."
+    "host_files": true,
+    "licence": "The pack's installer is Inno Setup 6.4.2, which no extractor reads yet, so the placed files travel with the recording. What this edition places is open source (LAV Filters, MPC-HC, MPC Video Renderer, DirectVobSub: GPL) plus Icaros, which its author distributes freely.",
+    "notes": "The pack registers its DirectShow filters with regsvr32 during setup; those CLSID / filter entries are the point of the recording."
   },
   "lavfilters741": {
     "installer": "lavfilters741.exe",

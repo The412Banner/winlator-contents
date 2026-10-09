@@ -53,6 +53,7 @@ SKIP_KEY_PREFIXES = (
     "software\\microsoft\\windows\\currentversion\\explorer", "software\\microsoft\\rpc\\",
     "software\\microsoft\\windows nt\\currentversion\\fonts", "software\\microsoft\\windows nt\\currentversion\\winlogon",
     "control panel\\", "environment", "volatile environment", "software\\microsoft\\windows\\currentversion\\uninstall\\{",
+    "console", "console\\",
 )
 SKIP_VALUE_NAMES = {"installdate", "installtime", "lastwritetime", "installsource", "sourcelist", "lastusedsource",
                     "estimatedsize", "modified", "installlocation"}
@@ -380,11 +381,29 @@ def main():
     extract_dir.mkdir(parents=True, exist_ok=True)
     inside, tried = extract_installer(installer, extract_dir, notes)
 
+    # When the installer cannot be opened (Inno Setup newer than innoextract reads, K-Lite) and
+    # the recipe says its contents may be redistributed, the placed files travel as an archive
+    # beside the recording instead of being pulled from the installer on the device.
+    host_files = bool(recipe.get("host_files")) or (not inside and recipe.get("host_files") is None and False)
+    files_archive = None
+    if host_files:
+        archive = out / ("%s.files.tar.xz" % args.component)
+        with tempfile.TemporaryDirectory(prefix="files-") as staging:
+            for rel in placed:
+                target = Path(staging) / "drive_c" / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(drive_c / rel, target)
+            run(["tar", "-C", staging, "-cJf", str(archive), "drive_c"], timeout=1800, check=True)
+        files_archive = {"name": archive.name, "size": archive.stat().st_size, "sha256": sha256_of(archive),
+                         "licence": recipe.get("licence", "")}
+        print("   files archive: %s (%d bytes)" % (archive.name, files_archive["size"]), flush=True)
     files, inline_total, missing = [], 0, 0
     for rel in sorted(placed):
         size, digest = placed[rel]
         entry = {"path": rel, "size": size, "sha256": digest}
-        if digest in inside:
+        if host_files:
+            entry["archived"] = True
+        elif digest in inside:
             entry["source"] = inside[digest]
         elif size <= INLINE_FILE_LIMIT and inline_total + size <= INLINE_TOTAL_LIMIT:
             entry["data"] = base64.b64encode((drive_c / rel).read_bytes()).decode("ascii")
@@ -402,8 +421,9 @@ def main():
         "installer": {"name": installer.name, "size": installer.stat().st_size, "sha256": sha256_of(installer),
                       "args": recipe.get("args", []), "exit": status, "seconds": elapsed, "extractors": tried},
         "stats": {"files": len(files), "from_installer": sum(1 for f in files if "source" in f),
-                  "inline": sum(1 for f in files if "data" in f), "missing": missing,
-                  "removed": len(removed), "registry": len(registry)},
+                  "inline": sum(1 for f in files if "data" in f), "archived": sum(1 for f in files if f.get("archived")),
+                  "missing": missing, "removed": len(removed), "registry": len(registry)},
+        "files_archive": files_archive,
         "files": files, "removed": removed, "registry": registry, "notes": notes,
     }
     (out / ("%s.snapshot.json" % args.component)).write_text(json.dumps(snapshot, indent=1), "utf-8")
@@ -417,6 +437,7 @@ def main():
                "| | |", "|---|---|",
                "| files placed | %d |" % len(files),
                "| of which found inside the installer | %d |" % snapshot["stats"]["from_installer"],
+               "| carried in the files archive beside this recording | %d |" % snapshot["stats"]["archived"],
                "| carried inline (generated, small) | %d |" % snapshot["stats"]["inline"],
                "| missing (generated, large) | %d |" % missing,
                "| files removed | %d |" % len(removed),

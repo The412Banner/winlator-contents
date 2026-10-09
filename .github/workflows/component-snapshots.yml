@@ -79,7 +79,7 @@ jobs:
           if ! gh release view "$tag" >/dev/null 2>&1; then
             gh release create "$tag" --title "Component snapshots" --notes "What each Windows component's installer leaves behind in a Wine prefix, recorded by tools/snapshot/record.py: the registry values it writes and the files it places, mapped back into the vendor's own installer. Read by the apps' Windows components page; one <name>.snapshot.json and <name>.summary.md per component." --latest=false
           fi
-          gh release upload "$tag" out/*.snapshot.json out/*.summary.md --clobber
+          gh release upload "$tag" out/*.snapshot.json out/*.summary.md $(ls out/*.files.tar.xz 2>/dev/null) --clobber
 
       - name: Keep the recordings as an artifact too
         uses: actions/upload-artifact@v4
