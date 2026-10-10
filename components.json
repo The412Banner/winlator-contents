@@ -4,7 +4,7 @@
   "format": "bottles-dependency",
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/",
   "release": "system-libraries-v1",
-  "count": 120,
+  "count": 123,
   "note": "Type-6 Wine dependency components for Bannerlator's Components installer. Step URLs rewritten to the winlator-contents mirror; status=needs-upstream uses the un-mirrored Win7-SP1 packages, status=pending-manual awaits a re-sourced binary.",
   "components": [
     {
@@ -27,8 +27,8 @@
     },
     {
       "name": "VulkanRT",
-      "description": "Cumulative Security Update for Internet Explorer 8",
-      "provider": "Microsoft",
+      "description": "Vulkan Runtime 1.3.283.0",
+      "provider": "LunarG",
       "dependencies": [],
       "status": "ready",
       "steps": [
