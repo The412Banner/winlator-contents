@@ -11,7 +11,7 @@ on:
   # Runs on pushes to the recorder's own branch too, since GitHub only lets a workflow be
   # dispatched once it exists on the default branch; the push run takes the defaults below.
   push:
-    branches: [feat/component-snapshots]
+    branches: [feat/win32-recordings]
     paths: ['tools/snapshot/**', '.github/workflows/component-snapshots.yml']
   workflow_dispatch:
     inputs:
@@ -30,6 +30,10 @@ on:
 
 permissions:
   contents: write
+
+env:
+  # What a push to the recorder's branch records (a dispatch names its own list).
+  PUSH_COMPONENTS: dotnet20 dotnet20sp1 dotnet35 dotnet35sp1 jet40 dirac art2kmin webview2 gfw
 
 jobs:
   record:
@@ -60,7 +64,7 @@ jobs:
         run: |
           set -uo pipefail
           mkdir -p installers out
-          names='${{ inputs.components || 'all' }}'
+          names='${{ inputs.components || env.PUSH_COMPONENTS }}'
           if [ "$names" = all ]; then
             names=$(python3 -c "import json; print(' '.join(k for k in json.load(open('tools/snapshot/recipes.json')) if k != '_'))")
           fi

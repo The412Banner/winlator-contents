@@ -237,6 +237,98 @@ def diff_registry(before, after, hive, home_user):
     return entries
 
 
+# ---------------------------------------------------------------- 32-bit recordings in the 64-bit layout
+
+# A 32-bit installer that refuses a 64-bit prefix (.NET 2.0 and 3.5, Jet) is recorded in a win32
+# prefix, then translated into what the same installer leaves on 64-bit Windows: files move the
+# way the file-system redirector moves them (system32 -> syswow64, Program Files -> Program
+# Files (x86)), and the registry is replayed into a fresh 64-bit prefix through Wine's own 32-bit
+# regedit, so Wine's WOW64 registry redirection (Wow6432Node, the Classes subkeys) decides where
+# each key lands rather than a hand-written table.
+SYSTEM32_SHARED = ("catroot", "catroot2", "driverstore", "drivers", "etc", "logfiles", "spool")
+
+
+def remap_file(rel):
+    parts = rel.split("/")
+    lower = [p.lower() for p in parts]
+    if lower[:2] == ["windows", "system32"] and not (len(lower) > 2 and lower[2] in SYSTEM32_SHARED):
+        return "/".join(["windows", "syswow64"] + parts[2:])
+    if lower[:1] == ["program files"]:
+        return "/".join(["Program Files (x86)"] + parts[1:])
+    if lower[:2] == ["programdata", "microsoft"] or lower[:1] == ["users"]:
+        return rel
+    return rel
+
+
+def reg_escape(text):
+    return text.replace("\\", "\\\\").replace('"', '\\"')
+
+
+def encode_value(kind, data):
+    if kind == "sz":
+        return '"%s"' % reg_escape(data)
+    if kind == "dword":
+        return "dword:%08x" % int(data)
+    if kind == "expand_sz":
+        return "hex(2):" + ",".join("%02x" % b for b in (data + "\0").encode("utf-16-le"))
+    if kind == "multi_sz":
+        return "hex(7):" + ",".join("%02x" % b for b in ("\0".join(list(data) + [""]) + "\0").encode("utf-16-le"))
+    if kind == "binary":
+        return "hex:" + ",".join(data[i:i + 2] for i in range(0, len(data), 2))
+    return None
+
+
+def write_reg(entries, path):
+    """The recorded values as a .reg file regedit imports (UTF-16, as Windows writes them)."""
+    roots = {"HKLM": "HKEY_LOCAL_MACHINE", "HKCU": "HKEY_CURRENT_USER"}
+    lines = ["Windows Registry Editor Version 5.00", ""]
+    by_key = {}
+    for entry in entries:
+        by_key.setdefault((entry["hive"], entry["key"]), []).append(entry)
+    for (hive, key), values in by_key.items():
+        lines.append("[%s\\%s]" % (roots[hive], key))
+        for entry in values:
+            if entry.get("type") == "key":
+                continue
+            raw = encode_value(entry["type"], entry["data"])
+            if raw is None:
+                continue
+            lines.append(("@=%s" if entry["name"] == "" else '"%s"=%%s' % reg_escape(entry["name"])) % raw if entry["name"] else "@=" + raw)
+        lines.append("")
+    Path(path).write_text("\n".join(lines) + "\n", "utf-16")
+
+
+def replay_into_win64(entries, work, home_user, notes):
+    """Imports the 32-bit recording's registry into a fresh 64-bit prefix with Wine's 32-bit
+    regedit and records what landed, Wow6432Node and all."""
+    prefix = work / "pfx64"
+    env = wine_env(prefix, "win64", "")
+    print("== making a fresh win64 prefix to replay the registry into", flush=True)
+    result = run(["wineboot", "-u"], env=env, timeout=600)
+    wait_wine(env, 300)
+    if result.returncode != 0:
+        notes.append("the 64-bit replay prefix could not be made; registry left in the 32-bit layout")
+        return entries
+    before = {"HKLM": parse_reg(prefix / "system.reg"), "HKCU": parse_reg(prefix / "user.reg")}
+    reg_file = work / "recording.reg"
+    write_reg(entries, reg_file)
+    dos_path = "Z:" + str(reg_file.resolve()).replace("/", "\\")
+    result = run(["wine", "C:\\windows\\syswow64\\regedit.exe", "/S", dos_path], env=env, timeout=600)
+    wait_wine(env, 300)
+    subprocess.run(["wineserver", "-k"], env=env)
+    time.sleep(2)
+    if result.returncode != 0:
+        notes.append("32-bit regedit import exit %s: %s" % (result.returncode, result.stderr.strip()[-300:]))
+    after = {"HKLM": parse_reg(prefix / "system.reg"), "HKCU": parse_reg(prefix / "user.reg")}
+    replayed = diff_registry(before["HKLM"], after["HKLM"], "HKLM", home_user) + \
+        diff_registry(before["HKCU"], after["HKCU"], "HKCU", home_user)
+    wow = sum(1 for e in replayed if "wow6432node" in e["key"].lower())
+    notes.append("registry replayed through Wine's 32-bit regedit into a 64-bit prefix: %d values in, %d out, %d under Wow6432Node" % (
+        sum(1 for e in entries if e.get("type") != "key"), sum(1 for e in replayed if e.get("type") != "key"), wow))
+    print("   replay: %d values in, %d out, %d under Wow6432Node" % (len(entries), len(replayed), wow), flush=True)
+    return replayed
+
+
 # ---------------------------------------------------------------- the run
 
 def wine_env(prefix, arch, overrides):
@@ -411,6 +503,23 @@ def main():
     registry = diff_registry(reg_before["HKLM"], reg_after["HKLM"], "HKLM", home_user) + \
         diff_registry(reg_before["HKCU"], reg_after["HKCU"], "HKCU", home_user)
 
+    # Where each recorded file is read from in the recording prefix (differs from its recorded
+    # path once a 32-bit recording is moved into the 64-bit layout).
+    source_of = {rel: rel for rel in placed}
+    layout = arch
+    if arch == "win32" and recipe.get("remap", True) and (placed or registry):
+        moved = {}
+        for rel, info in placed.items():
+            target = remap_file(rel)
+            moved[target] = info
+            source_of[target] = rel
+        shifted = sum(1 for rel in placed if remap_file(rel) != rel)
+        placed = moved
+        removed = [remap_file(rel) for rel in removed]
+        registry = replay_into_win64(registry, work, home_user, notes)
+        notes.append("32-bit recording laid out as on 64-bit Windows: %d of %d files moved (syswow64, Program Files (x86))" % (shifted, len(placed)))
+        layout = "win64"
+
     print("== opening the installer to find the placed files inside it", flush=True)
     extract_dir = Path(args.extract) if args.extract else work / "x"
     extract_dir.mkdir(parents=True, exist_ok=True)
@@ -436,7 +545,7 @@ def main():
             for rel in placed:
                 target = Path(staging) / "drive_c" / rel
                 target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(drive_c / rel, target)
+                shutil.copy2(drive_c / source_of[rel], target)
             run(["tar", "-C", staging, "-cJf", str(archive), "drive_c"], timeout=1800, check=True)
         files_archive = {"name": archive.name, "size": archive.stat().st_size, "sha256": sha256_of(archive),
                          "licence": recipe.get("licence", "")}
@@ -450,7 +559,7 @@ def main():
         elif digest in inside:
             entry["source"] = inside[digest]
         elif size <= INLINE_FILE_LIMIT and inline_total + size <= INLINE_TOTAL_LIMIT:
-            entry["data"] = base64.b64encode((drive_c / rel).read_bytes()).decode("ascii")
+            entry["data"] = base64.b64encode((drive_c / source_of[rel]).read_bytes()).decode("ascii")
             inline_total += size
         else:
             entry["missing"] = True
@@ -461,7 +570,7 @@ def main():
         "schema": 1,
         "component": args.component,
         "recorded": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "wine": wine_version, "arch": arch,
+        "wine": wine_version, "arch": arch, "layout": layout,
         "installer": {"name": installer.name, "size": installer.stat().st_size, "sha256": sha256_of(installer),
                       "args": runs[0][1], "exit": status, "seconds": elapsed, "extractors": tried},
         "installers": [{"name": path.name, "size": path.stat().st_size, "sha256": sha256_of(path), "args": run_args} for path, run_args in runs],
@@ -478,8 +587,8 @@ def main():
     for value in registry:
         by_hive.setdefault(value["hive"], set()).add(value["key"].split("\\")[0] + "\\" + value["key"].split("\\")[1] if "\\" in value["key"] else value["key"])
     summary = ["# %s" % args.component, "",
-               "Recorded %s on %s (%s prefix). Installer `%s`, exit %s after %d s." % (
-                   snapshot["recorded"], wine_version, arch, installer.name, status, elapsed), "",
+               "Recorded %s on %s (%s prefix%s). Installer `%s`, exit %s after %d s." % (
+                   snapshot["recorded"], wine_version, arch, ", laid out for win64" if layout != arch else "", installer.name, status, elapsed), "",
                "| | |", "|---|---|",
                "| files placed | %d |" % len(files),
                "| of which found inside the installer | %d |" % snapshot["stats"]["from_installer"],
