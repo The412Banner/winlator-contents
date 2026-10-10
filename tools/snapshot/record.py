@@ -322,6 +322,12 @@ def replay_into_win64(entries, work, home_user, notes):
     after = {"HKLM": parse_reg(prefix / "system.reg"), "HKCU": parse_reg(prefix / "user.reg")}
     replayed = diff_registry(before["HKLM"], after["HKLM"], "HKLM", home_user) + \
         diff_registry(before["HKCU"], after["HKCU"], "HKCU", home_user)
+    # Only what the recording wrote: Wine stirs a few keys of its own in a fresh prefix meanwhile.
+    wanted = {(e["hive"], e["key"].lower()) for e in entries}
+    def recorded_key(e):
+        plain = e["key"].lower().replace("\\wow6432node", "")
+        return (e["hive"], plain) in wanted or (e["hive"], e["key"].lower()) in wanted
+    replayed = [e for e in replayed if recorded_key(e)]
     wow = sum(1 for e in replayed if "wow6432node" in e["key"].lower())
     notes.append("registry replayed through Wine's 32-bit regedit into a 64-bit prefix: %d values in, %d out, %d under Wow6432Node" % (
         sum(1 for e in entries if e.get("type") != "key"), sum(1 for e in replayed if e.get("type") != "key"), wow))
@@ -489,10 +495,34 @@ def main():
     reg_before = {"HKLM": parse_reg(prefix / "system.reg"), "HKCU": parse_reg(prefix / "user.reg")}
 
     status, elapsed = None, 0
-    for path, run_args in runs:
-        exit_code, took = run_installer(path, run_args, timeout, path.name)
-        elapsed += took
-        status = exit_code if status in (None, 0) else status
+    if recipe.get("extract_to"):
+        # No silent mode (dirac's NSIS wizard): unpack the installer where its wizard would have put
+        # the files and register the filters it would have registered, with Wine's own regsvr32.
+        target = drive_c / recipe["extract_to"]
+        target.mkdir(parents=True, exist_ok=True)
+        started_at = time.time()
+        result = run(["7z", "x", "-y", "-bso0", "-bsp0", "-o" + str(target), str(installer)], timeout=600)
+        for litter in ("$PLUGINSDIR", "$TEMP", "$R0"):
+            shutil.rmtree(target / litter, ignore_errors=True)
+        status = result.returncode
+        notes.append("unpacked into %s instead of running the wizard (no silent mode)" % recipe["extract_to"])
+        for rel in recipe.get("register", []):
+            dos = "C:\\" + rel.replace("/", "\\")
+            print("== regsvr32 %s" % dos, flush=True)
+            result = run(["xvfb-run", "-a", "-s", "-screen 0 1280x800x24", "wine", "regsvr32", "/s", dos], env=env, timeout=300)
+            wait_wine(env, 120)
+            notes.append("regsvr32 %s exit %s" % (rel, result.returncode))
+            if result.returncode != 0 and status == 0:
+                status = result.returncode
+        subprocess.run(["wineserver", "-k"], env=env)
+        time.sleep(2)
+        elapsed = int(time.time() - started_at)
+        print("== %s unpacked and registered, exit %s after %d s" % (installer.name, status, elapsed), flush=True)
+    else:
+        for path, run_args in runs:
+            exit_code, took = run_installer(path, run_args, timeout, path.name)
+            elapsed += took
+            status = exit_code if status in (None, 0) else status
 
     print("== noting the prefix after", flush=True)
     files_after = snapshot_files(drive_c)

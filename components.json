@@ -1268,6 +1268,7 @@
     },
     {
       "name": "dotnet20",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/dotnet20.snapshot.json",
       "description": "Microsoft .NET Framework 2.0",
       "provider": "Microsoft",
       "dependencies": [],
@@ -2158,6 +2159,7 @@
     },
     {
       "name": "gfw",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/gfw.snapshot.json",
       "description": "MS Games For Windows Live (xlive.dll)",
       "provider": "Microsoft",
       "dependencies": [],
