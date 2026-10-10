@@ -569,14 +569,14 @@ def main():
         # The strings the installer wrote point where it put the files; on 64-bit Windows a 32-bit
         # installer resolves "Program Files" to "Program Files (x86)" and writes that. (system32
         # may stay: the file-system redirector sends a 32-bit reader to syswow64 by itself.)
-        program_files = re.compile(r"([A-Za-z]:\\\\)Program Files\\\\(?!\\(x86\\))", re.IGNORECASE)
+        program_files = re.compile(r"([A-Za-z]:\\)Program Files\\(?!\(x86\))", re.IGNORECASE)
         rewritten = 0
         for entry in registry:
             data = entry.get("data")
             if isinstance(data, str):
-                new = program_files.sub(r"\1Program Files (x86)\\\\", data)
+                new = program_files.sub(r"\1Program Files (x86)\\", data)
             elif isinstance(data, list):
-                new = [program_files.sub(r"\1Program Files (x86)\\\\", item) for item in data]
+                new = [program_files.sub(r"\1Program Files (x86)\\", item) for item in data]
             else:
                 continue
             if new != data:
