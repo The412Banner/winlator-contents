@@ -1309,6 +1309,7 @@
     },
     {
       "name": "dotnet20sp1",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/dotnet20sp1.snapshot.json",
       "description": "Microsoft .NET Framework 2.0 Service Pack 1",
       "provider": "Microsoft",
       "dependencies": [
@@ -1350,6 +1351,7 @@
     },
     {
       "name": "dotnet35",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/dotnet35.snapshot.json",
       "description": "Microsoft .NET Framework 3.5",
       "provider": "Microsoft",
       "dependencies": [],
@@ -1391,6 +1393,7 @@
     },
     {
       "name": "dotnet35sp1",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/dotnet35sp1.snapshot.json",
       "description": "Microsoft .NET Framework 3.5 Service Pack 1",
       "provider": "Microsoft",
       "dependencies": [],
