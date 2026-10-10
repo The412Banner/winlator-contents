@@ -774,6 +774,7 @@
     },
     {
       "name": "dirac",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/dirac.snapshot.json",
       "description": "The Dirac directshow filter v1.0.2",
       "provider": "Dirac",
       "dependencies": ["vcredist2008"],
