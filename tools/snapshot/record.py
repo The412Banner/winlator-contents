@@ -461,6 +461,26 @@ def main():
         time.sleep(2)
         took = int(time.time() - started_at)
         print("== %s exit %s after %d s" % (label, exit_code, took), flush=True)
+        if exit_code != 0:
+            # What the installer itself said: Microsoft's setups leave dd_*.txt / *.log in Temp.
+            logs = []
+            for pattern in ("users/*/Temp/*.txt", "users/*/Temp/*.log", "users/*/Temp/*/*.txt", "users/*/Temp/*/*.log",
+                            "windows/temp/*.txt", "windows/temp/*.log", "windows/temp/*/*.log", "*/*.log", "*/*.txt"):
+                for log in drive_c.glob(pattern):
+                    try:
+                        if log.stat().st_mtime >= started_at - 5 and log.stat().st_size > 0:
+                            logs.append(log)
+                    except OSError:
+                        pass
+            logs = sorted(set(logs), key=lambda l: -l.stat().st_size)[:3]
+            for log in logs:
+                try:
+                    text = log.read_bytes().decode("utf-16", errors="replace") if log.read_bytes()[:2] in (b"\xff\xfe", b"\xfe\xff") else log.read_text("utf-8", errors="replace")
+                except OSError:
+                    continue
+                tail = "\n".join(line for line in text.splitlines() if line.strip())[-1500:]
+                print("   -- %s (last lines) --\n%s" % (log.relative_to(drive_c), tail), flush=True)
+                notes.append("%s log %s: %s" % (label, log.relative_to(drive_c).as_posix(), tail[-600:]))
         return exit_code, took
 
     runs = runs_of(args.component)

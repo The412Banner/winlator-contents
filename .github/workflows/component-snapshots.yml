@@ -33,7 +33,7 @@ permissions:
 
 env:
   # What a push to the recorder's branch records (a dispatch names its own list).
-  PUSH_COMPONENTS: dotnet20sp1 dotnet35 dotnet35sp1 jet40 dirac
+  PUSH_COMPONENTS: dirac dotnet35 dotnet20sp1
 
 jobs:
   record:

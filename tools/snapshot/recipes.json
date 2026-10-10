@@ -62,7 +62,10 @@
       "Program Files/Dirac/DiracSplitter-Dirac.ax",
       "Program Files/Dirac/DiracSplitter-libschroedinger.ax"
     ],
-    "notes": "NSIS wizard with no working silent mode (winetricks clicks through it with AutoHotkey): unpacked into Program Files/Dirac and the two filters registered with regsvr32, in a win32 prefix laid out as on 64-bit Windows. 7-Zip opens the installer on the device."
+    "notes": "NSIS wizard with no working silent mode (winetricks clicks through it with AutoHotkey): unpacked into Program Files/Dirac and the two filters registered with regsvr32, in a win32 prefix laid out as on 64-bit Windows. 7-Zip opens the installer on the device. The filters link the VC++ 2008 runtime, installed first (and a catalog dependency).",
+    "after": [
+      "vcredist2008"
+    ]
   },
   "quicktime72": {
     "installer": "quicktime72.exe",
@@ -156,7 +159,7 @@
     "after": [
       "dotnet20"
     ],
-    "timeout": 1800,
+    "timeout": 900,
     "host_files": true,
     "licence": "Microsoft .NET Framework 2.0 SP1 redistributable: licensed for redistribution with applications.",
     "notes": "32-bit only; recorded on top of dotnet20 in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: Windows 2000 for the installer, ngen/regsvcs/mscorsvw stubbed.",
@@ -230,5 +233,14 @@
     "arch": "win64",
     "timeout": 1200,
     "notes": "Games for Windows Live client + redistributable (gfwlivesetupmin, two MSIs inside). The files come from the installer on the device; signing in needs Microsoft's live servers, which nothing here records."
+  },
+  "vcredist2008": {
+    "installer": "vcredist2008__vcredist_x86.exe",
+    "args": [
+      "/q"
+    ],
+    "arch": "win32",
+    "timeout": 600,
+    "notes": "Prerequisite only (dirac's filters link msvcr90): the app installs vcredist2008 through its own MSI engine; this recipe exists so a recording can be made on top of it."
   }
 }
