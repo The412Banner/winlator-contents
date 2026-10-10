@@ -426,8 +426,10 @@ def main():
     # When the installer cannot be opened (Inno Setup newer than innoextract reads, K-Lite) and
     # the recipe says its contents may be redistributed, the placed files travel as an archive
     # beside the recording instead of being pulled from the installer on the device.
-    host_files = bool(recipe.get("host_files")) or (not inside and recipe.get("host_files") is None and False)
+    host_files = bool(recipe.get("host_files")) and bool(placed)
     files_archive = None
+    if not placed:
+        notes.append("the installer placed no files (exit %s): nothing to lay out" % status)
     if host_files:
         archive = out / ("%s.files.tar.xz" % args.component)
         with tempfile.TemporaryDirectory(prefix="files-") as staging:

@@ -9,6 +9,7 @@
   "components": [
     {
       "name": "K-Lite",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/K-Lite.snapshot.json",
       "description": "K-Lite_Codec_Pack_1960",
       "provider": "Hendrik Leppkes",
       "dependencies": [],
@@ -62,6 +63,7 @@
     },
     {
       "name": "aairruntime",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/aairruntime.snapshot.json",
       "description": "Harman Air Runtime",
       "provider": "Harman",
       "dependencies": [],
@@ -2078,6 +2080,7 @@
     },
     {
       "name": "ffdshow",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/ffdshow.snapshot.json",
       "description": "ffdshow video codecs",
       "provider": "doom9 folks",
       "dependencies": [],
@@ -2292,6 +2295,7 @@
     },
     {
       "name": "lavfilters702",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/lavfilters702.snapshot.json",
       "description": "LAV Filters 0.70.2",
       "provider": "Hendrik Leppkes",
       "dependencies": [],
@@ -2309,6 +2313,7 @@
     },
     {
       "name": "lavfilters741",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/lavfilters741.snapshot.json",
       "description": "LAV Filters 0.74.1",
       "provider": "Hendrik Leppkes",
       "dependencies": [],
@@ -2326,6 +2331,7 @@
     },
     {
       "name": "mdac28",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/mdac28.snapshot.json",
       "description": "Microsoft Data Access Components 2.8 SP1",
       "provider": "Microsoft",
       "dependencies": [],
@@ -3039,6 +3045,7 @@
     },
     {
       "name": "quicktime72",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/quicktime72.snapshot.json",
       "description": "QuickTime 7.2.0.240",
       "provider": "Apple Inc.",
       "dependencies": [],
@@ -4194,6 +4201,7 @@
     },
     {
       "name": "vcredist6sp6",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/vcredist6sp6.snapshot.json",
       "description": "Microsoft Visual C++ 6 SP6 libraries",
       "provider": "Microsoft",
       "dependencies": [],
