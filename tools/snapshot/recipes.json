@@ -1,0 +1,146 @@
+{
+  "_": "How each installer is run unattended in a fresh Wine prefix to record what it leaves behind (tools/snapshot/record.py). 'installer'+'args', or 'installers' [{asset, args}] run in order, name assets on the system-libraries-v1 release. 'arch' = prefix (win64). 'timeout' seconds per installer. 'winver' = Windows version set before recording (not recorded). 'after' = recipes installed first, so this one records only its own delta (the app installs them first too). 'host_files' = the placed files travel with the recording (needed when no extractor opens the installer; only where the licence allows, 'licence' says why). 'dll_overrides' = Wine overrides for the run itself (never recorded).",
+  "K-Lite": {
+    "installer": "K-Lite.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 900,
+    "host_files": true,
+    "licence": "The pack's installer is Inno Setup 6.4.2, which no extractor reads yet, so the placed files travel with the recording. What this edition places is open source (LAV Filters, MPC-HC, MPC Video Renderer, DirectVobSub: GPL) plus Icaros, which its author distributes freely.",
+    "notes": "The pack registers its DirectShow filters with regsvr32 during setup; those CLSID / filter entries are the point of the recording."
+  },
+  "lavfilters741": {
+    "installer": "lavfilters741.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 600,
+    "host_files": true,
+    "licence": "LAV Filters is GPL-2.0; the files travel with the recording so a device needs no Inno Setup extractor."
+  },
+  "lavfilters702": {
+    "installer": "lavfilters702.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 600,
+    "host_files": true,
+    "licence": "LAV Filters is GPL-2.0; the files travel with the recording so a device needs no Inno Setup extractor."
+  },
+  "ffdshow": {
+    "installer": "ffdshow.exe",
+    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "arch": "win64",
+    "timeout": 600,
+    "host_files": true,
+    "licence": "ffdshow is GPL-2.0; the files travel with the recording so a device needs no Inno Setup extractor."
+  },
+  "dirac": {
+    "installer": "dirac.exe",
+    "args": ["/S"],
+    "arch": "win64",
+    "timeout": 300,
+    "notes": "NSIS: 7-Zip opens it on the device."
+  },
+  "quicktime72": {
+    "installer": "quicktime72.exe",
+    "args": ["/qn", "ALLUSERS=1", "DESKTOP_SHORTCUTS=0", "QTTaskRunFlags=0", "QTINFO.BISQTPRO=1", "SCHEDULE_ASUW=0", "REBOOT_REQUIRED=No"],
+    "arch": "win64",
+    "timeout": 900,
+    "dll_overrides": "winemenubuilder.exe=d",
+    "notes": "Apple's redistribution terms do not allow hosting the files: a device takes them from the installer (a cabinet wrapper 7-Zip and cabextract open)."
+  },
+  "oalinst": {
+    "installer": "oalinst.exe",
+    "args": ["/s"],
+    "arch": "win64",
+    "timeout": 300,
+    "notes": "NSIS; the DLL-copy twin oalinst_dll already covers most games."
+  },
+  "VulkanRT": {
+    "installer": "VulkanRT.exe",
+    "args": ["/S"],
+    "arch": "win64",
+    "timeout": 300,
+    "notes": "NSIS (the catalog's /passive is an MSI switch and shows the wizard)."
+  },
+  "vcredist6sp6": {
+    "installer": "vcredist6sp6_inner.exe",
+    "args": ["/Q"],
+    "arch": "win64",
+    "timeout": 300,
+    "host_files": true,
+    "licence": "Microsoft Visual C++ 6 runtime redistributable: licensed for redistribution with applications."
+  },
+  "jet40": {
+    "installer": "jet40.exe",
+    "args": ["/q:a", "/c:install.exe /qn"],
+    "arch": "win64",
+    "timeout": 600,
+    "host_files": true,
+    "licence": "Microsoft Jet 4.0 SP8 redistributable: licensed for redistribution with applications."
+  },
+  "mdac28": {
+    "installer": "mdac28.EXE",
+    "args": ["/q", "/C:setup /qnt"],
+    "arch": "win64",
+    "winver": "win2k",
+    "timeout": 900,
+    "host_files": true,
+    "licence": "Microsoft Data Access Components 2.8 redistributable: licensed for redistribution with applications.",
+    "notes": "The setup refuses to run on anything after Windows 2000, so the recording's prefix says win2k (the catalog's win98 is the 32-bit Wine convention)."
+  },
+  "dotnet20": {
+    "installers": [
+      {"asset": "dotnet20__dotnetfx.exe", "args": ["/q", "/c:install.exe /q"]},
+      {"asset": "dotnet20__NetFx64.exe", "args": ["/q", "/c:install.exe /q"]}
+    ],
+    "arch": "win64",
+    "winver": "winxp",
+    "timeout": 1800,
+    "host_files": true,
+    "licence": "Microsoft .NET Framework 2.0 redistributable: licensed for redistribution with applications."
+  },
+  "dotnet20sp1": {
+    "installers": [
+      {"asset": "dotnet20sp1__NetFx20SP1_x86.exe", "args": ["/q", "/norestart"]},
+      {"asset": "dotnet20sp1__NetFx20SP1_x64.exe", "args": ["/q", "/norestart"]}
+    ],
+    "arch": "win64",
+    "winver": "winxp",
+    "after": ["dotnet20"],
+    "timeout": 1800,
+    "host_files": true,
+    "licence": "Microsoft .NET Framework 2.0 SP1 redistributable: licensed for redistribution with applications."
+  },
+  "dotnet35": {
+    "installer": "dotnet35.exe",
+    "args": ["/lang:ENU", "/q", "/norestart"],
+    "arch": "win64",
+    "winver": "winxp",
+    "timeout": 3000,
+    "host_files": true,
+    "licence": "Microsoft .NET Framework 3.5 redistributable: licensed for redistribution with applications."
+  },
+  "dotnet35sp1": {
+    "installer": "dotnet35sp1.exe",
+    "args": ["/lang:ENU", "/q", "/norestart"],
+    "arch": "win64",
+    "winver": "winxp",
+    "timeout": 3000,
+    "host_files": true,
+    "licence": "Microsoft .NET Framework 3.5 SP1 redistributable: licensed for redistribution with applications."
+  },
+  "aairruntime": {
+    "installer": "aairruntime.exe",
+    "args": ["-silent", "-eulaAccepted"],
+    "arch": "win64",
+    "timeout": 600,
+    "notes": "Adobe's terms do not allow hosting the files; the installer is an archive 7-Zip can open."
+  },
+  "art2kmin": {
+    "installer": "art2kmin.exe",
+    "args": ["/q"],
+    "arch": "win64",
+    "timeout": 900,
+    "notes": "Access 2000 runtime: a self-extracting wrapper; the files come from it on the device."
+  }
+}

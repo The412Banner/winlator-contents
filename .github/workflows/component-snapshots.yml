@@ -1,0 +1,115 @@
+name: Record component snapshots
+
+# Runs a Windows component's installer once, unattended, in a fresh Wine prefix on an x86 runner
+# and records what it left behind: the registry values it wrote (the point: self-registering
+# DLLs decide their own entries at run time) and the files it placed, each mapped back to where
+# the same bytes sit inside the vendor's installer (innoextract / 7-Zip), so a device can pull them
+# from that installer rather than from a copy hosted here. Recipes: tools/snapshot/recipes.json.
+# Output per component: <name>.snapshot.json + <name>.summary.md on one release.
+
+on:
+  # Runs on pushes to the recorder's own branch too, since GitHub only lets a workflow be
+  # dispatched once it exists on the default branch; the push run takes the defaults below.
+  push:
+    branches: [feat/component-snapshots]
+    paths: ['tools/snapshot/**', '.github/workflows/component-snapshots.yml']
+  workflow_dispatch:
+    inputs:
+      components:
+        description: 'Space-separated component names (keys of tools/snapshot/recipes.json), or all'
+        required: true
+        default: 'all'
+      release:
+        description: 'Release tag to publish to (created if missing)'
+        required: true
+        default: 'component-snapshots-v1'
+      installers_release:
+        description: 'Release the installers are downloaded from'
+        required: true
+        default: 'system-libraries-v1'
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Wine and the extractors
+        run: |
+          set -euo pipefail
+          sudo dpkg --add-architecture i386
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends wine wine64 wine32:i386 xvfb p7zip-full \
+            cmake build-essential libboost-iostreams-dev libboost-filesystem-dev libboost-date-time-dev \
+            libboost-system-dev libboost-program-options-dev liblzma-dev >/dev/null
+          wine --version
+          # innoextract from its main branch: the 1.9 release does not read Inno Setup 6.4 (K-Lite).
+          git clone -q --depth 1 https://github.com/dscharrer/innoextract.git /tmp/innoextract
+          cmake -S /tmp/innoextract -B /tmp/innoextract/build -DCMAKE_BUILD_TYPE=Release -DUSE_LZMA=ON >/dev/null
+          cmake --build /tmp/innoextract/build -j"$(nproc)" >/dev/null
+          sudo install -m755 /tmp/innoextract/build/innoextract /usr/local/bin/innoextract
+          innoextract --version | head -1
+
+      - name: Record
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          mkdir -p installers out
+          names='${{ inputs.components || 'all' }}'
+          if [ "$names" = all ]; then
+            names=$(python3 -c "import json; print(' '.join(k for k in json.load(open('tools/snapshot/recipes.json')) if k != '_'))")
+          fi
+          # Every asset the chosen recipes and their prerequisites name, downloaded once.
+          python3 - $names > assets.txt <<'PY'
+          import json, sys
+          r = json.load(open("tools/snapshot/recipes.json"))
+          wanted = set()
+          def add(name):
+              rec = r[name]
+              for item in rec.get("installers") or [{"asset": rec.get("installer")}]:
+                  wanted.add(item["asset"])
+              for dep in rec.get("after", []):
+                  add(dep)
+          for name in sys.argv[1:]:
+              add(name)
+          print("\n".join(sorted(wanted)))
+          PY
+          while read -r asset; do
+            [ -n "$asset" ] && gh release download "${{ inputs.installers_release || 'system-libraries-v1' }}" -p "$asset" -D installers --clobber
+          done < assets.txt
+          ls -l installers
+          failed=""
+          for name in $names; do
+            echo "::group::$name"
+            if ! python3 tools/snapshot/record.py --component "$name" --installers-dir installers --out out; then
+              echo "::warning::$name: the recording failed"
+              failed="$failed $name"
+            fi
+            echo "::endgroup::"
+          done
+          ls -l out
+          { echo "# Recordings"; echo; for f in out/*.summary.md; do sed -n '1,14p' "$f"; echo; done; [ -n "$failed" ] && echo "**Failed:**$failed"; } >> "$GITHUB_STEP_SUMMARY"
+          echo "FAILED=$failed" >> "$GITHUB_ENV"
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag='${{ inputs.release || 'component-snapshots-v1' }}'
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --title "Component snapshots" --notes "What each Windows component's installer leaves behind in a Wine prefix, recorded by tools/snapshot/record.py: the registry values it writes and the files it places, mapped back into the vendor's own installer. Read by the apps' Windows components page; one <name>.snapshot.json and <name>.summary.md per component." --latest=false
+          fi
+          gh release upload "$tag" out/*.snapshot.json out/*.summary.md $(ls out/*.files.tar.xz 2>/dev/null) --clobber
+          [ -z "${FAILED:-}" ] || { echo "::error::recordings failed:$FAILED"; exit 1; }
+
+      - name: Keep the recordings as an artifact too
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots
+          path: out/
