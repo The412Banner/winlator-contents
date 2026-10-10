@@ -1,5 +1,5 @@
 {
-  "_": "How each installer is run unattended in a fresh Wine prefix to record what it leaves behind (tools/snapshot/record.py). 'installer'+'args', or 'installers' [{asset, args}] run in order, name assets on the system-libraries-v1 release. 'arch' = prefix: win64, or win32 for installers that refuse a 64-bit prefix (.NET 2.0/3.5, Jet); a win32 recording is laid out as on 64-bit Windows unless 'remap' is false. 'timeout' seconds per installer. 'winver' = Windows version set before recording (not recorded). 'after' = recipes installed first, so this one records only its own delta (the app installs them first too). 'host_files' = the placed files travel with the recording (needed when no extractor opens the installer; only where the licence allows, 'licence' says why). 'dll_overrides' = Wine overrides for the run itself (never recorded). 'extract_to' + 'register' = instead of running a wizard with no silent mode, unpack the installer into that drive_c folder and regsvr32 those files (paths under drive_c).",
+  "_": "How each installer is run unattended in a fresh Wine prefix to record what it leaves behind (tools/snapshot/record.py). 'installer'+'args', or 'installers' [{asset, args}] run in order, name assets on the system-libraries-v1 release. 'arch' = prefix: win64, or win32 for installers that refuse a 64-bit prefix (.NET 2.0/3.5, Jet); a win32 recording is laid out as on 64-bit Windows unless 'remap' is false. 'timeout' seconds per installer. 'winver' = Windows version set before recording (not recorded). 'after' = recipes installed first, so this one records only its own delta (the app installs them first too). 'host_files' = the placed files travel with the recording (needed when no extractor opens the installer; only where the licence allows, 'licence' says why). 'dll_overrides' = Wine overrides for the run itself (never recorded). 'extract_to' + 'register' = instead of running a wizard with no silent mode, unpack the installer into that drive_c folder and regsvr32 those files (paths under drive_c). 'pre_reg_delete' = registry keys removed before recording (a fresh Wine prefix may claim a .NET it does not have).",
   "K-Lite": {
     "installer": "K-Lite.exe",
     "args": [
@@ -151,19 +151,23 @@
   "dotnet20sp1": {
     "installer": "dotnet20sp1__NetFx20SP1_x86.exe",
     "args": [
-      "/q",
-      "/norestart"
+      "/q"
     ],
     "arch": "win32",
     "winver": "win2k",
     "after": [
       "dotnet20"
     ],
-    "timeout": 900,
+    "timeout": 600,
     "host_files": true,
     "licence": "Microsoft .NET Framework 2.0 SP1 redistributable: licensed for redistribution with applications.",
     "notes": "32-bit only; recorded on top of dotnet20 in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: Windows 2000 for the installer, ngen/regsvcs/mscorsvw stubbed.",
-    "dll_overrides": "ngen.exe,regsvcs.exe,mscorsvw.exe=b"
+    "dll_overrides": "ngen.exe,regsvcs.exe,mscorsvw.exe=b",
+    "pre_reg_delete": [
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v3.0",
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v3.5",
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v4"
+    ]
   },
   "dotnet35": {
     "installer": "dotnet35.exe",
@@ -178,7 +182,12 @@
     "host_files": true,
     "licence": "Microsoft .NET Framework 3.5 redistributable: licensed for redistribution with applications.",
     "notes": "The full redistributable (carries 2.0 SP2 and 3.0 SP2); 32-bit only, recorded in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: mscoree/mscorwks native (no Wine stand-ins), Windows XP.",
-    "dll_overrides": "mscoree,mscorwks=n"
+    "dll_overrides": "mscoree,mscorwks=n",
+    "pre_reg_delete": [
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v3.0",
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v3.5",
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v4"
+    ]
   },
   "dotnet35sp1": {
     "installer": "dotnet35sp1.exe",
@@ -193,7 +202,12 @@
     "host_files": true,
     "licence": "Microsoft .NET Framework 3.5 SP1 redistributable: licensed for redistribution with applications.",
     "notes": "The full redistributable (carries 2.0 SP2 and 3.0 SP2); 32-bit only, recorded in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: mscoree/mscorwks native (no Wine stand-ins), Windows XP.",
-    "dll_overrides": "mscoree,mscorwks=n;ngen.exe=n"
+    "dll_overrides": "mscoree,mscorwks=n;ngen.exe=n",
+    "pre_reg_delete": [
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v3.0",
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v3.5",
+      "HKLM\\Software\\Microsoft\\NET Framework Setup\\NDP\\v4"
+    ]
   },
   "aairruntime": {
     "installer": "aairruntime.exe",
