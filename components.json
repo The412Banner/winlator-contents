@@ -4965,7 +4965,7 @@
       "description": "Microsoft XNA Redistributable 3.1",
       "provider": "Microsoft",
       "dependencies": [
-        "dotnet20sp1"
+        "dotnet20"
       ],
       "status": "ready",
       "steps": [
