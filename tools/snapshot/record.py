@@ -315,7 +315,8 @@ def extract_installer(installer, dest, notes):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--component", required=True)
-    parser.add_argument("--installer", required=True)
+    parser.add_argument("--installer", help="the installer file (single-installer recipes)")
+    parser.add_argument("--installers-dir", help="folder holding every recipe's installer assets by name")
     parser.add_argument("--out", required=True)
     parser.add_argument("--recipes", default=str(Path(__file__).with_name("recipes.json")))
     parser.add_argument("--extract", help="where the installer's own extraction goes (default: a temp dir)")
@@ -326,12 +327,46 @@ def main():
     if not recipe:
         print("no recipe for %s" % args.component, file=sys.stderr)
         return 2
-    installer = Path(args.installer).resolve()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     arch = recipe.get("arch", "win64")
     timeout = int(recipe.get("timeout", 600))
     notes = []
+    assets = Path(args.installers_dir).resolve() if args.installers_dir else None
+
+    def runs_of(name):
+        """A recipe's installers as (path, args) pairs, from --installers-dir or --installer."""
+        r = recipes[name]
+        items = r.get("installers") or [{"asset": r.get("installer"), "args": r.get("args", [])}]
+        found = []
+        for item in items:
+            path = assets / item["asset"] if assets else Path(args.installer).resolve()
+            if not path.is_file():
+                raise SystemExit("installer missing: %s" % path)
+            found.append((path, list(item.get("args", []))))
+        return found
+
+    def run_installer(path, run_args, limit, label):
+        print("== running %s %s" % (path.name, " ".join(run_args)), flush=True)
+        cmd = ["xvfb-run", "-a", "-s", "-screen 0 1280x800x24", "wine", str(path)] + run_args
+        started_at = time.time()
+        try:
+            result = run(cmd, env=env, timeout=limit)
+            exit_code = result.returncode
+            if result.stderr.strip():
+                notes.append("%s stderr: %s" % (label, result.stderr.strip()[-400:]))
+        except subprocess.TimeoutExpired:
+            exit_code = "timeout"
+            notes.append("%s was still running after %d s and was killed" % (label, limit))
+        wait_wine(env, 180)
+        subprocess.run(["wineserver", "-k"], env=env)
+        time.sleep(2)
+        took = int(time.time() - started_at)
+        print("== %s exit %s after %d s" % (label, exit_code, took), flush=True)
+        return exit_code, took
+
+    runs = runs_of(args.component)
+    installer = runs[0][0]
 
     work = Path(tempfile.mkdtemp(prefix="snapshot-"))
     prefix = work / "pfx"
@@ -345,27 +380,27 @@ def main():
     wine_version = run(["wine", "--version"], env=env).stdout.strip()
     drive_c = prefix / "drive_c"
     home_user = next((p.name for p in (drive_c / "users").iterdir() if p.is_dir() and p.name.lower() not in ("public", "default")), "")
+    # The Windows version the installer wants to see (MDAC refuses anything after 2000), set before
+    # the first snapshot so it is not recorded; prerequisites likewise, so a service pack records its delta.
+    winver = recipe.get("winver")
+    if winver:
+        run(["wine", "reg", "add", "HKCU\\Software\\Wine", "/v", "Version", "/d", winver, "/f"], env=env, timeout=300)
+        wait_wine(env, 120)
+        notes.append("recorded with the Windows version set to %s" % winver)
+    for prerequisite in recipe.get("after", []):
+        for path, run_args in runs_of(prerequisite):
+            run_installer(path, run_args, int(recipes[prerequisite].get("timeout", 600)), "prerequisite " + prerequisite)
+        notes.append("recorded on top of %s" % prerequisite)
 
     print("== noting the prefix before", flush=True)
     files_before = snapshot_files(drive_c)
     reg_before = {"HKLM": parse_reg(prefix / "system.reg"), "HKCU": parse_reg(prefix / "user.reg")}
 
-    print("== running %s %s" % (installer.name, " ".join(recipe.get("args", []))), flush=True)
-    started = time.time()
-    cmd = ["xvfb-run", "-a", "-s", "-screen 0 1280x800x24", "wine", str(installer)] + recipe.get("args", [])
-    try:
-        result = run(cmd, env=env, timeout=timeout)
-        status = result.returncode
-        if result.stderr.strip():
-            notes.append("installer stderr: " + result.stderr.strip()[-500:])
-    except subprocess.TimeoutExpired:
-        status = "timeout"
-        notes.append("the installer was still running after %d s and was killed" % timeout)
-    wait_wine(env, 180)
-    subprocess.run(["wineserver", "-k"], env=env)
-    time.sleep(2)
-    elapsed = int(time.time() - started)
-    print("== installer exit %s after %d s" % (status, elapsed), flush=True)
+    status, elapsed = None, 0
+    for path, run_args in runs:
+        exit_code, took = run_installer(path, run_args, timeout, path.name)
+        elapsed += took
+        status = exit_code if status in (None, 0) else status
 
     print("== noting the prefix after", flush=True)
     files_after = snapshot_files(drive_c)
@@ -379,7 +414,14 @@ def main():
     print("== opening the installer to find the placed files inside it", flush=True)
     extract_dir = Path(args.extract) if args.extract else work / "x"
     extract_dir.mkdir(parents=True, exist_ok=True)
-    inside, tried = extract_installer(installer, extract_dir, notes)
+    inside, tried = {}, []
+    for index, (path, _) in enumerate(runs):
+        folder = extract_dir / ("installer%d" % index) if len(runs) > 1 else extract_dir
+        folder.mkdir(parents=True, exist_ok=True)
+        found, used = extract_installer(path, folder, notes)
+        for digest, rel in found.items():
+            inside.setdefault(digest, (("installer%d/" % index) if len(runs) > 1 else "") + rel)
+        tried = tried or used
 
     # When the installer cannot be opened (Inno Setup newer than innoextract reads, K-Lite) and
     # the recipe says its contents may be redistributed, the placed files travel as an archive
@@ -419,7 +461,9 @@ def main():
         "recorded": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "wine": wine_version, "arch": arch,
         "installer": {"name": installer.name, "size": installer.stat().st_size, "sha256": sha256_of(installer),
-                      "args": recipe.get("args", []), "exit": status, "seconds": elapsed, "extractors": tried},
+                      "args": runs[0][1], "exit": status, "seconds": elapsed, "extractors": tried},
+        "installers": [{"name": path.name, "size": path.stat().st_size, "sha256": sha256_of(path), "args": run_args} for path, run_args in runs],
+        "after": recipe.get("after", []), "winver": winver,
         "stats": {"files": len(files), "from_installer": sum(1 for f in files if "source" in f),
                   "inline": sum(1 for f in files if "data" in f), "archived": sum(1 for f in files if f.get("archived")),
                   "missing": missing, "removed": len(removed), "registry": len(registry)},
