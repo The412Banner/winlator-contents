@@ -774,9 +774,10 @@
     },
     {
       "name": "dirac",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/dirac.snapshot.json",
       "description": "The Dirac directshow filter v1.0.2",
       "provider": "Dirac",
-      "dependencies": [],
+      "dependencies": ["vcredist2008"],
       "status": "ready",
       "steps": [
         {
@@ -1268,6 +1269,7 @@
     },
     {
       "name": "dotnet20",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/dotnet20.snapshot.json",
       "description": "Microsoft .NET Framework 2.0",
       "provider": "Microsoft",
       "dependencies": [],
@@ -2158,6 +2160,7 @@
     },
     {
       "name": "gfw",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/gfw.snapshot.json",
       "description": "MS Games For Windows Live (xlive.dll)",
       "provider": "Microsoft",
       "dependencies": [],
@@ -2248,6 +2251,7 @@
     },
     {
       "name": "jet40",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/jet40.snapshot.json",
       "description": "MS Jet 4.0 Service Pack 8",
       "provider": "Microsoft",
       "dependencies": [],

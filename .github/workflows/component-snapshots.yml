@@ -8,11 +8,6 @@ name: Record component snapshots
 # Output per component: <name>.snapshot.json + <name>.summary.md on one release.
 
 on:
-  # Runs on pushes to the recorder's own branch too, since GitHub only lets a workflow be
-  # dispatched once it exists on the default branch; the push run takes the defaults below.
-  push:
-    branches: [feat/component-snapshots]
-    paths: ['tools/snapshot/**', '.github/workflows/component-snapshots.yml']
   workflow_dispatch:
     inputs:
       components:
@@ -30,6 +25,7 @@ on:
 
 permissions:
   contents: write
+
 
 jobs:
   record:
@@ -60,7 +56,7 @@ jobs:
         run: |
           set -uo pipefail
           mkdir -p installers out
-          names='${{ inputs.components || 'all' }}'
+          names='${{ inputs.components }}'
           if [ "$names" = all ]; then
             names=$(python3 -c "import json; print(' '.join(k for k in json.load(open('tools/snapshot/recipes.json')) if k != '_'))")
           fi

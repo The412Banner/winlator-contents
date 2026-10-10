@@ -1,8 +1,13 @@
 {
-  "_": "How each installer is run unattended in a fresh Wine prefix to record what it leaves behind (tools/snapshot/record.py). 'installer'+'args', or 'installers' [{asset, args}] run in order, name assets on the system-libraries-v1 release. 'arch' = prefix (win64). 'timeout' seconds per installer. 'winver' = Windows version set before recording (not recorded). 'after' = recipes installed first, so this one records only its own delta (the app installs them first too). 'host_files' = the placed files travel with the recording (needed when no extractor opens the installer; only where the licence allows, 'licence' says why). 'dll_overrides' = Wine overrides for the run itself (never recorded).",
+  "_": "How each installer is run unattended in a fresh Wine prefix to record what it leaves behind (tools/snapshot/record.py). 'installer'+'args', or 'installers' [{asset, args}] run in order, name assets on the system-libraries-v1 release. 'arch' = prefix: win64, or win32 for installers that refuse a 64-bit prefix (.NET 2.0/3.5, Jet); a win32 recording is laid out as on 64-bit Windows unless 'remap' is false. 'timeout' seconds per installer. 'winver' = Windows version set before recording (not recorded). 'after' = recipes installed first, so this one records only its own delta (the app installs them first too). 'host_files' = the placed files travel with the recording (needed when no extractor opens the installer; only where the licence allows, 'licence' says why). 'dll_overrides' = Wine overrides for the run itself (never recorded). 'extract_to' + 'register' = instead of running a wizard with no silent mode, unpack the installer into that drive_c folder and regsvr32 those files (paths under drive_c).",
   "K-Lite": {
     "installer": "K-Lite.exe",
-    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "args": [
+      "/VERYSILENT",
+      "/SUPPRESSMSGBOXES",
+      "/NORESTART",
+      "/SP-"
+    ],
     "arch": "win64",
     "timeout": 900,
     "host_files": true,
@@ -11,7 +16,12 @@
   },
   "lavfilters741": {
     "installer": "lavfilters741.exe",
-    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "args": [
+      "/VERYSILENT",
+      "/SUPPRESSMSGBOXES",
+      "/NORESTART",
+      "/SP-"
+    ],
     "arch": "win64",
     "timeout": 600,
     "host_files": true,
@@ -19,7 +29,12 @@
   },
   "lavfilters702": {
     "installer": "lavfilters702.exe",
-    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "args": [
+      "/VERYSILENT",
+      "/SUPPRESSMSGBOXES",
+      "/NORESTART",
+      "/SP-"
+    ],
     "arch": "win64",
     "timeout": 600,
     "host_files": true,
@@ -27,7 +42,12 @@
   },
   "ffdshow": {
     "installer": "ffdshow.exe",
-    "args": ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"],
+    "args": [
+      "/VERYSILENT",
+      "/SUPPRESSMSGBOXES",
+      "/NORESTART",
+      "/SP-"
+    ],
     "arch": "win64",
     "timeout": 600,
     "host_files": true,
@@ -35,14 +55,29 @@
   },
   "dirac": {
     "installer": "dirac.exe",
-    "args": ["/S"],
-    "arch": "win64",
-    "timeout": 300,
-    "notes": "NSIS: 7-Zip opens it on the device."
+    "arch": "win32",
+    "timeout": 600,
+    "extract_to": "Program Files/Dirac",
+    "register": [
+      "Program Files/Dirac/DiracSplitter-Dirac.ax",
+      "Program Files/Dirac/DiracSplitter-libschroedinger.ax"
+    ],
+    "notes": "NSIS wizard with no working silent mode (winetricks clicks through it with AutoHotkey): unpacked into Program Files/Dirac and the two filters registered with regsvr32, in a win32 prefix laid out as on 64-bit Windows. 7-Zip opens the installer on the device. The filters link the VC++ 2008 runtime, installed first (and a catalog dependency).",
+    "after": [
+      "vcredist2008"
+    ]
   },
   "quicktime72": {
     "installer": "quicktime72.exe",
-    "args": ["/qn", "ALLUSERS=1", "DESKTOP_SHORTCUTS=0", "QTTaskRunFlags=0", "QTINFO.BISQTPRO=1", "SCHEDULE_ASUW=0", "REBOOT_REQUIRED=No"],
+    "args": [
+      "/qn",
+      "ALLUSERS=1",
+      "DESKTOP_SHORTCUTS=0",
+      "QTTaskRunFlags=0",
+      "QTINFO.BISQTPRO=1",
+      "SCHEDULE_ASUW=0",
+      "REBOOT_REQUIRED=No"
+    ],
     "arch": "win64",
     "timeout": 900,
     "dll_overrides": "winemenubuilder.exe=d",
@@ -50,21 +85,27 @@
   },
   "oalinst": {
     "installer": "oalinst.exe",
-    "args": ["/s"],
+    "args": [
+      "/s"
+    ],
     "arch": "win64",
     "timeout": 300,
     "notes": "NSIS; the DLL-copy twin oalinst_dll already covers most games."
   },
   "VulkanRT": {
     "installer": "VulkanRT.exe",
-    "args": ["/S"],
+    "args": [
+      "/S"
+    ],
     "arch": "win64",
     "timeout": 300,
     "notes": "NSIS (the catalog's /passive is an MSI switch and shows the wizard)."
   },
   "vcredist6sp6": {
     "installer": "vcredist6sp6_inner.exe",
-    "args": ["/Q"],
+    "args": [
+      "/Q"
+    ],
     "arch": "win64",
     "timeout": 300,
     "host_files": true,
@@ -72,15 +113,21 @@
   },
   "jet40": {
     "installer": "jet40.exe",
-    "args": ["/q:a", "/c:install.exe /qn"],
-    "arch": "win64",
+    "args": [
+      "/q"
+    ],
+    "arch": "win32",
     "timeout": 600,
     "host_files": true,
-    "licence": "Microsoft Jet 4.0 SP8 redistributable: licensed for redistribution with applications."
+    "licence": "Microsoft Jet 4.0 SP8 redistributable: licensed for redistribution with applications.",
+    "notes": "32-bit only IExpress package (jetsetup.exe inside, INF-driven); /q as winetricks runs it; recorded in a win32 prefix and laid out as on 64-bit Windows."
   },
   "mdac28": {
     "installer": "mdac28.EXE",
-    "args": ["/q", "/C:setup /qnt"],
+    "args": [
+      "/q",
+      "/C:setup /qnt"
+    ],
     "arch": "win64",
     "winver": "win2k",
     "timeout": 900,
@@ -89,58 +136,111 @@
     "notes": "The setup refuses to run on anything after Windows 2000, so the recording's prefix says win2k (the catalog's win98 is the 32-bit Wine convention)."
   },
   "dotnet20": {
-    "installers": [
-      {"asset": "dotnet20__dotnetfx.exe", "args": ["/q", "/c:install.exe /q"]},
-      {"asset": "dotnet20__NetFx64.exe", "args": ["/q", "/c:install.exe /q"]}
+    "installer": "dotnet20__dotnetfx.exe",
+    "args": [
+      "/q",
+      "/c:install.exe /q"
     ],
-    "arch": "win64",
+    "arch": "win32",
     "winver": "winxp",
     "timeout": 1800,
     "host_files": true,
-    "licence": "Microsoft .NET Framework 2.0 redistributable: licensed for redistribution with applications."
+    "licence": "Microsoft .NET Framework 2.0 redistributable: licensed for redistribution with applications.",
+    "notes": "32-bit only installer (the x64 one refuses Wine); recorded in a win32 prefix and laid out as on 64-bit Windows."
   },
   "dotnet20sp1": {
-    "installers": [
-      {"asset": "dotnet20sp1__NetFx20SP1_x86.exe", "args": ["/q", "/norestart"]},
-      {"asset": "dotnet20sp1__NetFx20SP1_x64.exe", "args": ["/q", "/norestart"]}
+    "installer": "dotnet20sp1__NetFx20SP1_x86.exe",
+    "args": [
+      "/q",
+      "/norestart"
     ],
-    "arch": "win64",
-    "winver": "winxp",
-    "after": ["dotnet20"],
-    "timeout": 1800,
+    "arch": "win32",
+    "winver": "win2k",
+    "after": [
+      "dotnet20"
+    ],
+    "timeout": 900,
     "host_files": true,
-    "licence": "Microsoft .NET Framework 2.0 SP1 redistributable: licensed for redistribution with applications."
+    "licence": "Microsoft .NET Framework 2.0 SP1 redistributable: licensed for redistribution with applications.",
+    "notes": "32-bit only; recorded on top of dotnet20 in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: Windows 2000 for the installer, ngen/regsvcs/mscorsvw stubbed.",
+    "dll_overrides": "ngen.exe,regsvcs.exe,mscorsvw.exe=b"
   },
   "dotnet35": {
     "installer": "dotnet35.exe",
-    "args": ["/lang:ENU", "/q", "/norestart"],
-    "arch": "win64",
+    "args": [
+      "/lang:ENU",
+      "/q",
+      "/norestart"
+    ],
+    "arch": "win32",
     "winver": "winxp",
     "timeout": 3000,
     "host_files": true,
-    "licence": "Microsoft .NET Framework 3.5 redistributable: licensed for redistribution with applications."
+    "licence": "Microsoft .NET Framework 3.5 redistributable: licensed for redistribution with applications.",
+    "notes": "The full redistributable (carries 2.0 SP2 and 3.0 SP2); 32-bit only, recorded in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: mscoree/mscorwks native (no Wine stand-ins), Windows XP.",
+    "dll_overrides": "mscoree,mscorwks=n"
   },
   "dotnet35sp1": {
     "installer": "dotnet35sp1.exe",
-    "args": ["/lang:ENU", "/q", "/norestart"],
-    "arch": "win64",
+    "args": [
+      "/lang:ENU",
+      "/q",
+      "/norestart"
+    ],
+    "arch": "win32",
     "winver": "winxp",
     "timeout": 3000,
     "host_files": true,
-    "licence": "Microsoft .NET Framework 3.5 SP1 redistributable: licensed for redistribution with applications."
+    "licence": "Microsoft .NET Framework 3.5 SP1 redistributable: licensed for redistribution with applications.",
+    "notes": "The full redistributable (carries 2.0 SP2 and 3.0 SP2); 32-bit only, recorded in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: mscoree/mscorwks native (no Wine stand-ins), Windows XP.",
+    "dll_overrides": "mscoree,mscorwks=n;ngen.exe=n"
   },
   "aairruntime": {
     "installer": "aairruntime.exe",
-    "args": ["-silent", "-eulaAccepted"],
+    "args": [
+      "-silent",
+      "-eulaAccepted"
+    ],
     "arch": "win64",
     "timeout": 600,
     "notes": "Adobe's terms do not allow hosting the files; the installer is an archive 7-Zip can open."
   },
   "art2kmin": {
     "installer": "art2kmin.exe",
-    "args": ["/q"],
-    "arch": "win64",
+    "args": [
+      "/q"
+    ],
+    "arch": "win32",
     "timeout": 900,
-    "notes": "Access 2000 runtime: a self-extracting wrapper; the files come from it on the device."
+    "notes": "Access 2000 runtime: a 7-Zip-openable wrapper around Setup.exe + Data1.msi. Not recorded: the app's MSI engine lays Data1.msi out directly once art2kmin leaves its setup-program list."
+  },
+  "webview2": {
+    "installer": "webview2.exe",
+    "args": [
+      "/silent",
+      "/install"
+    ],
+    "arch": "win64",
+    "timeout": 1200,
+    "notes": "Microsoft Edge WebView2 Evergreen standalone installer. Recorded once: 656 files, 576 of them inside a payload no extractor opens, and Microsoft's terms do not allow hosting them. Not linkable; left for a runtime that can run the installer."
+  },
+  "gfw": {
+    "installer": "gfw.exe",
+    "args": [
+      "/nodotnet",
+      "/q"
+    ],
+    "arch": "win64",
+    "timeout": 1200,
+    "notes": "Games for Windows Live client + redistributable (gfwlivesetupmin, two MSIs inside). The files come from the installer on the device; signing in needs Microsoft's live servers, which nothing here records."
+  },
+  "vcredist2008": {
+    "installer": "vcredist2008__vcredist_x86.exe",
+    "args": [
+      "/q"
+    ],
+    "arch": "win32",
+    "timeout": 600,
+    "notes": "Prerequisite only (dirac's filters link msvcr90): the app installs vcredist2008 through its own MSI engine; this recipe exists so a recording can be made on top of it."
   }
 }
