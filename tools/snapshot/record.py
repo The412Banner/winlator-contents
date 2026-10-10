@@ -508,9 +508,16 @@ def main():
     # the first snapshot so it is not recorded; prerequisites likewise, so a service pack records its delta.
     winver = recipe.get("winver")
     if winver:
-        run(["wine", "reg", "add", "HKCU\\Software\\Wine", "/v", "Version", "/d", winver, "/f"], env=env, timeout=300)
+        # winecfg writes the whole set: the version APIs and the registry keys an installer reads
+        # directly (CurrentVersion, CSDVersion, Control\Windows\CSDVersion). .NET 3.5's "Windows XP
+        # Service Pack 2" check reads the latter, which the HKCU\Software\Wine\Version shortcut
+        # never writes.
+        result = run(["winecfg", "-v", winver], env=env, timeout=300)
         wait_wine(env, 120)
-        notes.append("recorded with the Windows version set to %s" % winver)
+        if result.returncode != 0:
+            run(["wine", "reg", "add", "HKCU\\Software\\Wine", "/v", "Version", "/d", winver, "/f"], env=env, timeout=300)
+            wait_wine(env, 120)
+        notes.append("recorded with the Windows version set to %s (winecfg)" % winver)
     for key in recipe.get("pre_reg_delete", []):
         run(["wine", "reg", "delete", key, "/f"], env=env, timeout=300)
         wait_wine(env, 120)

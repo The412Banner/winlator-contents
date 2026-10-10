@@ -158,7 +158,7 @@
     "after": [
       "dotnet20"
     ],
-    "timeout": 900,
+    "timeout": 600,
     "host_files": true,
     "licence": "Microsoft .NET Framework 2.0 SP1 redistributable: licensed for redistribution with applications.",
     "notes": "32-bit only; recorded on top of dotnet20 in a win32 prefix and laid out as on 64-bit Windows. As winetricks does: Windows 2000 for the installer, ngen/regsvcs/mscorsvw stubbed.",
