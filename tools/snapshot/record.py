@@ -481,6 +481,12 @@ def main():
                 tail = "\n".join(line for line in text.splitlines() if line.strip())[-1500:]
                 print("   -- %s (last lines) --\n%s" % (log.relative_to(drive_c), tail), flush=True)
                 notes.append("%s log %s: %s" % (label, log.relative_to(drive_c).as_posix(), tail[-600:]))
+                # The lines that name the problem, wherever they are in the log.
+                telling = [line.strip() for line in text.splitlines()
+                           if re.search(r"block|gencomp|return value 3|error|fail|not (met|found|supported)|requires|missing", line, re.IGNORECASE)
+                           and "does not match requested set" not in line][:25]
+                if telling:
+                    print("   -- %s (telling lines) --\n%s" % (log.relative_to(drive_c), "\n".join(telling)), flush=True)
         return exit_code, took
 
     runs = runs_of(args.component)
@@ -505,6 +511,10 @@ def main():
         run(["wine", "reg", "add", "HKCU\\Software\\Wine", "/v", "Version", "/d", winver, "/f"], env=env, timeout=300)
         wait_wine(env, 120)
         notes.append("recorded with the Windows version set to %s" % winver)
+    for key in recipe.get("pre_reg_delete", []):
+        run(["wine", "reg", "delete", key, "/f"], env=env, timeout=300)
+        wait_wine(env, 120)
+        notes.append("deleted %s before recording" % key)
     for prerequisite in recipe.get("after", []):
         for path, run_args in runs_of(prerequisite):
             run_installer(path, run_args, int(recipes[prerequisite].get("timeout", 600)), "prerequisite " + prerequisite)
