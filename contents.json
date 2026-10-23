@@ -985,30 +985,30 @@
   },
   {
     "type": "Proton",
-    "verName": "Proton-11.0-1-arm64ec (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/proton-11.0-1-arm64ec.wcp",
+    "verName": "Proton-11.0-1-arm64ec (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/proton-11.0-1-arm64ec.wcp",
     "versionName": "11.0-1-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "Proton-11.0-2-arm64ec (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/proton-11.0-2-arm64ec.wcp",
+    "verName": "Proton-11.0-2-arm64ec (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/proton-11.0-2-arm64ec.wcp",
     "versionName": "11.0-2-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "Proton-11.0-2-x86_64 (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/proton-11.0-2-x86_64.wcp",
+    "verName": "Proton-11.0-2-x86_64 (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/proton-11.0-2-x86_64.wcp",
     "versionName": "11.0-2-x86_64"
   },
   {
     "type": "Proton",
-    "verName": "Proton-10.0-4-arm64ec (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/proton-10.0-4-arm64ec.wcp",
+    "verName": "Proton-10.0-4-arm64ec (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/proton-10.0-4-arm64ec.wcp",
     "versionName": "10.0-4-arm64ec"
   },
   {
@@ -1062,37 +1062,37 @@
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-9-arm64ec (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/GE-proton-11.0-9-arm64ec.wcp",
+    "verName": "GE-Proton-11.0-9-arm64ec (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/GE-proton-11.0-9-arm64ec.wcp",
     "versionName": "11.0-9-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-11.0-9-x86_64 (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/GE-proton-11.0-9-x86_64.wcp",
+    "verName": "GE-Proton-11.0-9-x86_64 (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/GE-proton-11.0-9-x86_64.wcp",
     "versionName": "11.0-9-x86_64"
   },
   {
     "type": "Proton",
-    "verName": "DroidDeck-Proton-11.0-9.1-arm64ec (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/DroidDeck-proton-11.0-9.1-arm64ec.wcp",
-    "versionName": "11.0-9.1-arm64ec"
+    "verName": "DroidDeck-Proton-11.0-11.1-arm64ec (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/DroidDeck-proton-11.0-11.1-arm64ec.wcp",
+    "versionName": "11.0-11.1-arm64ec"
   },
   {
     "type": "Proton",
-    "verName": "DroidDeck-Proton-11.0-9.1-x86_64 (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/DroidDeck-proton-11.0-9.1-x86_64.wcp",
-    "versionName": "11.0-9.1-x86_64"
+    "verName": "DroidDeck-Proton-11.0-11.1-x86_64 (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/DroidDeck-proton-11.0-11.1-x86_64.wcp",
+    "versionName": "11.0-11.1-x86_64"
   },
   {
     "type": "Proton",
-    "verName": "GE-Proton-10.0-34-arm64ec (v14)",
-    "verCode": "14",
-    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261007-v14/GE-proton-10.0-34-arm64ec.wcp",
+    "verName": "GE-Proton-10.0-34-arm64ec (v15)",
+    "verCode": "15",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261023-v15/GE-proton-10.0-34-arm64ec.wcp",
     "versionName": "10.0-34-arm64ec"
   },
   {
