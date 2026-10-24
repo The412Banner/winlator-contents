@@ -4,7 +4,7 @@
   "format": "bottles-dependency",
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/",
   "release": "system-libraries-v1",
-  "count": 123,
+  "count": 124,
   "note": "Type-6 Wine dependency components for Bannerlator's Components installer. Step URLs rewritten to the winlator-contents mirror; status=needs-upstream uses the un-mirrored Win7-SP1 packages, status=pending-manual awaits a re-sourced binary.",
   "components": [
     {
@@ -3988,6 +3988,99 @@
           "action": "override_dll",
           "dll": "vcruntime140_1",
           "type": "native,builtin"
+        }
+      ]
+    },
+    {
+      "name": "vcredist2022_arm64",
+      "description": "Microsoft Visual C++ 2015-2022 ARM64 runtime 14.44.35211 - registers it for arm64ec containers (registry entries only)",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Installed",
+          "data": "1",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Major",
+          "data": "14",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Minor",
+          "data": "44",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Bld",
+          "data": "35211",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Rbld",
+          "data": "0",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Version",
+          "data": "v14.44.35211.00",
+          "type": "REG_SZ"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Wow6432Node\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Installed",
+          "data": "1",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Wow6432Node\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Major",
+          "data": "14",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Wow6432Node\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Minor",
+          "data": "44",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Wow6432Node\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Bld",
+          "data": "35211",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Wow6432Node\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Rbld",
+          "data": "0",
+          "type": "REG_DWORD"
+        },
+        {
+          "action": "set_register_key",
+          "key": "HKLM\\\\Software\\\\Wow6432Node\\\\Microsoft\\\\VisualStudio\\\\14.0\\\\VC\\\\Runtimes\\\\arm64",
+          "value": "Version",
+          "data": "v14.44.35211.00",
+          "type": "REG_SZ"
         }
       ]
     },
