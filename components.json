@@ -2563,12 +2563,12 @@
         },
         {
           "action": "install_msi",
-          "file_name": "wine-mono-10.1.0-x86.msi",
-          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/wine-mono-10.1.0-x86.msi",
-          "rename": "wine-mono-10.1.0-x86.msi",
-          "file_checksum": "4BEBE33A15D7C0EE2298B448F604A906",
-          "file_size": "85491712",
-          "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/wine-mono-10.1.0-x86.msi"
+          "file_name": "wine-mono-10.4.1-x86.msi",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/wine-mono-10.4.1-x86.msi",
+          "rename": "wine-mono-10.4.1-x86.msi",
+          "file_checksum": "E879A02555E3C6259EA508D14617DBCD",
+          "file_size": "85504000",
+          "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/wine-mono-10.4.1-x86.msi"
         },
         {
           "action": "override_dll",
