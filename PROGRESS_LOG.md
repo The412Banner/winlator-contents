@@ -6,6 +6,19 @@
 
 ---
 
+## Session — 2026-10-29
+
+### [vkd3d] — VKD3D-Proton 3.1 stable (std + arm64ec)
+
+#### What changed
+- `contents.json`: two new `VKD3D` rows, same shape as 3.0.1, each placed after its family's `3.0b` row (name order, as in `nightlies_components.json`):
+    - `vkd3d-proton-3.1` → Nightlies release `Vkd3d-proton`
+    - `vkd3d-proton-arm64ec-3.1` → Nightlies release `VKD3D-PROTON-ARM`
+- The files come from Nightlies `vkd3d-stable-repack.yml`: upstream v3.1 (tag commit `4522cc1a`) as built by the All-in-One nightly, stripped, `profile.json` versionName `3.1` / `3.1-arm64ec`, versionCode 0, root-owned tar + zstd like 3.0.1. Total 200 → 202 rows. No existing row changed.
+- Not device-tested.
+
+---
+
 ## Session — 2026-10-12
 
 ### [drivers] — Add the three Rutabaga Turnip drivers
