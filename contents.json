@@ -1102,6 +1102,20 @@
   },
   {
     "type": "Proton",
+    "verName": "DroidDeck-Proton-11.0-11.9-arm64ec (v16)",
+    "verCode": "16",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261030-v16/DroidDeck-proton-11.0-11.9-arm64ec.wcp",
+    "versionName": "11.0-11.9-arm64ec"
+  },
+  {
+    "type": "Proton",
+    "verName": "DroidDeck-Proton-11.0-11.9-x86_64 (v16)",
+    "verCode": "16",
+    "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261030-v16/DroidDeck-proton-11.0-11.9-x86_64.wcp",
+    "versionName": "11.0-11.9-x86_64"
+  },
+  {
+    "type": "Proton",
     "verName": "GE-Proton-10.0-34-arm64ec (v16)",
     "verCode": "16",
     "remoteUrl": "https://github.com/The412Banner/winlator-contents/releases/download/bionic-layers-20261030-v16/GE-proton-10.0-34-arm64ec.wcp",
