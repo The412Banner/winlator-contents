@@ -12,7 +12,7 @@
 - Why: user's Fold — DOOM (2016) closes at start: `mfc140u.dll (needed by CChromaEditorLibrary.dll) not found`. `vcredist2022_dll` / `vcredist2015_dll` / `vcredist2019_dll` share `vcredist2022_dll__libs.tar.xz` (14.50.35719), which has no mfc140*/mfcm140* DLLs.
 - New archive `vcredist2022_dll__libs-14.51.36247.tar.xz` (5,700,372 bytes, sha256 d326f40a…, md5 E6119DD7…): win64 26 + win32 25 DLLs, all 14.51.36247.0, from Microsoft's VC_redist.x64.exe / x86.exe (aka.ms/vc14, sha256 843068991daaa1f7… / f0bab33a302b3cdb…, matching the hash in Microsoft's download URL); cab entry names `<dll>_amd64` / `<dll>_x86`. Same 51-file set as the full installer lays out (checked against a container installed from vcredist2022 14.44.35211: all 51 byte-identical to that installer's files).
 - vcredist2022 label 14.42.34430.0 → 14.44.35211.0 (hosted VC_redist.x64.exe FileVersion read 10-30).
-- Before merge: upload the asset to `system-libraries-v1` (user OK needed), then merge; Bannerlator `fix/vcredist-files` (checks for mfc140u.dll) must not ship before this.
+- 10-30 14:58Z: asset UPLOADED to `system-libraries-v1` on the user's OK (public download sha256 d326f40a… == local). Next: merge after the app test; Bannerlator `fix/vcredist-files` (checks for mfc140u.dll) must not ship before this.
 
 ## Session — 2026-10-29
 
