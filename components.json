@@ -3908,7 +3908,7 @@
     },
     {
       "name": "vcredist2022",
-      "description": "Microsoft Visual C++ Redistributable (2015-2022) 14.42.34430.0",
+      "description": "Microsoft Visual C++ Redistributable (2015-2022) 14.44.35211.0",
       "provider": "Microsoft",
       "dependencies": [],
       "status": "ready",
@@ -4086,15 +4086,17 @@
     },
     {
       "name": "vcredist2022_dll",
-      "description": "Microsoft Visual C++ 2015-2022 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Supersedes vcredist2015/2019. UCRT (ucrtbase/api-ms-win-crt-*) provided by Wine builtin.",
+      "description": "Microsoft Visual C++ 2015-2022 Redistributable 14.51.36247 - direct DLL copy, MFC included (no installer; works on Proton 11 arm64ec). Supersedes vcredist2015/2019. UCRT (ucrtbase/api-ms-win-crt-*) provided by Wine builtin.",
       "provider": "Microsoft",
       "dependencies": [],
       "status": "ready",
       "steps": [
         {
           "action": "archive_extract",
-          "file_name": "vcredist2022_dll__libs.tar.xz",
-          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs.tar.xz"
+          "file_name": "vcredist2022_dll__libs-14.51.36247.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs-14.51.36247.tar.xz",
+          "file_checksum": "E6119DD7C3395624BBBFAE5F6EE44E72",
+          "file_size": "5700372"
         },
         {
           "action": "copy_dll",
@@ -4173,8 +4175,10 @@
       "steps": [
         {
           "action": "archive_extract",
-          "file_name": "vcredist2022_dll__libs.tar.xz",
-          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs.tar.xz"
+          "file_name": "vcredist2022_dll__libs-14.51.36247.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs-14.51.36247.tar.xz",
+          "file_checksum": "E6119DD7C3395624BBBFAE5F6EE44E72",
+          "file_size": "5700372"
         },
         {
           "action": "copy_dll",
@@ -4208,8 +4212,10 @@
       "steps": [
         {
           "action": "archive_extract",
-          "file_name": "vcredist2022_dll__libs.tar.xz",
-          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs.tar.xz"
+          "file_name": "vcredist2022_dll__libs-14.51.36247.tar.xz",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2022_dll__libs-14.51.36247.tar.xz",
+          "file_checksum": "E6119DD7C3395624BBBFAE5F6EE44E72",
+          "file_size": "5700372"
         },
         {
           "action": "copy_dll",
