@@ -8,6 +8,13 @@
 
 ## Session — 2026-10-30
 
+### [layers] — DroidDeck-Proton 11.0-11.9 added to v16 (1bbd65a8)
+- User request 2026-10-30: add the new DroidDeck-Proton 11.0-11.9 layer to v16 (no own release); user chose to also add it to the app list.
+- Release `bionic-layers-20261030-v16`: 2 wcp copied on GitHub from proton-wine `build-bionic-layers-20261030-v16` by temp branch `tmp/mirror-v16-dd119` (run 41124748490; sha256 -c OK, no --clobber) → 10 assets; title/notes updated (6 layers). Tag (acc3fe6a) and Latest unchanged.
+- contents.json 1bbd65a8 (manual edit): + `DroidDeck-Proton-11.0-11.9-arm64ec (v16)` and `DroidDeck-Proton-11.0-11.9-x86_64 (v16)`, verCode 16, versionName 11.0-11.9-<arch>, after the 11.0-11.1 rows (202 → 204 rows); both URLs answer. Containers on DroidDeck-Proton 11.0-11.1 are offered 11.0-11.9 (one DroidDeck line per arch in the app).
+- Proof: arm64ec device-tested (DiRT Showdown, Pocket FIT); x86_64 not device-tested. Details in proton-wine PROGRESS_LOG (proton_11.0-2).
+- Open: delete `tmp/mirror-v16-dd119` (and `tmp/mirror-v16`) on the user's word.
+
 ### [layers] — v16 delivery release + catalog (93c6d0d8)
 - Release `bionic-layers-20261030-v16` (target main acc3fe6a, not latest): 8 wcp copied on GitHub from proton-wine `build-bionic-layers-20261030-v16` by a temp workflow on branch `tmp/mirror-v16` (run 41087915491); sha256 == the proton-wine asset digests (all 8).
 - contents.json 93c6d0d8: Proton-11.0-2 (arm64ec, x86_64), Proton-10.0-4, GE-Proton-11.0-9 (arm64ec, x86_64), DroidDeck-Proton-11.0-11.1 (arm64ec, x86_64), GE-Proton-10.0-34 → `(v16)`, verCode 16, new release URLs (all 200). Proton-11.0-1 stays v15 (not affected by the rpcrt4 bug).
