@@ -1,0 +1,33 @@
+name: tmp v16 mirror
+# Temporary: copies the v16 layer wcp from the proton-wine release into this repo's delivery
+# release for the in-app catalog, so the files never leave GitHub. Deleted after the release.
+on:
+  push:
+    branches: [ 'tmp/mirror-v16' ]
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      SRC: https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20261030-v16
+      TAG: bionic-layers-20261030-v16
+      TARGET: acc3fe6aefcc773fbccca416f499b6f0fc1234b0
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download from the proton-wine release and check
+        run: |
+          set -euo pipefail
+          mkdir out
+          while read -r h n; do curl -fsSL --retry 3 -o "out/$n" "$SRC/$n"; done < SHA256SUMS
+          (cd out && sed 's/ /  /' ../SHA256SUMS | sha256sum -c -)
+          test "$(ls out | wc -l)" -eq 8
+      - name: Create the delivery release
+        run: |
+          set -euo pipefail
+          gh release create "$TAG" out/*.wcp -R "$REPO" --target "$TARGET" --latest=false \
+            --title "Bionic layers v16 — service-manager (rpcrt4) crash fix · GOG Galaxy games · 5 layers" \
+            --notes-file mirror-v16.md
+          gh api repos/$REPO/releases/tags/$TAG --jq '.assets[]|"\(.name) \(.size) \(.digest)"'
