@@ -1,0 +1,34 @@
+name: tmp v16 mirror DroidDeck-Proton 11.0-11.9
+# Temporary: copies the DroidDeck-Proton 11.0-11.9 wcp from the proton-wine v16 release into this
+# repo's v16 delivery release for the in-app catalog. Adds files only (no --clobber, no create).
+on:
+  push:
+    branches: [ 'tmp/mirror-v16-dd119' ]
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      SRC: https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20261030-v16
+      TAG: bionic-layers-20261030-v16
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download from the proton-wine release and check
+        run: |
+          set -euo pipefail
+          mkdir out
+          while read -r h n; do curl -fsSL --retry 3 -o "out/$n" "$SRC/$n"; done < SHA256SUMS
+          (cd out && sed 's/ /  /' ../SHA256SUMS | sha256sum -c -)
+          test "$(ls out | wc -l)" -eq 2
+          existing=$(gh api repos/$REPO/releases/tags/$TAG --jq '.assets[].name')
+          for f in out/*.wcp; do
+            if echo "$existing" | grep -qx "$(basename "$f")"; then echo "already attached: $f"; exit 1; fi
+          done
+      - name: Attach to the delivery release
+        run: |
+          set -euo pipefail
+          gh release upload "$TAG" out/*.wcp -R "$REPO"
+          gh api repos/$REPO/releases/tags/$TAG --jq '.assets[]|"\(.name) \(.size) \(.digest)"'
