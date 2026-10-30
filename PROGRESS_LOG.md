@@ -8,6 +8,12 @@
 
 ## Session — 2026-10-30
 
+### [layers] — v16 delivery release + catalog (93c6d0d8)
+- Release `bionic-layers-20261030-v16` (target main acc3fe6a, not latest): 8 wcp copied on GitHub from proton-wine `build-bionic-layers-20261030-v16` by a temp workflow on branch `tmp/mirror-v16` (run 41087915491); sha256 == the proton-wine asset digests (all 8).
+- contents.json 93c6d0d8: Proton-11.0-2 (arm64ec, x86_64), Proton-10.0-4, GE-Proton-11.0-9 (arm64ec, x86_64), DroidDeck-Proton-11.0-11.1 (arm64ec, x86_64), GE-Proton-10.0-34 → `(v16)`, verCode 16, new release URLs (all 200). Proton-11.0-1 stays v15 (not affected by the rpcrt4 bug).
+- Why: v16 = sechost/advapi32 import rpcrt4 directly (service-manager crash on arm64ec; DOOM 2016 GOG, EA app). Details in proton-wine PROGRESS_LOG (proton_11.0-2).
+- Open: delete branch `tmp/mirror-v16` on the user's word.
+
 ### [components] — Visual C++ DLL copies include MFC (branch `fix/vcredist-files` c982f20e, NOT merged, asset NOT uploaded)
 - Why: user's Fold — DOOM (2016) closes at start: `mfc140u.dll (needed by CChromaEditorLibrary.dll) not found`. `vcredist2022_dll` / `vcredist2015_dll` / `vcredist2019_dll` share `vcredist2022_dll__libs.tar.xz` (14.50.35719), which has no mfc140*/mfcm140* DLLs.
 - New archive `vcredist2022_dll__libs-14.51.36247.tar.xz` (5,700,372 bytes, sha256 d326f40a…, md5 E6119DD7…): win64 26 + win32 25 DLLs, all 14.51.36247.0, from Microsoft's VC_redist.x64.exe / x86.exe (aka.ms/vc14, sha256 843068991daaa1f7… / f0bab33a302b3cdb…, matching the hash in Microsoft's download URL); cab entry names `<dll>_amd64` / `<dll>_x86`. Same 51-file set as the full installer lays out (checked against a container installed from vcredist2022 14.44.35211: all 51 byte-identical to that installer's files).
