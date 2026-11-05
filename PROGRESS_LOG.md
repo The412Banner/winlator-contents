@@ -6,6 +6,13 @@
 
 ---
 
+## Session — 2026-11-05
+
+### [catalog] — FEXCore-2611 + FEXCore-2611-unix (53efc675)
+- User request 2026-11-05: "add these fexcore to bannerlator contents.json". Two rows after the FEXCore-2610 group, same shape (`verCode` "0", URL in the Nightlies `FexCore` archive release); both URLs answer 200. 204 → 206 rows (FEXCore 35 → 37).
+- Files: Nightlies release `FEXCore-2611` (own build of the FEX-2611 tag 8f92e80d + the `-unix` variant). `FEXCore-2611-PPA` / `-PPA-unix` rows follow once the FEX team's Launchpad build is downloadable (it was still in Launchpad's upload queue).
+- Not device-tested.
+
 ## Session — 2026-10-30
 
 ### [layers] — DroidDeck-Proton 11.0-11.9 added to v16 (1bbd65a8)
