@@ -43,6 +43,8 @@ SKIP_DIRS = ("windows/temp", "windows/installer", "users/*/temp", "users/*/appda
              "users/*/appdata/roaming/microsoft/windows/start menu", "users/*/desktop", "users/*/start menu",
              "windows/logs", "windows/prefetch")
 SKIP_FILE_SUFFIXES = (".log", ".lnk", ".url", ".tmp")
+# Microsoft setup logs (dd_vcredist*.txt, dd_dotNetFx*.txt), wherever the setup dropped them.
+SKIP_FILE_NAMES = re.compile(r"(^|/)dd_[^/]*\.txt$")
 
 # Registry keys Wine or the prefix maintain by themselves between two snapshots.
 SKIP_KEY_PREFIXES = (
@@ -78,7 +80,8 @@ SKIP_DIR_PATTERNS = [re.compile("^" + re.escape(p).replace("\\*", "[^/]+") + "(/
 
 def skipped_path(rel):
     lower = rel.lower()
-    return lower.endswith(SKIP_FILE_SUFFIXES) or any(pattern.match(lower) for pattern in SKIP_DIR_PATTERNS)
+    return (lower.endswith(SKIP_FILE_SUFFIXES) or SKIP_FILE_NAMES.search(lower) is not None
+            or any(pattern.match(lower) for pattern in SKIP_DIR_PATTERNS))
 
 
 def snapshot_files(drive_c):
