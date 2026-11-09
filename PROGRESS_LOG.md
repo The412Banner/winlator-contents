@@ -6,6 +6,15 @@
 
 ---
 
+## Session — 2026-11-09
+
+### [snapshots] — VC++ 2005 + 2008 recordings (fix/vcredist-snapshots, in progress)
+- Why: Discord report (Savaşzencisi01, MK9 on Bannerlator 3.1.9-pre): "Microsoft Visual C++ Runtime Library — R6034". The apps install the hidden `vcredist2005_dll` / `vcredist2008_dll` twins (Bannerlator `DeckComponentsPage.targetOf`, ComponentsSheet, RecommendedComponentsSection, GogRedistInstaller; DroidDeck `WinComponents.installable`), which copy bare msvcr80/msvcr90 into system32/syswow64 with a native override. Those runtimes refuse to load outside WinSxS without a manifest = R6034. Likely cause, not confirmed on his container.
+- User request 2026-11-09: "make snapshots for vcredist 2005 and 2008 then replace the current vcredist 2008 and 2005 with the new snapshots"; test by laying the recording into any container and checking files + registry (no game needed).
+- dcf1e28 recipes: `vcredist2005` + `vcredist2008` = x86 + x64 installers in one win64 prefix, `host_files` (redistributable); old x86-only recipe kept as `vcredist2008_x86` for dirac's `after`.
+- Plan: record into test release `component-snapshots-test` (not the live one) → check summaries (files under windows/winsxs + manifests, registry) → lay into a spare container on the device and check → on the user's go: publish to `component-snapshots-v1`, point `vcredist2005`/`2008` AND their `_dll` twins at the snapshots (the apps pick the twin; no APK change needed, Bannerlator 3.1.6+), fix the 2008 entry's overrides (lists *80, should be *90). Containers that already got the loose copies: Remove + reinstall (offline installer ignores `delete_dlls`). DroidDeck-Components has the same twins: separate decision.
+- Not device-tested.
+
 ## Session — 2026-11-05
 
 ### [catalog] — FEXCore-2611-PPA + FEXCore-2611-PPA-unix (122a5910)
