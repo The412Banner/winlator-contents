@@ -3208,7 +3208,8 @@
     },
     {
       "name": "vcredist2005",
-      "description": "Microsoft Visual C++ Redistributable for Visual Studio 2005",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/vcredist2005.snapshot.json",
+      "description": "Microsoft Visual C++ 2005 Redistributable 8.0.50727.6195 (x86 + x64): CRT, MFC, ATL and OpenMP, installed into WinSxS from a recording of Microsoft's installer.",
       "provider": "Microsoft",
       "dependencies": [],
       "status": "ready",
@@ -3263,25 +3264,16 @@
     },
     {
       "name": "vcredist2005_dll",
-      "description": "Microsoft Visual C++ 2005 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Core CRT/MFC runtime only (atl80/vcomp not included).",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/vcredist2005.snapshot.json",
+      "description": "Microsoft Visual C++ 2005 Redistributable 8.0.50727.6195 - same recording as vcredist2005 (WinSxS install; the apps install this name). Replaces the old loose DLL copy, which caused R6034.",
       "provider": "Microsoft",
       "dependencies": [],
       "status": "ready",
       "steps": [
         {
-          "action": "archive_extract",
-          "file_name": "vcredist2005_dll__libs.tar.xz",
-          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2005_dll__libs.tar.xz"
-        },
-        {
-          "action": "copy_dll",
-          "file_name": "*",
-          "dest": "win64"
-        },
-        {
-          "action": "copy_dll",
-          "file_name": "*",
-          "dest": "win32"
+          "action": "override_dll",
+          "dll": "atl80",
+          "type": "native,builtin"
         },
         {
           "action": "override_dll",
@@ -3297,13 +3289,19 @@
           "action": "override_dll",
           "dll": "msvcr80",
           "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcomp",
+          "type": "native,builtin"
         }
       ],
       "prebaked": true
     },
     {
       "name": "vcredist2008",
-      "description": "Microsoft Visual C++ Redistributable for Visual Studio 2008",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/vcredist2008.snapshot.json",
+      "description": "Microsoft Visual C++ 2008 Redistributable 9.0.30729.6161 (x86 + x64): CRT, MFC, ATL and OpenMP, installed into WinSxS from a recording of Microsoft's installer.",
       "provider": "Microsoft",
       "dependencies": [],
       "status": "ready",
@@ -3331,52 +3329,8 @@
         },
         {
           "action": "override_dll",
-          "dll": "atl80",
+          "dll": "atl90",
           "type": "native,builtin"
-        },
-        {
-          "action": "override_dll",
-          "dll": "msvcm80",
-          "type": "native,builtin"
-        },
-        {
-          "action": "override_dll",
-          "dll": "msvcp80",
-          "type": "native,builtin"
-        },
-        {
-          "action": "override_dll",
-          "dll": "msvcr80",
-          "type": "native,builtin"
-        },
-        {
-          "action": "override_dll",
-          "dll": "vcomp",
-          "type": "native,builtin"
-        }
-      ]
-    },
-    {
-      "name": "vcredist2008_dll",
-      "description": "Microsoft Visual C++ 2008 Redistributable - direct DLL copy (no installer; works on Proton 11 arm64ec). Core CRT/MFC runtime only (atl90/vcomp90 not included).",
-      "provider": "Microsoft",
-      "dependencies": [],
-      "status": "ready",
-      "steps": [
-        {
-          "action": "archive_extract",
-          "file_name": "vcredist2008_dll__libs.tar.xz",
-          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/vcredist2008_dll__libs.tar.xz"
-        },
-        {
-          "action": "copy_dll",
-          "file_name": "*",
-          "dest": "win64"
-        },
-        {
-          "action": "copy_dll",
-          "file_name": "*",
-          "dest": "win32"
         },
         {
           "action": "override_dll",
@@ -3391,6 +3345,46 @@
         {
           "action": "override_dll",
           "dll": "msvcr90",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcomp90",
+          "type": "native,builtin"
+        }
+      ]
+    },
+    {
+      "name": "vcredist2008_dll",
+      "snapshot": "https://github.com/The412Banner/winlator-contents/releases/download/component-snapshots-v1/vcredist2008.snapshot.json",
+      "description": "Microsoft Visual C++ 2008 Redistributable 9.0.30729.6161 - same recording as vcredist2008 (WinSxS install; the apps install this name). Replaces the old loose DLL copy, which caused R6034.",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "override_dll",
+          "dll": "atl90",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcm90",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcp90",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "msvcr90",
+          "type": "native,builtin"
+        },
+        {
+          "action": "override_dll",
+          "dll": "vcomp90",
           "type": "native,builtin"
         }
       ],
