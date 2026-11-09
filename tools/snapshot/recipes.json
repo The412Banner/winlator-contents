@@ -64,7 +64,7 @@
     ],
     "notes": "NSIS wizard with no working silent mode (winetricks clicks through it with AutoHotkey): unpacked into Program Files/Dirac and the two filters registered with regsvr32, in a win32 prefix laid out as on 64-bit Windows. 7-Zip opens the installer on the device. The filters link the VC++ 2008 runtime, installed first (and a catalog dependency).",
     "after": [
-      "vcredist2008"
+      "vcredist2008_x86"
     ]
   },
   "quicktime72": {
@@ -249,12 +249,54 @@
     "notes": "Games for Windows Live client + redistributable (gfwlivesetupmin, two MSIs inside). The files come from the installer on the device; signing in needs Microsoft's live servers, which nothing here records."
   },
   "vcredist2008": {
+    "installers": [
+      {
+        "asset": "vcredist2008__vcredist_x86.exe",
+        "args": [
+          "/q"
+        ]
+      },
+      {
+        "asset": "vcredist2008__vcredist_x64.exe",
+        "args": [
+          "/q"
+        ]
+      }
+    ],
+    "arch": "win64",
+    "timeout": 600,
+    "host_files": true,
+    "licence": "Microsoft Visual C++ 2008 redistributable: licensed for redistribution with applications.",
+    "notes": "x86 + x64 installers in one 64-bit prefix, as winetricks vcrun2008 runs them. The runtime goes into windows/winsxs with its manifests and policies, so it loads through its manifest; a loose copy in system32 gives R6034."
+  },
+  "vcredist2008_x86": {
     "installer": "vcredist2008__vcredist_x86.exe",
     "args": [
       "/q"
     ],
     "arch": "win32",
     "timeout": 600,
-    "notes": "Prerequisite only (dirac's filters link msvcr90): the app installs vcredist2008 through its own MSI engine; this recipe exists so a recording can be made on top of it."
+    "notes": "Prerequisite only (dirac's filters link msvcr90): the 32-bit installer alone, in a win32 prefix, as dirac was recorded on."
+  },
+  "vcredist2005": {
+    "installers": [
+      {
+        "asset": "vcredist2005__vcredist_x86.exe",
+        "args": [
+          "/q"
+        ]
+      },
+      {
+        "asset": "vcredist2005__vcredist_x64.exe",
+        "args": [
+          "/q"
+        ]
+      }
+    ],
+    "arch": "win64",
+    "timeout": 600,
+    "host_files": true,
+    "licence": "Microsoft Visual C++ 2005 redistributable: licensed for redistribution with applications.",
+    "notes": "x86 + x64 installers in one 64-bit prefix, as winetricks vcrun2005 runs them. The runtime goes into windows/winsxs with its manifests and policies, so it loads through its manifest; a loose copy in system32 gives R6034."
   }
 }
