@@ -1,6 +1,6 @@
 {
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/",
-  "count": 18,
+  "count": 20,
   "wrappers": [
     {
       "id": "bannerlator-wrapper",
@@ -257,6 +257,34 @@
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/bannerlator-legacy.tzst",
       "file_size": "5725821",
       "file_checksum": "ED5AF1577A5EB7BE529B0B5FD3142099",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "gamenative-wrapper-20261027",
+      "name": "GameNative — Wrapper 20261027",
+      "description": "GameNative's wrapper build 20261027 (GameNative #2262, from GameNative/mesa wrapper-25 @ 6bcfbaa7): BCn emulation inside the wrapper, DXVK 2.x / vkd3d fixes, Vulkan 1.1 Mali support (GameNative's notes). Unmodified upstream file. On Adreno 750 it measured the same speed as the default wrapper.",
+      "author": "Utkarsh Dalal / GameNative (wrapper lineage: leegao, Pipetto-crypto)",
+      "license": "Mesa (MIT); GameNative GPL-3.0",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20261027.tzst",
+      "file_size": "996825",
+      "file_checksum": "6B81DFC48CB065D62B6150884188543B",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "pipetto-bionic-20260905",
+      "name": "Pipetto — Winlator Bionic Wrapper 20260905",
+      "description": "Pipetto-crypto's newest Winlator Bionic wrapper (winlator 168b6c67, 2026-09-05): Mali multiDrawIndirect workaround, ClipDistance/CullDistance shader fix, WRAPPER_SURFACE_FORMAT option. Unmodified upstream file. On Adreno 750 it measured the same speed as the default wrapper.",
+      "author": "Pipetto-crypto (Winlator Bionic)",
+      "license": "Mesa (MIT); Winlator Bionic MIT",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/pipetto-20260905.tzst",
+      "file_size": "3817656",
+      "file_checksum": "D3D16D17EC41322A343A679AC97F3EEF",
       "version": 1,
       "gpuTargets": [
         "all"
