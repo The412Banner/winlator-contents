@@ -6,6 +6,16 @@
 
 ---
 
+## Session — 2026-11-11
+
+### [catalog] — FEXCore 2611.1 (stable, own build)
+- Why: upstream FEX-2611.1 released 2026-11-11 (bug-fix update to 2611); the user asked for the same stable set as 2611.
+- Added rows `FEXCore-2611.1` and `FEXCore-2611.1-unix` after the `FEXCore-2611-PPA-unix` row (206 → 208 rows). URLs point at the Nightlies `FexCore` archive release; both answer.
+- Files: `FEXCore-2611.1.wcp` sha256 60ef9fef…a8b4, `FEXCore-2611.1-unix.wcp` sha256 caca997e…770c (Nightlies build run 43088769775, FEX tag commit 4f9c1f1e).
+- Backup: `refs/backup/20261111/main-before-fexcore-2611.1` = b92ab77c.
+- Open: `FEXCore-2611.1-PPA` + `-PPA-unix` rows once Launchpad publishes fex-emu-wine 2611.1.
+- Proof level: files published and hash-checked; NOT device-tested.
+
 ## Session — 2026-11-09
 
 ### [snapshots] — VC++ 2005 + 2008 recordings (fix/vcredist-snapshots, in progress)
