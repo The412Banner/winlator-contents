@@ -6,6 +6,12 @@
 
 ---
 
+## Session — 2026-11-12
+
+### [catalog] — FEXCore-2611.1-PPA + FEXCore-2611.1-PPA-unix (87438d81)
+- Added once Launchpad published fex-emu-wine 2611.1~3-2~j (user request 2026-11-11: stable copies and PPA like 2611). Two rows after FEXCore-2611.1-unix, same shape; both URLs answered.
+- Backup: `refs/backup/20261112/main-before-fexcore-2611.1-ppa`. Proof level: files published and hash-checked; NOT device-tested.
+
 ## Session — 2026-11-11
 
 ### [catalog] — FEXCore 2611.1 (stable, own build)
