@@ -6,6 +6,13 @@
 
 ---
 
+## Session — 2026-11-15
+
+### [catalog] — DXVK 3.1-a6xx GPLAsync (4 rows)
+- Why: user asked (2026-11-15) to rebuild StevenMXZ's `dxvk-3.1-a6xx.wcp` as GPLAsync on Nightlies and then "add it to bannerlator contents". Built from DXVK master d30be2ba + StevenMX's a6xx change (8/16-bit storage buffer access optional) + Ph42oN GPLAsync; Nightlies run 43755609983, release `dxvk-3.1-a6xx-gplasync`.
+- Added `dxvk-gplasync-3.1-a6xx-1`, `dxvk-gplasync-arm64ec-3.1-a6xx-1`, `dxvk-binsem-gplasync-3.1-a6xx-1`, `dxvk-binsem-gplasync-arm64ec-3.1-a6xx-1`, each after its group's 3.1.1 row (212 → 216 rows; existing rows unchanged, script-checked). All four URLs answer 200; downloaded sha256 == release digests (e04ac3b7…, 24abc960…, 4a923131…, c3b36308…).
+- Backup: `refs/backup/20261115/main-before-dxvk-3.1-a6xx-gplasync` = f9ffed27. Proof level: files published and hash-checked; NOT device-tested.
+
 ## Session — 2026-11-12
 
 ### [catalog] — FEXCore-2611.1-PPA + FEXCore-2611.1-PPA-unix (87438d81)
