@@ -6,6 +6,22 @@
 
 ---
 
+## Session — 2026-11-23
+
+### [input-controls] — Community control profiles release (`input-controls`) + builder (branch feat/input-controls-catalog)
+- Why: user (2026-11-23): Bannerlator's Community profiles list should show Bruno's original Winlator layouts AND the layouts shared in
+  the Discord channel #bannerlator-osc-sharing (credited by Discord display name), in one list with Original / Discord shared sections,
+  with preview + download like the current list; host them on winlator-contents as a release with a JSON the app reads.
+- Release `input-controls` ("Community control profiles", target main a8ce4d61, not Latest, not prerelease; Latest stays
+  rutabaga-drivers-v1): 73 assets = index.json + LICENSE-LGPL-2.1.txt + 53 `original__*.icp` (brunodev85/winlator input_controls,
+  LGPL-2.1, order from its index.txt) + 18 `discord__*.icpx` (channel pulled read-only via BannerBot 2026-11-23: devaspe 1,
+  Babizi Games/HG99 2, Sr.Ed_137 12, UNHolyBlunts 3; all bannerlator.icpx v1, on-screen, custom icons embedded). Checked: 73/73 names,
+  sizes and GitHub sha256 digests == local; public download of discord__Skyrim.icpx and index.json OK.
+- index.json schemaVersion 1: sections original (49 on-screen + 4 both) and discord (18 on-screen); items title, author, file, type,
+  size, sha256 (+ date, note, link for Discord).
+- Builder `tools/input_controls_index.py --src --out`; how to update in `input-controls/README.md`. Source folder kept outside the repo.
+- Next: Bannerlator reads index.json (Original / Discord shared tabs, author, preview, download). Merge this branch on the user's go.
+
 ## Session — 2026-11-15
 
 ### [catalog] — DXVK 3.1-a6xx GPLAsync (4 rows)
