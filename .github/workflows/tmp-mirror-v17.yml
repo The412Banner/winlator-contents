@@ -1,0 +1,29 @@
+name: tmp v17 mirror assets
+on:
+  push:
+    branches: [ 'tmp/mirror-v17' ]
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      RELEASE_ID: '457144804'
+      SRC: https://github.com/The412Banner/proton-wine/releases/download/build-bionic-layers-20261124-v17
+    steps:
+      - name: Copy the v17 files from the proton-wine release to the draft delivery release
+        run: |
+          set -euo pipefail
+          mkdir out; cd out
+          for f in proton-10.0-4-arm64ec.wcp GE-proton-10.0-34-arm64ec.wcp proton-11.0-2-arm64ec.wcp proton-11.0-2-x86_64.wcp \
+                   proton-11.0-3-arm64ec.wcp proton-11.0-3-x86_64.wcp DroidDeck-proton-11.0-12.8-arm64ec.wcp \
+                   DroidDeck-proton-11.0-12.8-x86_64.wcp GE-proton-11.0-14-arm64ec.wcp GE-proton-11.0-14-x86_64.wcp; do
+            curl -fsSL --retry 4 -o "$f" "$SRC/$f"
+          done
+          ls -l; sha256sum *.wcp
+          for f in *.wcp; do
+            gh api --method POST -H "Content-Type: application/octet-stream" \
+              "https://uploads.github.com/repos/$REPO/releases/$RELEASE_ID/assets?name=$f" --input "$f" -q '.name + " " + (.size|tostring)'
+          done
