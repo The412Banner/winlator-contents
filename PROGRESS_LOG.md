@@ -8,6 +8,31 @@
 
 ## Session — 2026-11-23
 
+### [catalog-1124] — DRAFT: FEX gn-8, gn-cs2 verCode fix, Goldberg v3, GameNative wrapper 20261120 (branch feat/catalog-1124, NOT on main)
+- Why: user (2026-11-23 ~23:20 EST) approved "step 1": build the new download-list items overnight and stage them for a morning test.
+  Nothing goes live: no release, no asset upload, nothing on main.
+- Draft commit 7be19041 (from main ca5d0205):
+  - `contents.json` 216 → 218 rows: `FEXCore-2611.1-gn8` + `FEXCore-2611.1-gn8-unix` (verCode "0" = their profile.json versionCode),
+    after the gn-cs2 rows; URLs point at Nightlies release `FexCore` (files NOT uploaded). Built by Nightlies `feat/fex-gn8` f6a79e54,
+    run 45327752284 (FEX-2611.1 4f9c1f1e + GameNative/FEX gn-8 1c5699f3, 13 patches). `FEXCore-2611-gn-cs2` verCode "0" → "6":
+    its published profile.json says 6, and Bannerlator matches an installed package to its row on verName + verCode
+    (ContentsManager.syncContents), so the container FEX list showed it twice. Other rows unchanged (script-checked).
+  - `goldberg.json` version 3, release `goldberg-v3` (NOT created): gbe_fork release-2026_09_27 `emu-win-release-vs26.7z` (MSVC,
+    linker 14.51 = same build type as v2's release-2026_08_23 `emu-win-release.7z`), same 20 entries in the same order as v2,
+    no prefix. goldberg.tzst 41,768,305 B, MD5 B6285AB2D661C082312413C4622CF767, sha256 97ee2525…f3b8.
+  - `wrappers.json` count 20 → 21: `gamenative-wrapper-20261120` = GameNative's unmodified wrapper-gamenative-20261120.tzst
+    (GameNative #2481, GameNative/mesa #66; 997,338 B, MD5 52B50358BCF33F21F4B5A2B696E5E549, sha256 4443e109…43ff), asset name
+    planned `wrappers-v1/gamenative-20261120.tzst` (NOT uploaded).
+- Staged for the device test: `/sdcard/Download/step1/` (FIT), hashes checked host + device.
+- Draft release text for `goldberg-v3` (fixes v2's wording: v2 was an MSVC build, not MinGW):
+  "gbe_fork release-2026_09_27 (MSVC win-release build, emu-win-release-vs26). Same tarball layout as goldberg-v2 (regular/,
+  experimental/, steamclient_experimental/ tiers); binaries updated from release-2026_08_23 to release-2026_09_27 (exit deadlock fix
+  #611, Init(false) #614, overlay lobby invite fix #617). Goldberg / gbe_fork by Detanup01 and Mr_Goldberg, LGPL-3.0; source:
+  https://github.com/Detanup01/gbe_fork/tree/release-2026_09_27. Consumed by the Bannerlator Steam-store auto-patch (GoldbergPatcher)."
+- Proof level: JSON parses; files built/downloaded and hash-checked; NOT device-tested. Pre-existing, not touched: 3 duplicate
+  Box64/WOWBox64 rows; other FEXCore rows whose verName/verCode differ from their package (e.g. FEXCore-2611.1 package code 2450).
+- Next: user morning test → on the user's go: upload the files, then merge this branch to main.
+
 ### [input-controls] — Community control profiles release (`input-controls`) + builder (branch feat/input-controls-catalog)
 - Why: user (2026-11-23): Bannerlator's Community profiles list should show Bruno's original Winlator layouts AND the layouts shared in
   the Discord channel #bannerlator-osc-sharing (credited by Discord display name), in one list with Original / Discord shared sections,
