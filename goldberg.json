@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "category": "steam-emulator",
-  "release": "goldberg-v2",
+  "release": "goldberg-v3",
   "name": "Steam Emulator (Goldberg)",
-  "version": 2,
-  "url": "https://github.com/The412Banner/winlator-contents/releases/download/goldberg-v2/goldberg.tzst",
-  "file_size": "41765356",
-  "file_checksum": "4D916BBF5207F3E01D88A102B2A465DE",
-  "note": "gbe_fork release-2026_08_23 Goldberg build for the Bannerlator Steam-store auto-patch. Combined package; extracts to imagefs/opt/goldberg/ with regular/, experimental/, steamclient_experimental/ tiers."
+  "version": 3,
+  "url": "https://github.com/The412Banner/winlator-contents/releases/download/goldberg-v3/goldberg.tzst",
+  "file_size": "41768305",
+  "file_checksum": "B6285AB2D661C082312413C4622CF767",
+  "note": "gbe_fork release-2026_09_27 Goldberg build (emu-win-release-vs26, MSVC) for the Bannerlator Steam-store auto-patch. Combined package; extracts to imagefs/opt/goldberg/ with regular/, experimental/, steamclient_experimental/ tiers. LGPL-3.0, source: https://github.com/Detanup01/gbe_fork/tree/release-2026_09_27"
 }

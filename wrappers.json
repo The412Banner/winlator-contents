@@ -1,6 +1,6 @@
 {
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/",
-  "count": 20,
+  "count": 21,
   "wrappers": [
     {
       "id": "bannerlator-wrapper",
@@ -271,6 +271,20 @@
       "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20261027.tzst",
       "file_size": "996825",
       "file_checksum": "6B81DFC48CB065D62B6150884188543B",
+      "version": 1,
+      "gpuTargets": [
+        "all"
+      ]
+    },
+    {
+      "id": "gamenative-wrapper-20261120",
+      "name": "GameNative — Wrapper 20261120",
+      "description": "GameNative's wrapper build 20261120 (GameNative #2481, from GameNative/mesa #66 on wrapper-25): emulates VK_EXT_depth_clip_enable for OpenGL on drivers that have depth clamp but not the extension (the missing piece for OpenGL 3.2 on Mali) and reports rasterization order attachment access under its EXT name. Unmodified upstream file. OpenGL 3.3/4.0 on Mali also needs GameNative's newer libGL, which is not in this file.",
+      "author": "Utkarsh Dalal / GameNative (wrapper lineage: leegao, Pipetto-crypto)",
+      "license": "Mesa (MIT); GameNative GPL-3.0",
+      "url": "https://github.com/The412Banner/winlator-contents/releases/download/wrappers-v1/gamenative-20261120.tzst",
+      "file_size": "997338",
+      "file_checksum": "52B50358BCF33F21F4B5A2B696E5E549",
       "version": 1,
       "gpuTargets": [
         "all"
