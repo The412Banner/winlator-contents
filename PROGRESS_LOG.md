@@ -6,6 +6,13 @@
 
 ---
 
+## Session — 2026-11-26
+
+### [catalog] — DXVK 3.2 stable rows (branch catalog/dxvk-3.2)
+- Why: user (2026-11-26) asked for DXVK 3.2 stable builds like the previous stables; 3.1.1 had 6 rows here. 3.2 has 4 (no BinSem: the patch does not apply to 3.2, user decision).
+- Rows added (type DXVK, verCode 0), each after its 3.1.1 / 3.1-a6xx neighbour: `dxvk-3.2` (Dxvk), `dxvk-arm64ec-3.2` (Dxvk-arm64ec), `dxvk-gplasync-3.2-1` (Dxvk-gplasync), `dxvk-gplasync-arm64ec-3.2-1` (Dxvk-gplasync-arm64ec). 218 -> 222 rows. All 4 URLs return 200.
+- Source: Nightlies dxvk-stable-publish.yml run 45871131762 (combined release dxvk-3.2). Backup `refs/backup/20261126/main-before-dxvk-3.2`. Not device-tested.
+
 ## Session — 2026-11-23
 
 ### [input-controls] — Community control profiles release (`input-controls`) + builder (branch feat/input-controls-catalog)
