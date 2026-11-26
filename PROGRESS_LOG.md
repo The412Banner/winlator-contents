@@ -8,6 +8,11 @@
 
 ## Session — 2026-11-26
 
+### [catalog] — DXVK-Sarek 1.14.1 row (branch catalog/sarek-1.14.1)
+- Why: user (2026-11-26) asked for Sarek 1.14.1 too. Upstream 1.14.1 = 1.14.0 + our D3D10 fix (pythonlover02/DXVK-Sarek#83), so one stock file, no d3d10fix variant.
+- Row added before `dxvk-sarek-v1.14.0-d3d10fix` (newest first): `dxvk-sarek-v1.14.1` (type DXVK, verCode 0, DXVK-SAREK release). 222 -> 223 rows. URL returns 200.
+- Source: Nightlies build/sarek-1.14.1 run 45899315630 (sha256 37dd45fb…2965, 11 DLLs identical to upstream's tarball). Backup `refs/backup/20261126/main-before-sarek-1.14.1`. Not device-tested.
+
 ### [catalog] — DXVK 3.2 stable rows (branch catalog/dxvk-3.2)
 - Why: user (2026-11-26) asked for DXVK 3.2 stable builds like the previous stables; 3.1.1 had 6 rows here. 3.2 has 4 (no BinSem: the patch does not apply to 3.2, user decision).
 - Rows added (type DXVK, verCode 0), each after its 3.1.1 / 3.1-a6xx neighbour: `dxvk-3.2` (Dxvk), `dxvk-arm64ec-3.2` (Dxvk-arm64ec), `dxvk-gplasync-3.2-1` (Dxvk-gplasync), `dxvk-gplasync-arm64ec-3.2-1` (Dxvk-gplasync-arm64ec). 218 -> 222 rows. All 4 URLs return 200.
