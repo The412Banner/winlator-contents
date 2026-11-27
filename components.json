@@ -4,7 +4,7 @@
   "format": "bottles-dependency",
   "mirrorBase": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/",
   "release": "system-libraries-v1",
-  "count": 124,
+  "count": 125,
   "note": "Type-6 Wine dependency components for Bannerlator's Components installer. Step URLs rewritten to the winlator-contents mirror; status=needs-upstream uses the un-mirrored Win7-SP1 packages, status=pending-manual awaits a re-sourced binary.",
   "components": [
     {
@@ -1939,6 +1939,36 @@
           "arguments": "/passive",
           "for": "",
           "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/dotnetcoredesktop8__windowsdesktop-runtime-8.0.4-win-x64.exe"
+        }
+      ]
+    },
+    {
+      "name": "dotnetcoredesktop9",
+      "description": "Microsoft .NET Desktop Runtime 9.0",
+      "provider": "Microsoft",
+      "dependencies": [],
+      "status": "ready",
+      "steps": [
+        {
+          "action": "install_exe",
+          "file_name": "windowsdesktop-runtime-9.0.23-win-x86.exe",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/dotnetcoredesktop9__windowsdesktop-runtime-9.0.23-win-x86.exe",
+          "rename": "windowsdesktop-runtime-9.0.23-win-x86.exe",
+          "file_checksum": "075b0d8e748a4dd5a9980a92868dcec7",
+          "file_size": "55523896",
+          "arguments": "/passive",
+          "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/dotnetcoredesktop9__windowsdesktop-runtime-9.0.23-win-x86.exe"
+        },
+        {
+          "action": "install_exe",
+          "file_name": "windowsdesktop-runtime-9.0.23-win-x64.exe",
+          "url": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/dotnetcoredesktop9__windowsdesktop-runtime-9.0.23-win-x64.exe",
+          "rename": "windowsdesktop-runtime-9.0.23-win-x64.exe",
+          "file_checksum": "ee7b17641ac90c4d67546a8d1e17ad7c",
+          "file_size": "60732976",
+          "arguments": "/passive",
+          "for": "",
+          "mirror": "https://github.com/The412Banner/winlator-contents/releases/download/system-libraries-v1/dotnetcoredesktop9__windowsdesktop-runtime-9.0.23-win-x64.exe"
         }
       ]
     },
