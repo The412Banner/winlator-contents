@@ -8,6 +8,12 @@
 
 ## Session — 2026-11-26
 
+### [catalog + release] — DroidDeck-Proton 11.0-14.1 v18 replaces 11.0-12.8 v18 (main 44ada4d)
+- Why: user (2026-11-26): "merge it and build it, v18 and add it to the v18 release to replace the previous droiddeck proton layer".
+- Release `bionic-layers-20261124-v18`: added `DroidDeck-proton-11.0-14.1-arm64ec.wcp` (117999687 B, sha256 bf941761…4ff6) and `DroidDeck-proton-11.0-14.1-x86_64.wcp` (64819221 B, 910bde77…e65e), removed the two 11.0-12.8 files (copies on both SD cards). Same change on proton-wine `build-bionic-layers-20261124-v18`. Notes updated on both; tags unchanged.
+- Rows 190/191: verName `DroidDeck-Proton-11.0-14.1-{arch} (v18)`, verCode 18, versionName `11.0-14.1-{arch}`; 223 rows (unchanged count). URLs return 200, sha OK.
+- Source: proton-wine `proton_11.14.1-DroidDeck` 1a5735e7 (CI 45926928349 = the device-tested bytes; parent run 45933448325 green). Backup `refs/backup/20261126/main-before-dd1141-v18`. arm64ec device-tested on a Pocket FIT Elite (DiRT Showdown, Counter-Strike, FlatOut; in-app update/revert with the first 14.1 build); x86_64 not device-tested.
+
 ### [catalog] — DXVK-Sarek 1.14.1 row (branch catalog/sarek-1.14.1)
 - Why: user (2026-11-26) asked for Sarek 1.14.1 too. Upstream 1.14.1 = 1.14.0 + our D3D10 fix (pythonlover02/DXVK-Sarek#83), so one stock file, no d3d10fix variant.
 - Row added before `dxvk-sarek-v1.14.0-d3d10fix` (newest first): `dxvk-sarek-v1.14.1` (type DXVK, verCode 0, DXVK-SAREK release). 222 -> 223 rows. URL returns 200.
