@@ -6,6 +6,13 @@
 
 ---
 
+## Session — 2026-11-27
+
+### [catalog] — DXVK 3.2-a6xx GPLAsync rows (branch catalog/dxvk-3.2-a6xx-gplasync)
+- Why: user (2026-11-27) asked for the 3.1-a6xx GPLAsync build again on DXVK 3.2, and for it in the app list.
+- Rows added (type DXVK, verCode 0), each after its 3.2 GPLAsync neighbour: `dxvk-gplasync-3.2-a6xx-1`, `dxvk-gplasync-arm64ec-3.2-a6xx-1`. 223 -> 225 rows. Both URLs return 200. No BinSem rows (the patch does not apply to 3.2).
+- Source: Nightlies release `dxvk-3.2-a6xx-gplasync` (tag -> abed937a), build run 46024966369 (DXVK 1011dd97 = v3.2 + StevenMX a6xx change + Ph42oN GPLAsync). sha256 854a724e…a5dc (std), cc187912…cdd3 (arm64ec). Backup `refs/backup/20261127/main-before-dxvk-3.2-a6xx`. Not device-tested.
+
 ## Session — 2026-11-26
 
 ### [catalog + release] — DroidDeck-Proton 11.0-14.1 v18 replaces 11.0-12.8 v18 (main 44ada4d)
